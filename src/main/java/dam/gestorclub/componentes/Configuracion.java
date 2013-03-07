@@ -84,7 +84,7 @@ public class Configuracion {
 		return false;
 	}
 	
-	private void loadDefaults() {
+	public void loadDefaults() {
 		settings.put("DB_HOST", "127.0.0.1");
 		settings.put("DB_USER", "zapatillas");
 		settings.put("DB_PASS", "zapatillaspass");
