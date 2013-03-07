@@ -24,7 +24,7 @@ public class Aplicacion extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/principal.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/principal.fxml"));
 		Parent root = (Parent)loader.load();
 		
 		primaryStage.setTitle("Club social y deportivo.");
