@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<TabPane prefHeight="508.0" prefWidth="761.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.PrincipalController">
+  <tabs>
+    <Tab text="Clientes">
+      <content>
+        <fx:include fx:id="clientes" source="clientes.fxml"/>
+      </content>
+    </Tab>
+    <Tab text="Actividades">
+      <content>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
