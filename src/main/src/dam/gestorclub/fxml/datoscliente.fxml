@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import java.lang.* ?>
+<?import javafx.scene.control.*?>
+<?import javafx.collections.* ?>
+
+<AnchorPane prefHeight="168.0" prefWidth="528.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.DatosClienteController">
+	<children>
+    	<Label layoutX="18.0" layoutY="9.0" text="Codigo:"/>
+        <TextField layoutX="73.0" layoutY="7.0" prefWidth="147.0" fx:id="tfDCCodigo"/>
+        <Label layoutX="11.0" layoutY="29.0" text="Nombre:" />
+        <TextField layoutX="73.0" layoutY="28.0" prefWidth="147.0" fx:id="tfDCNombre"/>
+        <Label layoutX="233.0" layoutY="31.0" text="Apellidos:" />
+        <TextField layoutX="303.0" layoutY="28.0" prefWidth="220.0" fx:id="tfDCApellidos"/>
+        <Label layoutX="2.0" layoutY="53.0" text="Direccion:" />
+        <TextField layoutX="73.0" layoutY="50.0" prefWidth="450.0" fx:id="tfDCDireccion"/>
+        <Label layoutX="38.0" layoutY="75.0" text="C.P.:" />
+        <TextField layoutX="74.0" layoutY="72.0" prefWidth="116.0" fx:id="tfDCCodigoPostal"/>
+        <Label layoutX="30.0" layoutY="141.0" text="Sexo:" />
+        <Label layoutX="7.0" layoutY="94.0" text="Telefono:" />
+        <TextField layoutX="74.0" layoutY="94.0" prefWidth="146.0" fx:id="tfDCTelefono"/>
+        <Label layoutX="204.0" layoutY="75.0" text="F. nac:" />
+        <ChoiceBox layoutX="255.0" layoutY="72.0" prefWidth="61.0" fx:id="cbDCDia">
+        	<items>
+    			<FXCollections fx:factory="observableArrayList">
+            		<Integer fx:value="1" />
+            		<Integer fx:value="2" />
+            		<Integer fx:value="3" />
+            		<Integer fx:value="4" />
+            		<Integer fx:value="5" />
+            		<Integer fx:value="6" />
+            		<Integer fx:value="7" />
+            		<Integer fx:value="8" />
+            		<Integer fx:value="9" />
+            		<Integer fx:value="10" />
+            		<Integer fx:value="11" />
+            		<Integer fx:value="12" />
+            		<Integer fx:value="13" />
+            		<Integer fx:value="14" />
+            		<Integer fx:value="15" />
+            		<Integer fx:value="16" />
+            		<Integer fx:value="17" />
+            		<Integer fx:value="18" />
+            		<Integer fx:value="19" />
+            		<Integer fx:value="20" />
+            		<Integer fx:value="21" />
+            		<Integer fx:value="22" />
+            		<Integer fx:value="23" />
+            		<Integer fx:value="24" />
+            		<Integer fx:value="25" />
+            		<Integer fx:value="26" />
+            		<Integer fx:value="27" />
+            		<Integer fx:value="28" />
+            		<Integer fx:value="29" />
+            		<Integer fx:value="30" />
+            		<Integer fx:value="31" />
+        		</FXCollections>
+  			</items>
+        </ChoiceBox>
+        <ChoiceBox layoutX="316.0" layoutY="72.0" prefWidth="97.0" fx:id="cbDCMes">
+        	<items>
+    			<FXCollections fx:factory="observableArrayList">
+    				<String fx:value="Enero" />
+    				<String fx:value="Febrero" />
+    				<String fx:value="Marzo" />
+    				<String fx:value="Abril" />
+    				<String fx:value="Mayo" />
+    				<String fx:value="Junio" />
+    				<String fx:value="Julio" />
+    				<String fx:value="Agosto" />
+    				<String fx:value="Septiembre" />
+    				<String fx:value="Agosto" />
+    				<String fx:value="Noviembre" />
+    				<String fx:value="Diciembre" />
+    			</FXCollections>
+    		</items>
+    	</ChoiceBox>
+        <ChoiceBox layoutX="413.0" layoutY="72.0" prefWidth="109.0" fx:id="cbDCAnyo">
+        	<items>
+    			<FXCollections fx:factory="observableArrayList">
+            		<Integer fx:value="1930" />
+            		<Integer fx:value="1931" />
+            		<Integer fx:value="1932" />
+            		<Integer fx:value="1933" />
+            		<Integer fx:value="1934" />
+            		<Integer fx:value="1935" />
+            		<Integer fx:value="1936" />
+            		<Integer fx:value="1937" />
+            		<Integer fx:value="1938" />
+            		<Integer fx:value="1939" />
+            		<Integer fx:value="1940" />
+            		<Integer fx:value="1941" />
+            		<Integer fx:value="1942" />
+            		<Integer fx:value="1943" />
+            		<Integer fx:value="1944" />
+            		<Integer fx:value="1945" />
+            		<Integer fx:value="1946" />
+            		<Integer fx:value="1947" />
+            		<Integer fx:value="1948" />
+            		<Integer fx:value="1949" />
+            		<Integer fx:value="1950" />
+            		<Integer fx:value="1951" />
+            		<Integer fx:value="1952" />
+            		<Integer fx:value="1953" />
+            		<Integer fx:value="1954" />
+            		<Integer fx:value="1955" />
+            		<Integer fx:value="1956" />
+            		<Integer fx:value="1957" />
+            		<Integer fx:value="1958" />
+            		<Integer fx:value="1959" />
+            		<Integer fx:value="1960" />
+            		<Integer fx:value="1961" />
+            		<Integer fx:value="1962" />
+            		<Integer fx:value="1963" />
+            		<Integer fx:value="1964" />
+            		<Integer fx:value="1965" />
+            		<Integer fx:value="1966" />
+            		<Integer fx:value="1967" />
+            		<Integer fx:value="1968" />
+            		<Integer fx:value="1969" />
+            		<Integer fx:value="1970" />
+            		<Integer fx:value="1971" />
+            		<Integer fx:value="1972" />
+            		<Integer fx:value="1973" />
+            		<Integer fx:value="1974" />
+            		<Integer fx:value="1975" />
+            		<Integer fx:value="1976" />
+            		<Integer fx:value="1977" />
+            		<Integer fx:value="1978" />
+            		<Integer fx:value="1979" />
+            		<Integer fx:value="1980" />
+            		<Integer fx:value="1981" />
+            		<Integer fx:value="1982" />
+            		<Integer fx:value="1983" />
+            		<Integer fx:value="1984" />
+            		<Integer fx:value="1985" />
+            		<Integer fx:value="1986" />
+            		<Integer fx:value="1987" />
+            		<Integer fx:value="1988" />
+            		<Integer fx:value="1989" />
+            		<Integer fx:value="1990" />
+            		<Integer fx:value="1991" />
+            		<Integer fx:value="1992" />
+            		<Integer fx:value="1993" />
+            		<Integer fx:value="1994" />
+            		<Integer fx:value="1995" />
+            		<Integer fx:value="1996" />
+            		<Integer fx:value="1997" />
+            		<Integer fx:value="1998" />
+            		<Integer fx:value="1999" />
+            		<Integer fx:value="2000" />
+        		</FXCollections>
+  			</items>
+        </ChoiceBox>
+        <Label layoutX="11.0" layoutY="119.0" text="Cuenta bancaria:" />
+        <TextField layoutX="126.0" layoutY="116.0" prefWidth="335.0" fx:id="tfDCCuentaBancaria"/>
+        <CheckBox layoutX="468.0" layoutY="119.0" mnemonicParsing="false" text="Ver" fx:id="chbDCVer"/>
+        <ToggleButton layoutX="390.0" layoutY="142.0" mnemonicParsing="false" text="Asignar Tarjeta" fx:id="bDCAddCard"/>
+        <ChoiceBox layoutX="74.0" layoutY="138.0" fx:id="cbDCSexo">
+        	<items>
+    			<FXCollections fx:factory="observableArrayList">
+            		<String fx:value="Masculino" />
+            		<String fx:value="Femenino" />
+        		</FXCollections>
+  			</items>
+        </ChoiceBox>
+	</children>
+</AnchorPane>
