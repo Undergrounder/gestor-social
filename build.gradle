@@ -4,3 +4,15 @@ apply from: 'https://repository-javafx-gradle-plugin.forge.cloudbees.com/release
 javafx {
 	mainClass = 'dam.gestorclub.Aplicacion'
 }
+
+repositories {
+	maven {
+        url "http://repository.jboss.org/nexus/content/groups/public-jboss"
+    }
+	mavenCentral()
+}
+
+dependencies {
+	compile group: 'org.hibernate', name: 'hibernate-core', version: '4.1.9.Final'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
