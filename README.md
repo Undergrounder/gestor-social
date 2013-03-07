@@ -8,3 +8,9 @@ Programa desarrollado para el proyecto final de interfaces y acceso a datos de e
 	- Aaron Soria
 	- Adrian Tello
 	- Joan Gonzalez
+	
+	
+	
+###Fechas de entrega
+	-Zona comun: 11-03-2013
+	-Zona individual: 14-03-2013
