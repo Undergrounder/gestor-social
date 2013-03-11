@@ -21,3 +21,8 @@ Añadimos el update site de Gradle:
 	
 Instalamos:
 	- Eclipse EGit
+	
+Se añaden en las variables de entorno  del sistema las siguentes variables:
+
+	- JAVA_HOME:  C:\Program Files\Java\jdk1.7.0_07
+	- JFXRT_HOME: C:\Program Files\Java\jdk1.7.0_07\lib
