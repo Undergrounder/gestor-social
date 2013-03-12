@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.CorreosController">
+	<children>
+    	<Label layoutX="44.0" layoutY="14.0" text="Titulo:" />
+       	<TextField layoutX="95.0" layoutY="11.0" prefWidth="390.0" />
+        <Label layoutX="14.0" layoutY="43.0" text="Contenido:" />
+        <TextArea layoutX="95.0" layoutY="43.0" prefWidth="648.0" wrapText="true" />
+        <Label layoutX="5.0" layoutY="212.0" text="Actividades:" />
+        <ComboBox layoutX="95.0" layoutY="210.0" prefWidth="170.0">
+        	<items>
+            	<FXCollections fx:factory="observableArrayList">
+                	<String fx:value="Item 1" />
+                    <String fx:value="Item 2" />
+                    <String fx:value="Item 3" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Button layoutX="45.0" layoutY="242.0" mnemonicParsing="false" prefWidth="220.0" text="Enviar" />
+	</children>
+</AnchorPane>

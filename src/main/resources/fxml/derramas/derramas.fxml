@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.DerramasController">
+	<children>
+    	<Label layoutX="14.0" layoutY="14.0" text="Cantidad:" />
+        <TextField layoutX="87.0" layoutY="11.0" prefWidth="200.0" />
+        <Label layoutX="14.0" layoutY="43.0" text="Concepto:" />
+        <TextArea layoutX="87.0" layoutY="43.0" prefWidth="656.0" wrapText="true" />
+        <Button layoutX="11.0" layoutY="212.0" mnemonicParsing="false" prefWidth="276.0" text="Generar derrama" />
+    </children>
+</AnchorPane>

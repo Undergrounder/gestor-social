@@ -27,3 +27,9 @@
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
 }
+
+.correos-button {
+  -fx-background-image: url('../icons/enviar-correo.png');
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+}
