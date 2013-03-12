@@ -10,13 +10,13 @@
   <children>
     <VBox id="VBox" alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
       <children>
-        <ChoiceBox fx:id="cbTA" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER"/>
-        <ListView fx:id="lvTA" prefHeight="200.0" prefWidth="200.0" />
+        <ChoiceBox fx:id="cbTA" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER" />
+        <ListView fx:id="lvTA" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
       </children>
     </VBox>
     <VBox prefHeight="200.0" prefWidth="100.0">
       <children>
-        <Button fx:id="tAAdd" mnemonicParsing="false" text="Añadir" onAction="#onAdd"/>
+        <Button fx:id="tAAdd" mnemonicParsing="false" onAction="#onAdd" text="Añadir" />
         <Button fx:id="tADelete" mnemonicParsing="false" text="Eliminar" />
       </children>
     </VBox>

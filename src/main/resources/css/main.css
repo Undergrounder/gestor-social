@@ -1,0 +1,29 @@
+.ajustes-button {
+  -fx-background-image: url('../icons/ajustes.png');
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+}
+
+.clientes-button {
+  -fx-background-image: url('../icons/clientes.png');
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+}
+
+.derramas-button {
+  -fx-background-image: url('../icons/derramas.png');
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+}
+
+.empleados-button {
+  -fx-background-image: url('../icons/empleado.png');
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+}
+
+.instalaciones-button {
+  -fx-background-image: url('../icons/instalaciones.png');
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+}

@@ -52,6 +52,15 @@
                 <fx:include fx:id="tablaActividades" source="tablaactividades.fxml" />
               </content>
             </Tab>
+            <Tab text="Entradas">
+              <content>
+                <TableView prefHeight="200.0" prefWidth="200.0">
+                  <columns>
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="550.0" text="Fecha y hora" />
+                  </columns>
+                </TableView>
+              </content>
+            </Tab>
             <Tab text="Derramas">
               <content>
                 <TableView prefHeight="200.0" prefWidth="200.0">
