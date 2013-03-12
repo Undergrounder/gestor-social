@@ -1,41 +1,41 @@
 .ajustes-button {
-  -fx-background-image: url('../icons/ajustes.png');
+  -fx-background-image: url('../icons/principal/ajustes.png');
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
 }
 
 .clientes-button {
-  -fx-background-image: url('../icons/clientes.png');
+  -fx-background-image: url('../icons/principal/clientes.png');
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
 }
 
 .derramas-button {
-  -fx-background-image: url('../icons/derramas.png');
+  -fx-background-image: url('../icons/principal/derramas.png');
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
 }
 
 .empleados-button {
-  -fx-background-image: url('../icons/empleado.png');
+  -fx-background-image: url('../icons/principal/empleado.png');
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
 }
 
 .instalaciones-button {
-  -fx-background-image: url('../icons/instalaciones.png');
+  -fx-background-image: url('../icons/principal/instalaciones.png');
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
 }
 
 .correos-button {
-  -fx-background-image: url('../icons/enviar-correo.png');
+  -fx-background-image: url('../icons/principal/enviar-correo.png');
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
 }
 
 .estadisticas-button {
-  -fx-background-image: url('../icons/estadisticas.png');
+  -fx-background-image: url('../icons/principal/estadisticas.png');
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
 }

@@ -7,10 +7,17 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane prefHeight="422.0" prefWidth="788.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.clientes.ClientesController">
+  <bottom>
+    <ToolBar>
+      <items>
+        <Button mnemonicParsing="false" onAction="#onVolverClicked" text="Volver" />
+      </items>
+    </ToolBar>
+  </bottom>
   <center>
     <VBox prefHeight="200.0" prefWidth="100.0">
       <children>
-        <fx:include fx:id="datosCliente" source="datoscliente.fxml"/>
+        <fx:include fx:id="datosCliente" source="datoscliente.fxml" />
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
           <tabs>
             <Tab text="Cuotas">

@@ -32,6 +32,9 @@ public class StageSwitcher {
 		INSTALACIONES,
 		EMPLEADOS,
 		DERRAMAS,
+		ESTADISTICAS,
+		ESTADISTICAS_ACCESOS,
+		ESTADISTICAS_INGRESOS,
 		CORREOS,
 		AJUSTES
 	}
@@ -73,6 +76,15 @@ public class StageSwitcher {
 				break;
 			case DERRAMAS:
 				fxmlPath = "derramas/derramas";
+				break;
+			case ESTADISTICAS:
+				fxmlPath = "estadisticas/estadisticas";
+				break;
+			case ESTADISTICAS_ACCESOS:
+				fxmlPath = "estadisticas/accesos";
+				break;
+			case ESTADISTICAS_INGRESOS:
+				fxmlPath = "estadisticas/ingresos";
 				break;
 			case CORREOS:
 				fxmlPath = "correos";

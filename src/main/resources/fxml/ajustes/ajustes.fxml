@@ -6,12 +6,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane prefHeight="222.0" prefWidth="682.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.ajustes.AjustesController">
-  <tabs>
-    <Tab text="Empleos">
-      <content>
-        <fx:include fx:id="empleos" source="empleos.fxml"/>
-      </content>
-    </Tab>
-  </tabs>
-</TabPane>
+<VBox prefHeight="266.0" prefWidth="492.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.ajustes.AjustesController">
+  <children>
+    <TabPane prefHeight="222.0" prefWidth="682.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+      <tabs>
+        <Tab text="Empleos">
+          <content>
+            <fx:include fx:id="empleos" source="empleos.fxml" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+    <ToolBar>
+      <items>
+        <Button mnemonicParsing="false" onAction="#onVolverClicked" text="Volver" />
+      </items>
+    </ToolBar>
+  </children>
+</VBox>

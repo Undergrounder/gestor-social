@@ -1,7 +1,7 @@
 /**
  * 
  */
-package dam.gestorclub.controladores;
+package dam.gestorclub.controladores.estadisticas;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +12,7 @@ import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
  * @author Undergrounder
  *
  */
-public class CorreosController {
+public class AccesosController {
 
 	/**
 	 * Boton de volver pulsado
@@ -20,7 +20,7 @@ public class CorreosController {
 	 * @param event
 	 */
 	@FXML protected void onVolverClicked(ActionEvent event){
-		StageSwitcher.cambiaPantalla(PANTALLA.PRINCIPAL);
+		StageSwitcher.cambiaPantalla(PANTALLA.ESTADISTICAS);
 	}
 	
 }

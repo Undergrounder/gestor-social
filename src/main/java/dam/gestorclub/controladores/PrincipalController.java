@@ -60,6 +60,15 @@ public class PrincipalController {
 	}
 	
 	/**
+	 * Boton de estadisticas pulsado
+	 * Llamado por JavaFX
+	 * @param event
+	 */
+	@FXML protected void onEstadisticasClicked(ActionEvent event){
+		StageSwitcher.cambiaPantalla(PANTALLA.ESTADISTICAS);
+	}
+	
+	/**
 	 * Boton de ajustes pulsado
 	 * Llamado por JavaFX
 	 * @param event
