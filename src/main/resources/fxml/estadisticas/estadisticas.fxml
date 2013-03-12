@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane prefHeight="259.0" prefWidth="797.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.estadisticas.EstadisticasController">
+  <children>
+    <Button alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAccesosClicked" styleClass="accesos-button" text="Accesos" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <ToolBar GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <items>
+        <Button mnemonicParsing="false" onAction="#onVolverClicked" text="Volver" />
+      </items>
+    </ToolBar>
+    <Button alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onIngresosClicked" styleClass="ingresos-button" text="Ingresos" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+  </rowConstraints>
+  <stylesheets>
+    <URL value="@../../css/estadisticas.css" />
+  </stylesheets>
+</GridPane>

@@ -1,0 +1,11 @@
+.ingresos-button {
+  -fx-background-image: url('../icons/estadisticas/dinero.png');
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+}
+
+.accesos-button {
+  -fx-background-image: url('../icons/estadisticas/accesos.png');
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+}
