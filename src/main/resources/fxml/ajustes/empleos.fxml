@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="288.0" prefWidth="771.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.ajustes.EmpleosController">
+  <children>
+    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <children>
+        <TableView prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+          <columns>
+            <TableColumn prefWidth="200.0" text="Nombre" />
+            <TableColumn prefWidth="250.0" text="Horario" />
+            <TableColumn prefWidth="120.0" text="Sueldo" />
+          </columns>
+        </TableView>
+        <Button mnemonicParsing="false" text="Eliminar" />
+      </children>
+    </HBox>
+    <FlowPane prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <TextField prefWidth="200.0" />
+        <TextField prefWidth="250.0" />
+        <TextField prefWidth="120.0" />
+        <Button mnemonicParsing="false" text="Añadir" />
+      </children>
+    </FlowPane>
+  </children>
+</VBox>

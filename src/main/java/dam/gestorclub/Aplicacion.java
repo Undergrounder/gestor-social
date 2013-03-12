@@ -3,10 +3,9 @@
  */
 package dam.gestorclub;
 
+import dam.gestorclub.componentes.StageSwitcher;
+import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -24,12 +23,9 @@ public class Aplicacion extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/principal.fxml"));
-		Parent root = (Parent)loader.load();
 		
-		primaryStage.setTitle("Club social y deportivo.");
-		primaryStage.setScene(new Scene(root, 760, 600));
-		primaryStage.setResizable(false);
+		StageSwitcher.setStage(primaryStage);
+		StageSwitcher.cambiaPantalla(PANTALLA.PRINCIPAL);
 		primaryStage.show();
 	}
 

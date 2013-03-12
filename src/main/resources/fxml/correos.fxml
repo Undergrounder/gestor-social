@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane prefHeight="402.0" prefWidth="771.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.CorreosController">
+  <children>
+    <ToolBar GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="4">
+      <items>
+        <Button mnemonicParsing="false" onAction="#onVolverClicked" text="Volver" />
+      </items>
+    </ToolBar>
+    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" text="Titulo:" textAlignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <Label alignment="TOP_RIGHT" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Contenido:" textAlignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+    <TextArea prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+    <Label text="Actividades:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <ChoiceBox maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ChoiceBox>
+    <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
+      <children>
+        <Button mnemonicParsing="false" text="Añadir" />
+        <Button mnemonicParsing="false" text="Eliminar" />
+      </children>
+    </VBox>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+  </rowConstraints>
+</GridPane>
