@@ -9,6 +9,11 @@
 
 <VBox prefHeight="447.0" prefWidth="736.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.estadisticas.AccesosController">
   <children>
+    <ToolBar>
+      <items>
+        <Button mnemonicParsing="false" text="Generar reporte" />
+      </items>
+    </ToolBar>
     <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
       <children>
         <LineChart id="LineChartNxN" HBox.hgrow="ALWAYS">
