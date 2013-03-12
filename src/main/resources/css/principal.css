@@ -33,3 +33,9 @@
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
 }
+
+.estadisticas-button {
+  -fx-background-image: url('../icons/estadisticas.png');
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+}
