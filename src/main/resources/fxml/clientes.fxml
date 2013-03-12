@@ -1,42 +1,88 @@
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
-<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="200.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.ClientesController">
-	<center>
-    	<VBox prefHeight="200.0" prefWidth="100.0">
-        	<children>
-            	<fx:include fx:id="datosCliente" source="datoscliente.fxml"/>
-                <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-                	<tabs>
-                    	<Tab text="Untitled Tab 1">
-                      		<content>
-                        		<AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                      		</content>
-                    	</Tab>
-                    	<Tab text="Actividades">
-                      		<content>
-                      			<fx:include fx:id="tablaActividades" source="tablaactividades.fxml"/>
-                      		</content>
-                    	</Tab>
-                  	</tabs>
-                  	<VBox.margin>
-                    	<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                  	</VBox.margin>
-                </TabPane>
-			</children>
-		</VBox>
-	</center>
-	<right>
-    	<fx:include fx:id="tablaClientes" source="tablaclientes.fxml"/>
-    </right>
-    <top>
-    	<ToolBar>
-        	<items>
-            	<ToggleButton mnemonicParsing="false" text="Filtrar" />
-            </items>
-        </ToolBar>
-    </top>
+<BorderPane prefHeight="422.0" prefWidth="788.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.ClientesController">
+  <center>
+    <VBox prefHeight="200.0" prefWidth="100.0">
+      <children>
+        <fx:include fx:id="datosCliente" source="datoscliente.fxml">
+          <children>
+            <Label layoutX="197.0" layoutY="141.0" text="Estado:" />
+            <ChoiceBox layoutX="255.0" layoutY="139.0">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ChoiceBox>
+          </children>
+        </fx:include>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+          <tabs>
+            <Tab text="Cuotas">
+              <content>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                    <TableView prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                      <columns>
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="119.0" text="Fecha" />
+                        <TableColumn prefWidth="75.0" text="Meses" />
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="198.0" text="Cantidad" />
+                      </columns>
+                    </TableView>
+                    <VBox prefHeight="200.0" prefWidth="100.0">
+                      <children>
+                        <Button mnemonicParsing="false" text="Añadir" />
+                        <Button mnemonicParsing="false" text="Eliminar" />
+                      </children>
+                    </VBox>
+                  </children>
+                </HBox>
+              </content>
+            </Tab>
+            <Tab text="Actividades">
+              <content>
+                <fx:include fx:id="tablaActividades" source="tablaactividades.fxml" />
+              </content>
+            </Tab>
+            <Tab text="Derramas">
+              <content>
+                <TableView prefHeight="200.0" prefWidth="200.0">
+                  <columns>
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Fecha" />
+                    <TableColumn prefWidth="250.0" text="Concepto" />
+                    <TableColumn prefWidth="100.0" text="Cantidad" />
+                    <TableColumn prefWidth="75.0" text="Pagada" />
+                  </columns>
+                </TableView>
+              </content>
+            </Tab>
+          </tabs>
+          <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+          </VBox.margin>
+        </TabPane>
+      </children>
+    </VBox>
+  </center>
+  <right>
+    <fx:include fx:id="tablaClientes" source="tablaclientes.fxml" />
+  </right>
+  <top>
+    <ToolBar>
+      <items>
+        <Button mnemonicParsing="false" text="Nuevo" />
+        <Button mnemonicParsing="false" text="Guardar" />
+        <Button mnemonicParsing="false" text="Eliminar" />
+        <ToggleButton mnemonicParsing="false" text="Filtrar" />
+      </items>
+    </ToolBar>
+  </top>
 </BorderPane>
