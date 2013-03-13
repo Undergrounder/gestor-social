@@ -1,5 +1,4 @@
-apply plugin: 'eclipse'
-apply from: 'https://repository-javafx-gradle-plugin.forge.cloudbees.com/release/javafx.plugin'
+apply from: "http://dl.bintray.com/content/shemnon/javafx-gradle/javafx.plugin"
 
 javafx {
 	mainClass = 'dam.gestorclub.Aplicacion'
@@ -8,10 +7,6 @@ javafx {
 repositories {
 	maven {
         url "http://repository.jboss.org/nexus/content/groups/public-jboss"
-    }
-    maven {
-            name = 'BinTray' 
-            url = 'http://dl.bintray.com/content/shemnon/javafx-gradle/'
     }
 	mavenCentral()
 }
