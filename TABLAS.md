@@ -2,7 +2,7 @@ TABLAS
 ######
 
 ##XML
-- Personal externo
+- Personal Externo --> Adrian
 	
 ##Hibernate
 - Empleado --> Adrian
@@ -11,7 +11,9 @@ TABLAS
 
 ##Objeto Relacional
 - Cuota --> Joan
+- Deducciones --> Joan
 - Linea de Pago --> Aaron
+- Linea deduccion --> Aaron
 - Cabecera de pago --> Adrian
 
 ##Base de datos relacional
