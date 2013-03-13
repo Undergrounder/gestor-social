@@ -20,26 +20,33 @@ CREATE TABLE Pista(
     precioSocios NUMBER,
     PRIMARY KEY (idPista)
   );
-  
---TABLA Cuota
+
+-- Cuota
+	create or replace TYPE Cuota_tipo AS OBJECT(
+    idCuota NUMBER(4),
+	  nombre VARCHAR2(25),
+	  iva NUMBER(3),
+	  precio NUMBER
+	);
+
+
 CREATE SEQUENCE idCuota;
 
-CREATE TABLE Cuota(
-  idCuota NUMBER(4) NOT NULL,
-  nombre VARCHAR2(25) NOT NULL,
-  iva NUMBER(3) NOT NULL,
-  precio NUMBER NOT NULL,
+CREATE TABLE Cuota of Cuota_tipo(
   PRIMARY KEY (idCuota)
 );
   
-  
---TABLA Deduccion
+-- Deduccion
+create or replace TYPE Deduccion_tipo AS OBJECT(
+  nombre VARCHAR2(25),
+  cantidad NUMBER
+);
+
 CREATE SEQUENCE idDeduccion;
 
 CREATE TABLE Deduccion(
   idDeduccion NUMBER(4) NOT NULL,
-  nombre VARCHAR2(25) NOT NULL,
-  cantidad NUMBER NOT NULL,
+  deduccion Deduccion_tipo NOT NULL,
   PRIMARY KEY (idDeduccion)
 );
 
@@ -111,13 +118,17 @@ CREATE TABLE ActividadSocio(
 --TABLA Factura
 CREATE SEQUENCE idFactura;
 
-CREATE TABLE Factura(
-  idFactura NUMBER(4) NOT NULL,
-  socio_id NUMBER(4) NOT NULL,
-  creada DATE NOT NULL,
-  numMeses NUMBER(2) NOT NULL,
+create or replace TYPE Factura_tipo AS OBJECT(
+  idFactura NUMBER(4),
+  socio_id NUMBER(4),
+  creada DATE,
+  numMeses NUMBER(2),
   fechaPagado DATE,
-  total NUMBER NOT NULL,
+  total NUMBER
+);
+
+
+CREATE TABLE Factura of Factura_tipo(
   PRIMARY KEY (idFactura),
   FOREIGN KEY (socio_id) REFERENCES Socio (idSocio)
 );
