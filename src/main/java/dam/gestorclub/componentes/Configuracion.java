@@ -131,13 +131,13 @@ public class Configuracion {
 		FileOutputStream out;
 		try {
 			out = new FileOutputStream(FILENAME);
-			settings.store(out, "Configuración del gestor de zapatillas");
+			settings.store(out, "Configuracion del gestor social");
 			out.close();
 			return true;
 		} catch (FileNotFoundException e) {
-			System.err.println("Archivo de configuración no encontrado al guardar?.");;
+			System.err.println("Archivo de configuracion no encontrado al guardar?.");;
 		} catch (IOException e) {
-			System.err.println("Error de E/S al guardar la configuración.");
+			System.err.println("Error de E/S al guardar la configuracion.");
 		}
 		return false;
 	}
