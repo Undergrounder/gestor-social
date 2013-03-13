@@ -9,6 +9,10 @@ repositories {
 	maven {
         url "http://repository.jboss.org/nexus/content/groups/public-jboss"
     }
+    maven {
+            name = 'BinTray' 
+            url = 'http://dl.bintray.com/content/shemnon/javafx-gradle/'
+    }
 	mavenCentral()
 }
 
