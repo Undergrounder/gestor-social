@@ -6,6 +6,7 @@
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import jfxtras.labs.scene.control.CalendarTextField?>
 
 <VBox prefHeight="447.0" prefWidth="736.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.estadisticas.IngresosController">
   <children>
@@ -27,25 +28,9 @@
         <VBox prefHeight="200.0" prefWidth="100.0">
           <children>
             <Label text="Desde:" />
-            <ChoiceBox>
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
-              </items>
-            </ChoiceBox>
+            <CalendarTextField showTime="true"/>
             <Label text="Hasta:" />
-            <ChoiceBox>
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
-              </items>
-            </ChoiceBox>
+            <CalendarTextField showTime="true"/>
           </children>
         </VBox>
       </children>
