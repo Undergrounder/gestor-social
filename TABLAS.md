@@ -2,23 +2,60 @@ TABLAS
 ######
 
 ##XML
-- Personal Externo --> Adrian
+- PersonalExterno* ->Desde Base de datos relacional
 	
 ##Hibernate
-- Empleado --> Adrian
-- Empleo --> Joan
-- Entrada (Relacionada on la parte Obj. Rel) -->Aaron
+- Entrada
+- Empleado
+- Empleo
+
 
 ##Objeto Relacional
-- Cuota --> Joan
-- Deducciones --> Joan
-- Linea de Pago --> Aaron
-- Linea deduccion --> Aaron
-- Cabecera de pago --> Adrian
+- Cuota
+- Deduccion
+- Factura
+- LineaDeduccion
+- LineaPago
+
 
 ##Base de datos relacional
-- Reserva --> Aaron
-- Pistas --> Adrian
-- Actividad --> Joan
-- Participantes --> Joan
-- Socio, relacionado con Obj. Rel -> Aaron. 
+- PersonalExterno
+- Pista
+- Socio
+- Reserva
+- Actividad
+- ActividadSocio
+
+#División por personas
+
+##Aaron (5 tablas):
+	- Hibernate:
+		- Entrada
+	- Objeto Relacional
+		- Deduccion
+		- LineaPago
+	- Relacional
+		- Socio
+		- Reserva
+	
+##Adrian (5 tablas):
+	- Hibernate
+		- Empleado
+	- Objeto Relacional
+		- Factura
+	- Relacional
+		- Pista
+		- PersonalExterno*
+	- XML
+		- PersonalExterno
+
+##Joan (5 tablas):
+	- Hibernate
+		- Empleo
+	- Objeto Relacional
+		- Cuota
+		- LineaDeduccion
+	- Relacional
+		- Actividad
+		- ActividadSocio
+
