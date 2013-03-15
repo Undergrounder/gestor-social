@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TableView fx:id="tablaDerramas" prefHeight="200.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.clientes.DerramasController">
+  <columns>
+    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Fecha" />
+    <TableColumn prefWidth="250.0" text="Concepto" />
+    <TableColumn prefWidth="100.0" text="Cantidad" />
+    <TableColumn prefWidth="75.0" text="Pagada" />
+  </columns>
+</TableView>
