@@ -22,23 +22,7 @@
           <tabs>
             <Tab text="Cuotas">
               <content>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                  <children>
-                    <TableView prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                      <columns>
-                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="119.0" text="Fecha" />
-                        <TableColumn prefWidth="75.0" text="Meses" />
-                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="198.0" text="Cantidad" />
-                      </columns>
-                    </TableView>
-                    <VBox prefHeight="200.0" prefWidth="100.0">
-                      <children>
-                        <Button mnemonicParsing="false" text="Añadir" />
-                        <Button mnemonicParsing="false" text="Eliminar" />
-                      </children>
-                    </VBox>
-                  </children>
-                </HBox>
+                <fx:include fx:id="cuotas" source="cuotas.fxml" />
               </content>
             </Tab>
             <Tab text="Actividades">
@@ -48,23 +32,12 @@
             </Tab>
             <Tab text="Entradas">
               <content>
-                <TableView prefHeight="200.0" prefWidth="200.0">
-                  <columns>
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="550.0" text="Fecha y hora" />
-                  </columns>
-                </TableView>
+                <fx:include fx:id="entradas" source="entradas.fxml" />
               </content>
             </Tab>
             <Tab text="Derramas">
               <content>
-                <TableView prefHeight="200.0" prefWidth="200.0">
-                  <columns>
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Fecha" />
-                    <TableColumn prefWidth="250.0" text="Concepto" />
-                    <TableColumn prefWidth="100.0" text="Cantidad" />
-                    <TableColumn prefWidth="75.0" text="Pagada" />
-                  </columns>
-                </TableView>
+                <fx:include fx:id="derramas" source="derramas.fxml" />
               </content>
             </Tab>
           </tabs>
@@ -81,10 +54,10 @@
   <top>
     <ToolBar>
       <items>
-        <Button mnemonicParsing="false" text="Nuevo" />
-        <Button mnemonicParsing="false" text="Guardar" />
-        <Button mnemonicParsing="false" text="Eliminar" />
-        <ToggleButton mnemonicParsing="false" text="Filtrar" />
+        <Button onAction="#onNuevoClicked" mnemonicParsing="false" text="Nuevo" />
+        <Button onAction="#onGuardarClicked" mnemonicParsing="false" text="Guardar" />
+        <Button onAction="#onEliminarClicked" mnemonicParsing="false" text="Eliminar" />
+        <ToggleButton fx:id="bFiltrar" onAction="#onFiltrarClicked" mnemonicParsing="false" text="Filtrar" />
       </items>
     </ToolBar>
   </top>

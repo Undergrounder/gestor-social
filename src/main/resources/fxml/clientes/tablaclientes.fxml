@@ -1,6 +1,6 @@
 <?import javafx.scene.control.*?>
 
-<TableView fx:id="tvTC" prefHeight="441.0" prefWidth="233.0" xmlns:fx="http://javafx.com/fxml">
+<TableView fx:id="tvTC" prefHeight="441.0" prefWidth="233.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.clientes.TablaClientesController">
 	<columns>
 		<TableColumn prefWidth="75.0" text="Codigo" fx:id="tcTCCodigo"/>
         <TableColumn prefWidth="75.0" text="Nombre" fx:id="tcTCNombre"/>
