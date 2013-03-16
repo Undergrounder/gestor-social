@@ -41,7 +41,6 @@ CREATE TABLE Socio(
   );
 
 -- TABLA Reserva
-CREATE SEQUENCE Reserva_Seq;
 
 CREATE TABLE Reserva(
     socio_id NUMBER(4),
@@ -164,11 +163,10 @@ CREATE SEQUENCE Empleado_Seq;
 CREATE TABLE Empleado(
     idEmpleado NUMBER(4) NOT NULL,
     empleo_id NUMBER(4) NOT NULL,
-    dni VARCHAR2(9) NOT NULL,
+    dni VARCHAR2(9) NOT NULL UNIQUE,
     nombre VARCHAR2(25) NOT NULL,
     apellidos VARCHAR2(50) NOT NULL,
-    datosTarjeta NUMBER(25) NOT NULL,
-    foto BLOB NOT NULL,
+    datosTarjeta NUMBER(25) NOT NULL UNIQUE,
     PRIMARY KEY (idEmpleado),
     FOREIGN KEY (empleo_id) REFERENCES Empleo (idEmpleo)
   );
