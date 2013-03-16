@@ -1,12 +1,15 @@
 --TABLA PersonalExterno
 CREATE SEQUENCE idPersonalExterno;
 
-CREATE TABLE PersonalExterno(
-  idPersonalExterno NUMBER(4) NOT NULL,
-  nombre VARCHAR2(25) NOT NULL,
-  apellidos VARCHAR2(50) NOT NULL,
-  empleo VARCHAR2(25) NOT NULL,
-  empresa VARCHAR2(30) NOT NULL,
+CREATE OR REPLACE TYPE PersonalExterno_Type AS OBJECT(
+  idPersonalExterno NUMBER(4),
+  nombre VARCHAR2(25),
+  apellidos VARCHAR2(50),
+  empleo VARCHAR2(25),
+  empresa VARCHAR2(30)
+);
+
+CREATE TABLE PersonalExterno OF PersonalExterno_Type(
   PRIMARY KEY (idPersonalExterno)
 );
 
@@ -20,29 +23,30 @@ CREATE TABLE Pista(
     precioSocios NUMBER,
     PRIMARY KEY (idPista)
   );
-
--- Cuota
+  
+  -- Cuota
 CREATE SEQUENCE idCuota;
 
-	CREATE OR REPLACE TYPE Cuota_Type AS OBJECT(
-    	idCuota NUMBER(4),
-	  	nombre VARCHAR2(25),
-	  	iva NUMBER(3),
-	  	precio NUMBER,
-	);
-
+CREATE OR REPLACE TYPE Cuota_Type AS OBJECT(
+    idCuota NUMBER(4),
+    nombre VARCHAR2(25),
+    iva NUMBER(3),
+    precio NUMBER
+);
 
 CREATE TABLE Cuota OF Cuota_Type(
   PRIMARY KEY (idCuota)
 );
+
+
   
 -- Deduccion
 CREATE SEQUENCE idDeduccion;
 
-	CREATE OR REPLACE TYPE Deduccion_Type AS OBJECT(
-	  nombre VARCHAR2(25),
-	  cantidad NUMBER
-	);
+CREATE OR REPLACE TYPE Deduccion_Type AS OBJECT(
+  nombre VARCHAR2(25),
+  cantidad NUMBER
+);
 
 CREATE TABLE Deduccion(
   idDeduccion NUMBER(4) NOT NULL,
@@ -68,6 +72,7 @@ CREATE TABLE Socio(
     descuento NUMBER(3),
     PRIMARY KEY (idSocio)
   );
+  
 
 -- TABLA Reserva
 CREATE SEQUENCE idReserva;
@@ -93,7 +98,7 @@ CREATE TABLE Entrada(
     PRIMARY KEY (idEntrada),
     FOREIGN KEY (socio_id) REFERENCES Socio (idSocio)
   );
-    
+  
 --TABLA Actividad
 CREATE SEQUENCE idActividad;
   
@@ -114,66 +119,6 @@ CREATE TABLE ActividadSocio(
   FOREIGN KEY (socio_id) REFERENCES Socio (idSocio)
 );
 
---TABLA Factura
-CREATE SEQUENCE idFactura;
-
-	CREATE OR REPLACE TYPE Factura_tipo AS OBJECT(
-	  idFactura NUMBER(4),
-	  socio_id REF socio,
-	  creada DATE,
-	  numMeses NUMBER(2),
-	  fechaPagado DATE,
-	  idLineaPago Lineas_Pago,
-	  idLineaDeduccion Lineas_Deduccion,
-	  total NUMBER   
-	);
-
-
-CREATE TABLE Factura OF Factura_tipo(
-  PRIMARY KEY (idFactura),
-  NESTED TABLE idLineaPago STORE AS Tabla_LineasPago,
-  NESTED TABLE idLineaDeduccion STORE AS Tabla_LineasDeduccion
-
-);
-
---TABLA LineaDeduccion
-CREATE SEQUENCE idLineaDeduccion;
-
-	CREATE OR REPLACE TYPE LineaDeduccion_Type AS OBJECT (
-		idLineaDeduccion NUMBER(4) NOT NULL,
-		factura_id REF Factura,
-		nomDeduccion VARCHAR2(25) NOT NULL,
-		numero NUMBER NOT NULL,
-		cantidad NUMBER NOT NULL,
-		total NUMBER NOT NULL,	
-	);
-	
-CREATE OR REPLACE TYPE Lineas_Deduccion AS TABLE OF LineaDeduccion_Type;
-	
-CREATE TABLE LineaDeduccion OF LineaDeduccion_Type( 
-  PRIMARY KEY (idLineaDeduccion)
-);
-
---TABLA LineaPago
-CREATE SEQUENCE idLineaPago;
-
-	CREATE OR REPLACE TYPE LineaPago_Type AS OBJECT (
-		idLineaPago NUMBER(4) NOT NULL,
-		factura_id REF Factura,
-		descuento NUMBER NOT NULL,
-		nomCuota VARCHAR2(25) NOT NULL,
-		numero NUMBER NOT NULL,
-		precio NUMBER NOT NULL,
-		iva NUMBER NOT NULL,
-		total NUMBER NOT NULL,
-	);
-
-CREATE OR REPLACE TYPE Lineas_Pago AS TABLE OF LineaPago_Type;
-
-CREATE TABLE LineaPago OF LineaPago_Type(
-  PRIMARY KEY (idLineaPago)
-);
-
 -- TABLA Empleo
 CREATE SEQUENCE idEmpleo;
 
@@ -185,17 +130,53 @@ CREATE TABLE Empleo(
     PRIMARY KEY (idEmpleo)
   );
   
-    -- TABLA Empleado
+-- TABLA Empleado
 CREATE SEQUENCE idEmpleado;
 
 CREATE TABLE Empleado(
     idEmpleado NUMBER(4) NOT NULL,
-    empleo_id NUMBER(4) NOT NULL,
-    dni VARCHAR2(9) NOT NULL,
+    dni VARCHAR2(25) NOT NULL,
     nombre VARCHAR2(25) NOT NULL,
     apellidos VARCHAR2(50) NOT NULL,
-    datosTarjeta NUMBER(25) NOT NULL,
+    datosTarjeta VARCHAR2(25),
     foto BLOB NOT NULL,
-    PRIMARY KEY (idEmpleado),
-    FOREIGN KEY (empleo_id) REFERENCES Empleo (idEmpleo)
+    PRIMARY KEY (idEmpleado)
+  );
+  
+-- TABLA Factura
+CREATE SEQUENCE idFactura;
+
+CREATE TABLE Factura(
+    idFactura NUMBER(4) NOT NULL,
+    nuMeses NUMBER(2) NOT NULL,
+    fechaPagado DATE,
+    total NUMBER NOT NULL,
+    creada DATE NOT NULL,
+    PRIMARY KEY (idFactura)
+  );
+ 
+-- TABLA LineaDeduccion
+CREATE SEQUENCE idLineaDeduccion; 
+ 
+CREATE TABLE LineaDeduccion(
+    idLineaDeduccion NUMBER(4) NOT NULL,
+    nomDeduccion VARCHAR2(25) NOT NULL,
+    numero NUMBER NOT NULL,
+    cantidad NUMBER NOT NULL,
+    total NUMBER NOT NULL,
+    PRIMARY KEY (idLineaDeduccion)
+  );
+  
+-- TABLA LineaPago
+CREATE SEQUENCE idLineaPago; 
+ 
+CREATE TABLE LineaPago(
+    idLineaPago NUMBER(4) NOT NULL,
+    descuento NUMBER NOT NULL,
+    numero NUMBER NOT NULL,
+    total NUMBER NOT NULL,
+    iva NUMBER NOT NULL,
+    nomCuota VARCHAR2(25) NOT NULL,
+    precio NUMBER NOT NULL,
+    PRIMARY KEY (idLineaPago)
   );
