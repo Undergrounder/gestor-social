@@ -8,6 +8,6 @@
 
 <TableView fx:id="tablaEntradas" prefHeight="200.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.clientes.EntradasController">
   <columns>
-    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="550.0" text="Fecha y hora" />
+    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="550.0" text="Fecha y hora" fx:id="tcEFechaHora" />
   </columns>
 </TableView>

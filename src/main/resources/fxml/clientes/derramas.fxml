@@ -8,9 +8,9 @@
 
 <TableView fx:id="tablaDerramas" prefHeight="200.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.clientes.DerramasController">
   <columns>
-    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Fecha" />
-    <TableColumn prefWidth="250.0" text="Concepto" />
-    <TableColumn prefWidth="100.0" text="Cantidad" />
-    <TableColumn prefWidth="75.0" text="Pagada" />
+    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Fecha" fx:id="tcDFecha"/>
+    <TableColumn prefWidth="250.0" text="Concepto" fx:id="tcDConcepto"/>
+    <TableColumn prefWidth="100.0" text="Cantidad" fx:id="tcDCantidad"/>
+    <TableColumn prefWidth="75.0" text="Pagada" fx:id="tcDPagada"/>
   </columns>
 </TableView>
