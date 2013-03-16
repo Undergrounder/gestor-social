@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2013 16:35:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="dam.gestorclub.entidades.Actividad" table="ACTIVIDAD">
+        <id name="idactividad" type="short">
+            <column name="IDACTIVIDAD" precision="4" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="25" not-null="true" />
+        </property>
+        <property name="lugar" type="string">
+            <column name="LUGAR" not-null="true" />
+        </property>
+        <property name="categoria" type="string">
+            <column name="CATEGORIA" not-null="true" />
+        </property>
+        <set name="socios" table="ACTIVIDADSOCIO" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="ACTIVIDAD_ID" precision="4" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="dam.gestorclub.entidades.Socio">
+                <column name="SOCIO_ID" precision="4" scale="0" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2013 16:35:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="dam.gestorclub.entidades.Socio" table="SOCIO">
+        <id name="idsocio" type="short">
+            <column name="IDSOCIO" precision="4" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="dni" type="string">
+            <column name="DNI" length="9" not-null="true" unique="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="25" not-null="true" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="APELLIDOS" length="50" not-null="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="CORREO" length="100" not-null="true" />
+        </property>
+        <property name="esvaron" type="char">
+            <column name="ESVARON" length="1" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="TELEFONO" length="9" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" not-null="true" />
+        </property>
+        <property name="fechanac" type="date">
+            <column name="FECHANAC" length="7" />
+        </property>
+        <property name="cuentabancaria" type="big_decimal">
+            <column name="CUENTABANCARIA" precision="20" scale="0" />
+        </property>
+        <property name="codigobarras" type="big_decimal">
+            <column name="CODIGOBARRAS" precision="22" scale="0" />
+        </property>
+        <property name="descuento" type="java.lang.Short">
+            <column name="DESCUENTO" precision="3" scale="0" />
+        </property>
+        <set name="reservas" table="RESERVA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SOCIO_ID" precision="4" scale="0" />
+            </key>
+            <one-to-many class="dam.gestorclub.entidades.Reserva" />
+        </set>
+        <set name="actividads" table="ACTIVIDADSOCIO" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="SOCIO_ID" precision="4" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="dam.gestorclub.entidades.Actividad">
+                <column name="ACTIVIDAD_ID" precision="4" scale="0" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="entradas" table="ENTRADA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SOCIO_ID" precision="4" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="dam.gestorclub.entidades.Entrada" />
+        </set>
+    </class>
+</hibernate-mapping>

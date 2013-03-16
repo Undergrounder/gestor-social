@@ -85,10 +85,10 @@ public class Configuracion {
 	}
 	
 	public void loadDefaults() {
-		settings.put("DB_HOST", "127.0.0.1");
-		settings.put("DB_USER", "zapatillas");
-		settings.put("DB_PASS", "zapatillaspass");
-		settings.put("DB_SCHEMA", "zapatillas");
+		settings.put("DB_HOST", "undergrounder.no-ip.info");
+		settings.put("DB_USER", "under");
+		settings.put("DB_PASS", "qwerty69");
+		settings.put("DB_SCHEMA", "UNDER");
 		
 	}
 
