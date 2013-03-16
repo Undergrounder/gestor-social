@@ -15,19 +15,19 @@ import javafx.scene.control.ListView;
  */
 public class TablaActividadesController {
 	
-	@FXML
-	private ChoiceBox cbTA;
-	private ListView lvTA;
-	private Button tAAdd;
-	private Button tADelete;
+	
+	@FXML private ChoiceBox cbTA;
+	@FXML private ListView lvTA;
+	@FXML private Button tAAdd;
+	@FXML private Button tADelete;
 	
 	/**
-	 * Boton de añadir pulsado
+	 * Boton de aï¿½adir pulsado
 	 * Llamado por JavaFX
 	 * @param event
 	 */
-	@FXML protected void onAñadirClicked(ActionEvent event){
-		//TODO Añadir Actividad
+	@FXML protected void onAddClicked(ActionEvent event){
+		//TODO Aï¿½adir Actividad
 	}
 	
 	/**

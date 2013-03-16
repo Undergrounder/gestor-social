@@ -25,7 +25,7 @@
         <TextField prefWidth="200.0" />
         <TextField prefWidth="250.0" />
         <TextField prefWidth="120.0" />
-        <Button mnemonicParsing="false" text="Añadir" />
+        <Button mnemonicParsing="false" text="AÃ±adir" />
       </children>
     </FlowPane>
   </children>

@@ -15,17 +15,17 @@ import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
  */
 public class ClientesController {
 
-	@FXML ToggleButton bFiltrar;
+	@FXML private ToggleButton bFiltrar;
 	
 	
 	//Controladores (para pasar datos a otra parte y simplificar el codigo haciendolo modular)
-	@FXML DatosClienteController datosClienteController;
+	@FXML private DatosClienteController datosClienteController;
 	
 	//Pestañas
-	@FXML CuotasController cuotasController;
-	@FXML DerramasController derramasController;
-	@FXML TablaActividadesController tablaActividadesController;
-	@FXML TablaClientesController tablaClientesController;
+	@FXML private CuotasController cuotasController;
+	@FXML private DerramasController derramasController;
+	@FXML private TablaActividadesController tablaActividadesController;
+	@FXML private TablaClientesController tablaClientesController;
 	
 	/**
 	 * Boton de nuevo pulsado

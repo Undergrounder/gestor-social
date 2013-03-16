@@ -12,17 +12,11 @@ import javafx.scene.control.TableColumn;
  */
 public class TablaClientesController {
 	
-	@FXML
-	private TableColumn tcTCCodigo;
-	private TableColumn tcTCNombre;
-	private TableColumn tcTCApellidos;
+	
+	//@FXML private TableColumn tcTCCodigo;
+	//@FXML private TableColumn tcTCNombre;
+	//@FXML private TableColumn tcTCApellidos;
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }
