@@ -60,7 +60,7 @@ public class ClientesController {
 	 * @param event
 	 */
 	@FXML protected void onFiltrarClicked(ActionEvent event){
-		//TODO nuevo cliente
+		//TODO filtrar cliente
 	}
 	
 	/**

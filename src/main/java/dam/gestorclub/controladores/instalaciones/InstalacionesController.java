@@ -5,6 +5,7 @@ package dam.gestorclub.controladores.instalaciones;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import dam.gestorclub.componentes.StageSwitcher;
 import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
 
@@ -13,6 +14,11 @@ import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
  *
  */
 public class InstalacionesController {
+	
+	@FXML
+	private TableColumn iTCInstalacion;
+	private TableColumn iTCSocio;
+	private TableColumn iTCTiempo;
 
 	/**
 	 * Boton de volver pulsado
