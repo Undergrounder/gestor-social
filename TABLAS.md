@@ -2,10 +2,13 @@ TABLAS
 ######
 
 ##XML
-- PersonalExterno* ->Desde Base de datos relacional
+- PersonalExterno* ->Desde Base de objeto relacional
 	
 ##Hibernate
-- Entrada
+- Socio
+- Factura
+- LineaDeduccion
+- LineaPago
 - Empleado
 - Empleo
 
@@ -13,49 +16,45 @@ TABLAS
 ##Objeto Relacional
 - Cuota
 - Deduccion
-- Factura
-- LineaDeduccion
-- LineaPago
-
+- PersonalExterno
 
 ##Base de datos relacional
-- PersonalExterno
 - Pista
-- Socio
 - Reserva
 - Actividad
 - ActividadSocio
+- Entrada
+
 
 #División por personas
 
-##Aaron (5 tablas):
+##Aaron (4 tablas):
 	- Hibernate:
-		- Entrada
+		- Empleado
+        - Empleo
 	- Objeto Relacional
 		- Deduccion
-		- LineaPago
 	- Relacional
-		- Socio
-		- Reserva
+		- Entrada
 	
 ##Adrian (5 tablas):
 	- Hibernate
-		- Empleado
+		- Socio
 	- Objeto Relacional
-		- Factura
+		- PersonalExterno*
 	- Relacional
 		- Pista
-		- PersonalExterno*
+		- Reserva
+		- Actividad
 	- XML
 		- PersonalExterno
 
-##Joan (5 tablas):
+##Joan (4 tablas):
 	- Hibernate
-		- Empleo
+	    - Factura
+		- LineaDeduccion
+        - LineaPago
 	- Objeto Relacional
 		- Cuota
-		- LineaDeduccion
 	- Relacional
-		- Actividad
-		- ActividadSocio
-
+        - ActividadSocio

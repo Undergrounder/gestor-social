@@ -12,10 +12,10 @@ import javafx.scene.control.TableColumn;
  */
 public class DerramasController {
 	
-	@FXML
-	private TableColumn tcDFecha;
-	private TableColumn tcDConcepto;
-	private TableColumn tcDCantidad;
-	private TableColumn tcDPagada;
+	
+	//@FXML private TableColumn tcDFecha;
+	//@FXML private TableColumn tcDConcepto;
+	//@FXML private TableColumn tcDCantidad;
+	//@FXML private TableColumn tcDPagada;
 
 }

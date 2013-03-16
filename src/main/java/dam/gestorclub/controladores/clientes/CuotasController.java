@@ -13,18 +13,18 @@ import javafx.scene.control.TableColumn;
  */
 public class CuotasController {
 	
-	@FXML
-	private TableColumn tcCFecha;
-	private TableColumn	tcCMeses;
-	private TableColumn	tcCCantidad;
+	
+	//@FXML private TableColumn tcCFecha;
+	//@FXML private TableColumn	tcCMeses;
+	//@FXML private TableColumn	tcCCantidad;
 	
 	/**
-	 * Boton de añadir pulsado
+	 * Boton de aï¿½adir pulsado
 	 * Llamado por JavaFX
 	 * @param event
 	 */
-	@FXML protected void onAñadirClicked(ActionEvent event){
-		//TODO Añadir Actividad
+	@FXML protected void onAddClicked(ActionEvent event){
+		//TODO Aï¿½adir Actividad
 	}
 	
 	/**

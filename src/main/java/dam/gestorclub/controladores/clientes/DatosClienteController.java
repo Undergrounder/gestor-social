@@ -15,17 +15,17 @@ import jfxtras.labs.scene.control.CalendarTextField;
  */
 public class DatosClienteController {
 	
-	@FXML
-	private TextField tfDCCodigo;
-	private TextField tfDCNombre;
-	private TextField tfDCApellidos;
-	private TextField tfDCDireccion;
-	private TextField tfDCCodigoPostal;
-	private TextField tfDCTelefono;
-	private CalendarTextField calNacimiento;
-	private TextField tfDCCuentaBancaria;
-	private CheckBox chbDCVer;
-	private ChoiceBox cbDCSexo;
+	
+	@FXML private TextField tfDCCodigo;
+	@FXML private TextField tfDCNombre;
+	@FXML private TextField tfDCApellidos;
+	@FXML private TextField tfDCDireccion;
+	@FXML private TextField tfDCCodigoPostal;
+	@FXML private TextField tfDCTelefono;
+	@FXML private CalendarTextField calNacimiento;
+	@FXML private TextField tfDCCuentaBancaria;
+	@FXML private CheckBox chbDCVer;
+	@FXML private ChoiceBox cbDCSexo;
 	
 
 }
