@@ -36,10 +36,10 @@ TABLAS
 ##Adrian (5 tablas):
 	- Hibernate
 		- Empleado
-	- Objeto Relacional
-		- PersonalExterno*
+	- Objeto Relacional		
 		- Factura
 	- Relacional
+		- PersonalExterno*
 		- Pista
 	- XML
 		- PersonalExterno
