@@ -117,6 +117,26 @@ public class ConexionJDBC {
 		
 		  
 	}
-	
-	
+	/**
+	 * Actualiza los datos de una lista.
+	 * Los datos de idpista deben ser de una existente.
+	 * @param pista
+	 * @return
+	 */
+	public boolean actualizaPista(Pista pista){
+		try {
+			PreparedStatement stmt = conn.prepareStatement("UPDATE Pista SET nombre = ?, preciosocios = ?, precionosocios = ? where idpista = ?");
+			stmt.setString(1, pista.getNombre());
+			stmt.setBigDecimal(2, pista.getPreciosocios());
+			stmt.setBigDecimal(3, pista.getPrecionosocios());
+			stmt.setShort(4, pista.getIdpista());
+			
+			return 1== stmt.executeUpdate();
+		} catch (SQLException e) {
+			System.err.println("No se pudo modificar la pista. " + e.getLocalizedMessage());
+			return false;
+		}
+		
+		
+	}
 }

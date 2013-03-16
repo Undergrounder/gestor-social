@@ -10,8 +10,6 @@ import java.util.ResourceBundle;
 
 import name.antonsmirnov.javafx.dialog.Dialog;
 import dam.gestorclub.componentes.ConexionJDBC;
-import dam.gestorclub.componentes.StageSwitcher;
-import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
 import dam.gestorclub.entidades.Pista;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -111,17 +109,24 @@ public class PistasController implements Initializable{
 		tcPPrecioSocios.setCellValueFactory(new PropertyValueFactory<Pista, Float>("preciosocios"));
 		tcPPrecioNoSocios.setCellValueFactory(new PropertyValueFactory<Pista, Float>("precionosocios"));
 		
-		//Para editar
+		//Para editar nombre
 		tcPNombre.setCellFactory(TextFieldTableCell.<Pista>forTableColumn());
-		tcPNombre.setEditable(true);
 		tcPNombre.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Pista,String>>() {
 			
 			@Override
 			public void handle(CellEditEvent<Pista, String> arg0) {
-				//Update nombre
+				Pista pista = arg0.getRowValue();
+				pista.setNombre(arg0.getNewValue());
 				
+				if(!conexion.actualizaPista(pista))
+					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
 			}
 		});
+		
+		//TODO Para editar precio socios
+		//tcPPrecioSocios.setCellFactory(TextFieldTableCell.<Pista>forTableColumn());
+		
+		//TODO Para editar precio no socios
 		
 		//Saber si algo esta seleccionado
 		tvPistas.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
