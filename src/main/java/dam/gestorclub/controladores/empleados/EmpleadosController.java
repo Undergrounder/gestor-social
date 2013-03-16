@@ -5,6 +5,7 @@ package dam.gestorclub.controladores.empleados;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import dam.gestorclub.componentes.StageSwitcher;
 import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
@@ -15,13 +16,13 @@ import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
  */
 public class EmpleadosController {
 
-	@FXML
-	private TextField eTFID;
-	private TextField eTFNombre;
-	private TextField eTFApellidos;
-	private TextField eTFDni;
-	private TextField eTCNombre;
-	private TextField eTCApellidos;
+	
+	@FXML private TextField eTFID;
+	@FXML private TextField eTFNombre;
+	@FXML private TextField eTFApellidos;
+	@FXML private TextField eTFDni;
+	@FXML private TableColumn<String, String> eTCNombre;
+	@FXML private TableColumn<String, String> eTCApellidos;
 	
 	/**
 	 * Boton de nuevo pulsado
@@ -47,6 +48,15 @@ public class EmpleadosController {
 	 * @param event
 	 */
 	@FXML protected void onFiltrarClicked(ActionEvent event){
+		//TODO filtrar cliente
+	}
+	
+	/**
+	 * Boton de imagen pulsado
+	 * Llamado por JavaFX
+	 * @param event
+	 */
+	@FXML protected void onImagenClicked(ActionEvent event){
 		//TODO filtrar cliente
 	}
 	

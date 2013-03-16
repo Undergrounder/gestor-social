@@ -15,10 +15,10 @@ import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
  */
 public class InstalacionesController {
 	
-	@FXML
-	private TableColumn iTCInstalacion;
-	private TableColumn iTCSocio;
-	private TableColumn iTCTiempo;
+	
+	@FXML private TableColumn iTCInstalacion;
+	@FXML private TableColumn iTCSocio;
+	@FXML private TableColumn iTCTiempo;
 
 	/**
 	 * Boton de volver pulsado

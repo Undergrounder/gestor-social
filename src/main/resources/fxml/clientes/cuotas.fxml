@@ -12,12 +12,12 @@
       <columns>
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="119.0" text="Fecha" fx:id="tcCFecha"/>
         <TableColumn prefWidth="75.0" text="Meses" fx:id="tcCMeses"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="198.0" text="Cantidad"fx:id="tcCCantidad"  />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="198.0" text="Cantidad" fx:id="tcCCantidad"/>
       </columns>
     </TableView>
     <VBox prefHeight="200.0" prefWidth="100.0">
       <children>
-        <Button onAction="#onAñadirClicked" mnemonicParsing="false" text="Añadir" />
+        <Button onAction="#onAddClicked" mnemonicParsing="false" text="AÃ±adir" />
         <Button onAction="#onEliminarClicked" mnemonicParsing="false" text="Eliminar" />
       </children>
     </VBox>

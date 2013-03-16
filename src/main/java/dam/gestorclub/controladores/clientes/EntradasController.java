@@ -12,8 +12,8 @@ import javafx.scene.control.TableColumn;
  */
 public class EntradasController {
 	
-	@FXML
-	private TableColumn tcEFechaHora;
+	
+	//@FXML private TableColumn tcEFechaHora;
 
 	//TODO no es de Strings@FXML TableView<String> tablaEntradas;
 	
