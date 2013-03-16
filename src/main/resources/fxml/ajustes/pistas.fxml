@@ -10,9 +10,9 @@
   <children>
     <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
       <children>
-        <TableView fx:id="tvPistas" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+        <TableView fx:id="tvPistas" editable="true" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
           <columns>
-            <TableColumn fx:id="tcPId" maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="ID" />
+            <TableColumn fx:id="tcPId" editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="ID" />
             <TableColumn fx:id="tcPNombre" prefWidth="250.0" text="Nombre" />
             <TableColumn fx:id="tcPPrecioSocios" prefWidth="120.0" text="Precio socios" />
             <TableColumn fx:id="tcPPrecioNoSocios" maxWidth="5000.0" minWidth="10.0" prefWidth="124.0" text="Precio no socios" />
