@@ -28,7 +28,7 @@ TABLAS
 
 #División por personas
 
-##Aaron (5 tablas):
+##Aaron (4 tablas):
 	- Hibernate:
 		- Empleado
         - Empleo
@@ -45,15 +45,16 @@ TABLAS
 	- Relacional
 		- Pista
 		- Reserva
+		- Actividad
 	- XML
 		- PersonalExterno
 
-##Joan (5 tablas):
+##Joan (4 tablas):
 	- Hibernate
+	    - Factura
 		- LineaDeduccion
         - LineaPago
 	- Objeto Relacional
 		- Cuota
 	- Relacional
-		- Actividad
-
+        - ActividadSocio
