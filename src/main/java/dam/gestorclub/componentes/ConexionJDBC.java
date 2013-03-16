@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import dam.gestorclub.componentes.Configuracion.KEYS;
+import dam.gestorclub.entidades.Actividad;
 import dam.gestorclub.entidades.Pista;
 
 
@@ -113,8 +114,7 @@ public class ConexionJDBC {
 		} catch (SQLException e) {
 			System.err.println("SE produjo un error al eliminar la pista " + id + ": " + e.getLocalizedMessage());
 			return false;
-		}
-		
+		}		
 		  
 	}
 	/**
@@ -136,7 +136,68 @@ public class ConexionJDBC {
 			System.err.println("No se pudo modificar la pista. " + e.getLocalizedMessage());
 			return false;
 		}
-		
-		
+				
 	}
+
+	public boolean insertarActividad(String nombre, String lugar, String categoria)throws SQLException{
+		PreparedStatement stmt = conn.prepareStatement("INSERT INTO Actividad VALUES (Actividad_Seq.nextVal,?,?,?)");
+		stmt.setString(1, nombre);
+		stmt.setString(2, lugar);
+		stmt.setString(3, categoria);		
+		
+		return stmt.execute();
+	}
+
+	public boolean actualizaActividad(Actividad actividad) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement("UPDATE Actividad SET nombre = ?, lugar = ?, categoria = ? where idactividad = ?");
+			stmt.setString(1, actividad.getNombre());
+			stmt.setString(2, actividad.getLugar());
+			stmt.setString(3, actividad.getCategoria());
+			stmt.setShort(4, actividad.getIdactividad());
+			
+			return 1== stmt.executeUpdate();
+		} catch (SQLException e) {
+			System.err.println("No se pudo modificar la Actividad. " + e.getLocalizedMessage());
+			return false;
+		}
+	}
+
+	public List<Actividad> getListaActividades() {
+		LinkedList<Actividad> lista = new LinkedList<>();
+		
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Actividad");
+			while(rs.next()){
+				Actividad actividad = new Actividad();
+				actividad.setIdactividad(rs.getShort("idactividad"));
+				actividad.setNombre(rs.getString("nombre"));
+				actividad.setLugar(rs.getString("lugar"));
+				actividad.setCategoria(rs.getString("categoria"));
+				lista.add(actividad);
+			}
+		} catch (SQLException e) {
+			return null;
+		}		
+		
+		return lista;
+	}
+
+	public boolean eliminarActividad(short id) {
+		Statement st;
+		try {
+			st = conn.createStatement();
+			String sql = "DELETE FROM Actividad WHERE idactividad = '"+id+"'";
+			int delete = st.executeUpdate(sql);
+			if(delete==1)
+				return true;
+			else
+				return false;
+		} catch (SQLException e) {
+			System.err.println("SE produjo un error al eliminar la Actividad " + id + ": " + e.getLocalizedMessage());
+			return false;
+		}		
+	}
+	
 }
