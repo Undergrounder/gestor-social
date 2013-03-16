@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2013 16:35:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="dam.gestorclub.entidades.Empleo" table="EMPLEO">
+        <id name="idempleo" type="short">
+            <column name="IDEMPLEO" precision="4" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="25" not-null="true" />
+        </property>
+        <property name="horario" type="string">
+            <column name="HORARIO" length="50" not-null="true" />
+        </property>
+        <property name="sueldo" type="big_decimal">
+            <column name="SUELDO" precision="22" scale="0" />
+        </property>
+        <set name="empleados" table="EMPLEADO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="EMPLEO_ID" precision="4" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="dam.gestorclub.entidades.Empleado" />
+        </set>
+    </class>
+</hibernate-mapping>

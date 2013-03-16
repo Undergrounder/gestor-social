@@ -1,13 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
- <session-factory name="MySessionFactory">
-  <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
-  <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
-  <property name="hibernate.connection.password">interfaces</property>
-  <property name="hibernate.connection.url">jdbc:oracle:thin:@192.168.1.201:1521:xe</property>
-  <property name="hibernate.connection.username">datos</property>
-  <property name="hibernate.default_schema">xe</property>
- </session-factory>
+    <session-factory name="MySessionFactory">
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+        <property name="hibernate.connection.password">qwerty69</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@192.168.1.201:1521:xe</property>
+        <property name="hibernate.connection.username">under</property>
+        <property name="hibernate.default_schema">UNDER</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <mapping resource="dam/gestorclub/entidades/Entrada.hbm.xml" />
+        <mapping resource="dam/gestorclub/entidades/Empleado.hbm.xml" />
+        <mapping resource="dam/gestorclub/entidades/Actividad.hbm.xml" />
+        <mapping resource="dam/gestorclub/entidades/Socio.hbm.xml" />
+        <mapping resource="dam/gestorclub/entidades/Personalexterno.hbm.xml" />
+        <mapping resource="dam/gestorclub/entidades/Pista.hbm.xml" />
+        <mapping resource="dam/gestorclub/entidades/Empleo.hbm.xml" />
+        <mapping resource="dam/gestorclub/entidades/Reserva.hbm.xml" />
+    </session-factory>
 </hibernate-configuration>

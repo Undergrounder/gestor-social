@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2013 16:35:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="dam.gestorclub.entidades.Personalexterno" table="PERSONALEXTERNO">
+        <id name="idpersonalexterno" type="short">
+            <column name="IDPERSONALEXTERNO" precision="4" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="25" not-null="true" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="APELLIDOS" length="50" not-null="true" />
+        </property>
+        <property name="empleo" type="string">
+            <column name="EMPLEO" length="25" not-null="true" />
+        </property>
+        <property name="empresa" type="string">
+            <column name="EMPRESA" length="30" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

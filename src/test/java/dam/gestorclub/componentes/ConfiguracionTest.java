@@ -35,10 +35,10 @@ public class ConfiguracionTest {
 		Configuracion config = Configuracion.getConfiguration();
 		config.loadDefaults();
 		
-		assertEquals("127.0.0.1", config.getKey(KEYS.DB_HOST));
-		assertEquals("zapatillas", config.getKey(KEYS.DB_USER));
-		assertEquals("zapatillaspass", config.getKey(KEYS.DB_PASS));
-		assertEquals("zapatillas", config.getKey(KEYS.DB_SCHEMA));
+		assertEquals("undergrounder.no-ip.info", config.getKey(KEYS.DB_HOST));
+		assertEquals("under", config.getKey(KEYS.DB_USER));
+		assertEquals("qwerty69", config.getKey(KEYS.DB_PASS));
+		assertEquals("UNDER", config.getKey(KEYS.DB_SCHEMA));
 		
 	}
 
