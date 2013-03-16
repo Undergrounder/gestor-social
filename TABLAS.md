@@ -5,56 +5,50 @@ TABLAS
 - PersonalExterno* ->Desde Base de objeto relacional
 	
 ##Hibernate
-- Socio
-- Factura
-- LineaDeduccion
-- LineaPago
 - Empleado
 - Empleo
-
+- Entrada
 
 ##Objeto Relacional
 - Cuota
-- Deduccion
-- PersonalExterno
+- Linea Pago
+- Factura
 
 ##Base de datos relacional
 - Pista
 - Reserva
 - Actividad
 - ActividadSocio
-- Entrada
+- Socio
 
 
 #División por personas
 
 ##Aaron (4 tablas):
 	- Hibernate:
-		- Empleado
-        - Empleo
-	- Objeto Relacional
-		- Deduccion
-	- Relacional
 		- Entrada
+	- Objeto Relacional
+		- Linea Pago
+	- Relacional
+		- Reserva
+		- ActividadSocio
 	
 ##Adrian (5 tablas):
 	- Hibernate
-		- Socio
+		- Empleado
 	- Objeto Relacional
 		- PersonalExterno*
+		- Factura
 	- Relacional
 		- Pista
-		- Reserva
-		- Actividad
 	- XML
 		- PersonalExterno
 
 ##Joan (4 tablas):
 	- Hibernate
-	    - Factura
-		- LineaDeduccion
-        - LineaPago
+	    - Empleo
 	- Objeto Relacional
 		- Cuota
 	- Relacional
-        - ActividadSocio
+		- Actividad
+        - Socio
