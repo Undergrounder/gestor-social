@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2013 16:35:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="dam.gestorclub.entidades.Reserva" table="RESERVA">
+        <composite-id name="id" class="dam.gestorclub.entidades.ReservaId">
+            <key-property name="pistaId" type="short">
+                <column name="PISTA_ID" precision="4" scale="0" />
+            </key-property>
+            <key-property name="fecha" type="date">
+                <column name="FECHA" length="7" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pista" class="dam.gestorclub.entidades.Pista" update="false" insert="false" fetch="select">
+            <column name="PISTA_ID" precision="4" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="socio" class="dam.gestorclub.entidades.Socio" fetch="select">
+            <column name="SOCIO_ID" precision="4" scale="0" />
+        </many-to-one>
+        <property name="precio" type="big_decimal">
+            <column name="PRECIO" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="estapagado" type="char">
+            <column name="ESTAPAGADO" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

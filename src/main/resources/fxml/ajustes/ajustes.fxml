@@ -15,6 +15,16 @@
             <fx:include fx:id="empleos" source="empleos.fxml" />
           </content>
         </Tab>
+        <Tab text="Pistas">
+          <content>
+            <fx:include fx:id="pistas" source="pistas.fxml" />
+          </content>
+        </Tab>
+        <Tab text="Actividades">
+          <content>
+            <fx:include fx:id="actividades" source="actividades.fxml" />
+          </content>
+        </Tab>
       </tabs>
     </TabPane>
     <ToolBar>
