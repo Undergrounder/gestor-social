@@ -6,13 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox prefHeight="100.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.clientes.CuotasController">
+<HBox prefHeight="100.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.clientes.TablaFacturasController">
   <children>
-    <TableView prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+    <TableView fx:id="tvTF" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
       <columns>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="119.0" text="Fecha" fx:id="tcCFecha"/>
-        <TableColumn prefWidth="75.0" text="Meses" fx:id="tcCMeses"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="198.0" text="Cantidad" fx:id="tcCCantidad"/>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="119.0" text="Fecha" fx:id="tcTFFecha"/>
+        <TableColumn prefWidth="75.0" text="Meses" fx:id="tcTFMeses"/>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="198.0" text="Cantidad" fx:id="tcTFCantidad"/>
       </columns>
     </TableView>
     <VBox prefHeight="200.0" prefWidth="100.0">

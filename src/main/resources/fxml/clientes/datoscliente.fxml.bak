@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.lang.* ?>
+<?import javafx.collections.*?>
+<?import javafx.collections.* ?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="168.0" prefWidth="528.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.clientes.DatosClienteController">
+  <children>
+    <Label layoutX="18.0" layoutY="9.0" text="DNI:" />
+    <TextField fx:id="tfDCDni" layoutX="73.0" layoutY="6.0" prefWidth="147.0" />
+    <Label layoutX="11.0" layoutY="29.0" text="Nombre:" />
+    <TextField fx:id="tfDCNombre" layoutX="73.0" layoutY="28.0" prefWidth="147.0" />
+    <Label layoutX="233.0" layoutY="31.0" text="Apellidos:" />
+    <TextField fx:id="tfDCApellidos" layoutX="303.0" layoutY="28.0" prefWidth="220.0" />
+    <Label layoutX="2.0" layoutY="56.0" text="Direccion:" />
+    <TextField fx:id="tfDCDireccion" layoutX="73.0" layoutY="53.0" prefWidth="450.0" />
+    <Label layoutX="9.0" layoutY="81.0" text="Telefono:" />
+    <TextField id="tfDCCodigoPostal" fx:id="tfDCTelefono" layoutX="73.0" layoutY="78.0" prefWidth="116.0" />
+    <Label layoutX="264.0" layoutY="103.0" text="Sexo:" />
+    <Label layoutX="14.0" layoutY="105.0" text="Tarjeta:" />
+    <TextField id="tfDCTelefono" fx:id="tfDCCodigoBarras" layoutX="73.0" layoutY="102.0" prefWidth="146.0" />
+    <Label layoutX="200.0" layoutY="81.0" text="F. nac:" />
+    <Label layoutX="9.0" layoutY="133.0" text="Cuenta bancaria:" />
+    <TextField fx:id="tfDCCuentaBancaria" layoutX="118.0" layoutY="130.0" prefWidth="335.0" />
+    <CheckBox fx:id="chbDCVer" layoutX="468.0" layoutY="133.0" mnemonicParsing="false" text="Ver" />
+    <ChoiceBox fx:id="cbDCSexo" layoutX="310.0" layoutY="100.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Masculino" />
+          <String fx:value="Femenino" />
+        </FXCollections>
+      </items>
+    </ChoiceBox>
+    <Label layoutX="248.0" layoutY="9.0" text="Correo:" />
+    <TextField fx:id="tfDCCorreo" layoutX="303.0" layoutY="6.0" prefWidth="220.0" />
+  </children>
+</AnchorPane>
