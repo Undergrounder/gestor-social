@@ -76,4 +76,13 @@ public class PrincipalController {
 	@FXML protected void onAjustesClicked(ActionEvent event){
 		StageSwitcher.cambiaPantalla(PANTALLA.AJUSTES);
 	}
+	
+	/**
+	 * Boton de personal externo pulsado
+	 * Llamado por JavaFX
+	 * @param event
+	 */
+	@FXML protected void onExternosClicked(ActionEvent event){
+		StageSwitcher.cambiaPantalla(PANTALLA.EXTERNOS);
+	}
 }

@@ -36,7 +36,8 @@ public class StageSwitcher {
 		ESTADISTICAS_ACCESOS,
 		ESTADISTICAS_INGRESOS,
 		CORREOS,
-		AJUSTES
+		AJUSTES, 
+		EXTERNOS
 	}
 	
 	/**
@@ -92,6 +93,9 @@ public class StageSwitcher {
 			case AJUSTES:
 				fxmlPath = "ajustes/ajustes";
 				break;
+			case EXTERNOS:
+				fxmlPath = "externos/externos";
+				break;	
 			}
 			FXMLLoader loader = new FXMLLoader(StageSwitcher.class.getResource("/fxml/" + fxmlPath + ".fxml"));
 			Parent root = (Parent)loader.load();
