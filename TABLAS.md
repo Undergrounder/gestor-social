@@ -39,7 +39,7 @@ TABLAS
 	- Objeto Relacional		
 		- Factura
 	- Relacional
-		- PersonalExterno*
+		- Socio
 		- Pista
 	- XML
 		- PersonalExterno
@@ -51,4 +51,4 @@ TABLAS
 		- Cuota
 	- Relacional
 		- Actividad
-        - Socio
+        - PersonalExterno*
