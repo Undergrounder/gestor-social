@@ -15,10 +15,13 @@ import java.sql.Statement;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import dam.gestorclub.componentes.Configuracion.KEYS;
 import dam.gestorclub.entidades.Actividad;
+import dam.gestorclub.entidades.Entrada;
 import dam.gestorclub.entidades.Pista;
+import dam.gestorclub.entidades.Reserva;
 import dam.gestorclub.entidades.Socio;
 
 
@@ -182,6 +185,7 @@ public class ConexionJDBC {
 				lista.add(actividad);
 			}
 		} catch (SQLException e) {
+			System.err.println("Error al obtener la lista de actividades: " + e.getLocalizedMessage());
 			return null;
 		}		
 		
@@ -205,8 +209,35 @@ public class ConexionJDBC {
 	}
 
 	public List<Socio> getListaSocios() {
-		// TODO Auto-generated method stub
-		return null;
+		LinkedList<Socio> lista = new LinkedList<>();
+		
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Socio");
+			while(rs.next()){
+				Socio socio = new Socio(rs.getShort("idsocio"),
+										rs.getString("dni"),
+										rs.getString("nombre"),
+										rs.getString("apellidos"),
+										rs.getString("correo"),
+										rs.getString("esvaron").charAt(0),
+										rs.getString("telefono"),
+										rs.getString("direccion"),
+										rs.getDate("fechanac"),
+										rs.getBigDecimal("cuentabancaria"),
+										rs.getBigDecimal("codigobarras"),
+										rs.getShort("descuento"),
+										null,
+										null,
+										null);
+				lista.add(socio);
+			}
+		} catch (SQLException e) {
+			System.err.println("Error al obtener la lista de socios: " + e.getLocalizedMessage());
+			return null;
+		}		
+		
+		return lista;
 	}
 
 	public boolean insertarSocio(String dni, String nombre, String apellidos,
@@ -217,8 +248,7 @@ public class ConexionJDBC {
 		stmt.setString(2, nombre);
 		stmt.setString(3, apellidos);
 		stmt.setString(4, correo);
-		//AQUI COMO?
-//		stmt.setCharacter(5, esvaron);
+		stmt.setString(5, String.valueOf(esvaron));
 		stmt.setString(6, telefono);
 		stmt.setString(7, direccion);
 		stmt.setDate(8, fechanac);
