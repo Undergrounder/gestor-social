@@ -57,6 +57,7 @@ public class ActividadesController  implements Initializable{
 	@FXML protected void onAddClicked(ActionEvent event){
 		
 		//Validación
+	
 		String nombre = tfANombre.getText().trim();
 		if(nombre.isEmpty()){
 			Dialog.showError("Datos invalidos", "El nombre no puede estar vacio.");

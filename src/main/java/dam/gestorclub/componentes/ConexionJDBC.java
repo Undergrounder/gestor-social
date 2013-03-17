@@ -3,19 +3,23 @@
  */
 package dam.gestorclub.componentes;
 
+import java.io.Reader;
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
 import dam.gestorclub.componentes.Configuracion.KEYS;
 import dam.gestorclub.entidades.Actividad;
 import dam.gestorclub.entidades.Pista;
+import dam.gestorclub.entidades.Socio;
 
 
 
@@ -199,5 +203,30 @@ public class ConexionJDBC {
 			return false;
 		}		
 	}
-	
+
+	public List<Socio> getListaSocios() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean insertarSocio(String dni, String nombre, String apellidos,
+			String correo, Character esvaron, String telefono, String direccion,
+			Date fechanac, Float cuentabancaria, Float codigobarras, Short descuento) throws SQLException{
+		PreparedStatement stmt = conn.prepareStatement("INSERT INTO Socio VALUES (Pista_Seq.nextVal,?,?,?,?,?,?,?,?,?,?,?)");
+		stmt.setString(1, dni);
+		stmt.setString(2, nombre);
+		stmt.setString(3, apellidos);
+		stmt.setString(4, correo);
+		//AQUI COMO?
+//		stmt.setCharacter(5, esvaron);
+		stmt.setString(6, telefono);
+		stmt.setString(7, direccion);
+		stmt.setDate(8, fechanac);
+		stmt.setFloat(9, cuentabancaria);
+		stmt.setFloat(10, codigobarras);
+		stmt.setShort(11, descuento);
+		
+		
+		return stmt.execute();
+	}
 }
