@@ -84,4 +84,9 @@ public class TablaClientesController implements Initializable{
 		this.listener = listener;
 	}
 	
+	public void addSocio(Socio socio){
+		tvTC.getItems().add(socio);
+		tvTC.getSelectionModel().select(socio);
+	}
+	
 }

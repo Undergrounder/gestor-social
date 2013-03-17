@@ -3,13 +3,17 @@
  */
 package dam.gestorclub.controladores.clientes;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import dam.gestorclub.componentes.ConexionJDBC;
+import dam.gestorclub.entidades.Socio;
 import name.antonsmirnov.javafx.dialog.Dialog;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -17,7 +21,8 @@ import javafx.scene.control.TableView;
  * @author under
  *
  */
-public class TablaFacturasController {
+public class TablaFacturasController implements Initializable{
+	
 	
 	private ConexionJDBC conexion;
 	
@@ -54,5 +59,16 @@ public class TablaFacturasController {
 //			tvTC.setItems(FXCollections.observableList(lista));
 	}
 
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		
+	}
 
+
+
+	public void setSocio(Socio object) {
+		// TODO Auto-generated method stub
+		
+	}
 }

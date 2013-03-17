@@ -3,24 +3,34 @@
  */
 package dam.gestorclub.controladores.clientes;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.ResourceBundle;
+
+import com.sun.media.sound.DirectAudioDeviceProvider;
 
 import name.antonsmirnov.javafx.dialog.Dialog;
 import dam.gestorclub.componentes.ConexionJDBC;
 import dam.gestorclub.entidades.Socio;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import jfxtras.labs.scene.control.CalendarTextField;
 
 /**
- * @author under
+ * @author Undergrounder
  *
  */
-public class DatosClienteController {
+public class DatosClienteController implements Initializable, ChangeListener<Object>{
+	
+	private boolean estaTodoGuardaro;
 	
 	private ConexionJDBC conexion;
 	private TablaClientesController tablaClientesController;
@@ -35,13 +45,12 @@ public class DatosClienteController {
 	@FXML private TextField tfDCCuentaBancaria;
 	@FXML private TextField tfDCCodigoBarras;
 	@FXML private CheckBox chbDCVer;
-	@FXML private ChoiceBox<?> cbDCSexo;
+	@FXML private ChoiceBox<String> cbDCSexo;
 	
 	
 	
 	
 	public void LimpiarCliente() {
-		// TODO Auto-generated method stub
 		tfDCDni.clear();
 		tfDCNombre.clear();
 		tfDCApellidos.clear();
@@ -51,74 +60,74 @@ public class DatosClienteController {
 		calNacimiento.setValue(null);
 		tfDCCuentaBancaria.clear();
 		tfDCCodigoBarras.clear();
-		cbDCSexo.setValue(null); // NO FUNCIONA DAFQ		
+		cbDCSexo.setValue("Varon"); // NO FUNCIONA DAFQ
+		
+		estaTodoGuardaro = true;
 	}
 	
 
-	public void GuardarCliente() {
-		// TODO Auto-generated method stub
+	public Short guardarCliente() {
 		
 		String dni = tfDCDni.getText().trim();
 		if(dni.isEmpty()){
 			Dialog.showError("Datos invalidos", "El Dni no puede estar vacio.");
-			return;
+			return -1;
 		}
 		
 		String nombre = tfDCNombre.getText().trim();
 		if(nombre.isEmpty()){
 			Dialog.showError("Datos invalidos", "El nombre no puede estar vacio.");
-			return;
+			return -1;
 		}
 		
 		String apellidos = tfDCApellidos.getText().trim();
 		if(apellidos.isEmpty()){
 			Dialog.showError("Datos invalidos", "Los apellidos no puede estar vacio.");
-			return;
+			return -1;
 		}
 		
 		String correo = tfDCCorreo.getText().trim();
 		if(correo.isEmpty()){
 			Dialog.showError("Datos invalidos", "El correo no puede estar vacio.");
-			return;
+			return -1;
 		}
 		
-		/* TODO: Coger dato del choice Box de SEXO
-		 * 
-		 * 
-		 */
-		Character esvaron = (Character) null;
+		
+		Character esVaron = null;
+		if(cbDCSexo.getValue().equals("Masculino")){
+			esVaron = 'S';
+		}else{
+			esVaron = 'N';
+		}
+		
 		
 		String telefono = tfDCTelefono.getText().trim();
 		if(telefono.isEmpty()){
 			Dialog.showError("Datos invalidos", "El telefono no puede estar vacio.");
-			return;
+			return -1;
 		}
 		
 		String direccion = tfDCDireccion.getText().trim();
 		if(direccion.isEmpty()){
 			Dialog.showError("Datos invalidos", "La direccion no puede estar vacia.");
-			return;
+			return -1;
 		}
 		
-		// TODO: Coger dato de la fecha
-		Date fechanac = null; //calNacimiento.getValue();
+		Date fechanac = calNacimiento.getValue().getTime();
 		
 		Float cuentabancaria = Float.parseFloat(tfDCCuentaBancaria.getText());
 		Float codigobarras = Float.parseFloat(tfDCCodigoBarras.getText());
 		
-		/* SI USAMOS DESCUENTO... 
-		Short descuento = Short.parseShort(SOMETHIGN.getText());
-		*/ 
-		
-		Short descuento = null;
+		Short descuento = 0;
 		
 		try {
-			conexion.insertarSocio(dni, nombre, apellidos, correo, esvaron, telefono, direccion, (java.sql.Date) fechanac, cuentabancaria, codigobarras, descuento);
-			
+			conexion.insertarSocio(dni, nombre, apellidos, correo, esVaron, telefono, direccion, (java.sql.Date) fechanac, cuentabancaria, codigobarras, descuento);
+			//TODO devuelve id
 			tablaClientesController.actualizarTabla();
 		} catch (SQLException e) {
 			Dialog.showError("Error al crear la Actividad", "Se produjo un error: " + e.getLocalizedMessage());
 		}
+		return -1; //TEMPORAL;
 		
 	}
 
@@ -133,9 +142,65 @@ public class DatosClienteController {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		estaTodoGuardaro = true;
+		
+		//Controlar si se ha cambiado algo
+		tfDCDni.textProperty().addListener(this);
+		tfDCNombre.textProperty().addListener(this);
+		tfDCApellidos.textProperty().addListener(this);
+		tfDCDireccion.textProperty().addListener(this);
+		tfDCCorreo.textProperty().addListener(this);
+		tfDCTelefono.textProperty().addListener(this);
+		calNacimiento.valueProperty().addListener(this);
+		tfDCCuentaBancaria.textProperty().addListener(this);
+		tfDCCodigoBarras.textProperty().addListener(this);
+		cbDCSexo.valueProperty().addListener(this);
+	}
 	
+	public boolean getEstaTodoGuardado(){
+		return estaTodoGuardaro;
+	}
+
+
+	@Override
+	public void changed(ObservableValue<? extends Object> arg0, Object arg1,
+			Object arg2) {
+		estaTodoGuardaro = false;
+		
+	}
 	
-	 
+	/**
+	 * Pone el bean del socio a editar
+	 * @param socio
+	 */
+	public void setSocio(Socio socio){
+		tfDCDni.setText(socio.getDni());
+		tfDCNombre.setText(socio.getNombre());
+		tfDCApellidos.setText(socio.getApellidos());
+		tfDCDireccion.setText(socio.getDireccion());
+		tfDCCorreo.setText(socio.getCorreo());
+		tfDCTelefono.setText(socio.getTelefono());
+		calNacimiento.setValue(dateToCalendar(socio.getFechanac()));
+		tfDCCuentaBancaria.setText(String.valueOf(socio.getCuentabancaria()));
+		tfDCCodigoBarras.setText(String.valueOf(socio.getCodigobarras()));
+		
+		if(socio.getEsvaron() == 'S')
+			cbDCSexo.setValue("Masculino");
+		else
+			cbDCSexo.setValue("Femenino");
+		
+		
+		estaTodoGuardaro = true;
+	}
 	
+	public static Calendar dateToCalendar(Date date){ 
+		  Calendar cal = Calendar.getInstance();
+		  cal.setTime(date);
+		  return cal;
+		}
 
 }

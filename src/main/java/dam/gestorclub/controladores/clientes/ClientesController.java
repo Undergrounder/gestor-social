@@ -6,6 +6,8 @@ package dam.gestorclub.controladores.clientes;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import name.antonsmirnov.javafx.dialog.Dialog;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,7 +27,8 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 	
 	public static enum MODO{
 		NUEVO,
-		MODIFICAR
+		VER,
+		BUSCAR
 	};
 	
 	
@@ -47,8 +50,7 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 	 * @param event
 	 */
 	@FXML protected void onNuevoClicked(ActionEvent event){
-		//TODO nuevo cliente
-		datosClienteController.LimpiarCliente();
+		cambiaModo(MODO.NUEVO, null);
 	}
 	
 	/**
@@ -57,9 +59,13 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 	 * @param event
 	 */
 	@FXML protected void onGuardarClicked(ActionEvent event){
-		//TODO guardar cliente
-		datosClienteController.GuardarCliente();
+		short id = datosClienteController.guardarCliente();
 		
+		if(id == -1){
+			Dialog.showError("Error al guardar.", "No se pudo guardar el cliente");
+		}else{
+			
+		}
 	}
 	
 	/**
@@ -94,20 +100,67 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		tablaClientesController.setOnSocioSelected(this);
-		cambiaModo(MODO.NUEVO);
-		
-		//TODO estoy aki!!!
+		modo = MODO.NUEVO;
 	}
 
-	private void cambiaModo(MODO nuevo) {
-		// TODO Auto-generated method stub
+	private void cambiaModo(MODO nuevo, Socio socio) {
 		
+		if(modo == MODO.NUEVO){
+			if(!confirmacionContinuar())
+				return;
+			
+			if(nuevo == MODO.NUEVO){
+				datosClienteController.LimpiarCliente();
+			}else if(nuevo == MODO.VER){
+				datosClienteController.setSocio(socio);
+				derramasController.setSocio(socio);
+				tablaActividadesController.setSocio(socio);
+				tablaFacturasController.setSocio(socio);
+			}else if(nuevo == MODO.BUSCAR){
+				//TODO!!!
+			}
+			
+		}else if(modo == MODO.VER){
+			if(nuevo == MODO.NUEVO){
+				datosClienteController.LimpiarCliente();
+				derramasController.setSocio(null);
+				tablaActividadesController.setSocio(null);
+				tablaFacturasController.setSocio(null);
+			}else if(nuevo == MODO.VER){
+				datosClienteController.setSocio(socio);
+				derramasController.setSocio(socio);
+				tablaActividadesController.setSocio(socio);
+				tablaFacturasController.setSocio(socio);
+			}else if(nuevo == MODO.BUSCAR){
+				//TODO!!!
+			}
+		}else{ //MODO buscar
+			if(nuevo == MODO.NUEVO){
+				datosClienteController.LimpiarCliente();
+				derramasController.setSocio(null);
+				tablaActividadesController.setSocio(null);
+				tablaFacturasController.setSocio(null);
+			}else if(nuevo == MODO.VER){
+				datosClienteController.setSocio(socio);
+				derramasController.setSocio(socio);
+				tablaActividadesController.setSocio(socio);
+				tablaFacturasController.setSocio(socio);
+			}else if(nuevo == MODO.BUSCAR){
+				//TODO!!!
+			}
+		}
+		modo = nuevo;
 	}
 
 	@Override
 	public void onSocioSelected(Socio socio) {
-		System.out.println(socio);
-		
+		cambiaModo(MODO.VER, socio);
 	}
 	
+	private boolean confirmacionContinuar(){
+		if(!datosClienteController.getEstaTodoGuardado()){
+					//TODO preguntar si se desean descartar los cambios
+		}
+		return true; 
+	}
 }
