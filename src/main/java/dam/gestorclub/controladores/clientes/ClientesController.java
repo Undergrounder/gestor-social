@@ -22,10 +22,10 @@ public class ClientesController {
 	@FXML private DatosClienteController datosClienteController;
 	
 	//Pestañas
-	@FXML private CuotasController cuotasController;
 	@FXML private DerramasController derramasController;
 	@FXML private TablaActividadesController tablaActividadesController;
 	@FXML private TablaClientesController tablaClientesController;
+	@FXML private TablaFacturasController tablaFacturasController;
 	
 	/**
 	 * Boton de nuevo pulsado
@@ -34,6 +34,7 @@ public class ClientesController {
 	 */
 	@FXML protected void onNuevoClicked(ActionEvent event){
 		//TODO nuevo cliente
+		datosClienteController.LimpiarCliente();
 	}
 	
 	/**
@@ -43,6 +44,8 @@ public class ClientesController {
 	 */
 	@FXML protected void onGuardarClicked(ActionEvent event){
 		//TODO guardar cliente
+		datosClienteController.GuardarCliente();
+		
 	}
 	
 	/**
@@ -52,6 +55,7 @@ public class ClientesController {
 	 */
 	@FXML protected void onEliminarClicked(ActionEvent event){
 		//TODO eliminar cliente
+		datosClienteController.BorrarCliente();
 	}
 	
 	/**
@@ -61,6 +65,7 @@ public class ClientesController {
 	 */
 	@FXML protected void onFiltrarClicked(ActionEvent event){
 		//TODO filtrar cliente
+		datosClienteController.FiltrarCliente();
 	}
 	
 	/**

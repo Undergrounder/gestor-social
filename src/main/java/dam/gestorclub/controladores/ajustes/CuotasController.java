@@ -31,14 +31,14 @@ import javafx.scene.control.cell.TextFieldTableCell;
  * @author under
  *
  */
-public class ActividadesController  implements Initializable{
+public class CuotasController  implements Initializable{
 
 	private ConexionJDBC conexion;
 	
-	@FXML private Button bAEliminar;
+	@FXML private Button bCEliminar;
 	
 	//Tabla
-	@FXML private TableView<Actividad> tvActividades;
+	@FXML private TableView<Actividad> tvCuotas;
 	@FXML private TableColumn<Actividad, Short> tcAId;
 	@FXML private TableColumn<Actividad, String> tcANombre;
 	@FXML private TableColumn<Actividad, String> tcALugar;
@@ -89,8 +89,8 @@ public class ActividadesController  implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		conexion  = ConexionJDBC.getConexionJDBC();
-		
-		bAEliminar.setDisable(true);
+		/*
+		bCEliminar.setDisable(true);
 		
 		//Para mostrar
 		tcAId.setCellValueFactory(new PropertyValueFactory<Actividad, Short>("idactividad"));
@@ -113,26 +113,26 @@ public class ActividadesController  implements Initializable{
 		});
 			
 		//Saber si algo esta seleccionado
-		tvActividades.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+		tvCuotas.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0,
 					Number value, Number newValue) {
-				bAEliminar.setDisable(-1==newValue.intValue());
+				bCEliminar.setDisable(-1==newValue.intValue());
 			}
 		});
 		
 		//Cargamos los datos iniciales.
-		actualizarTabla();
+		actualizarTabla();*/
 	}
 	
 	private void actualizarTabla(){
-		List<Actividad> lista = conexion.getListaActividades();
+		/*List<Actividad> lista = conexion.getListaActividades();
 		
 		if(lista == null)
 			Dialog.showError("Error al leer los datos", "No se pudieron cargar los datos");
 		else
-			tvActividades.setItems(FXCollections.observableList(lista));
+			tvCuotas.setItems(FXCollections.observableList(lista));*/
 	}
 	
 	/**
@@ -141,12 +141,12 @@ public class ActividadesController  implements Initializable{
 	 * @param event
 	 */
 	@FXML protected void onEliminarClicked(ActionEvent event){
-		Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
+		/*Actividad actividad = tvCuotas.getSelectionModel().getSelectedItem();
 		if(conexion.eliminarActividad(actividad.getIdactividad())){
 			Dialog.showInfo("Actividad eliminada", "Actividad eliminada correctamente");
 			actualizarTabla();
 		}else{
 			Dialog.showError("Error al eliminar", "Se produjo un error al eliminar la actividad.");
-		}
+		}*/
 	}
 }
