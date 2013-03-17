@@ -81,6 +81,8 @@ public class ActividadesController  implements Initializable{
 			conexion.insertarActividad(nombre, lugar, categoria);
 			
 			actualizarTabla();
+			limpiarCampos();
+			
 		} catch (SQLException e) {
 			Dialog.showError("Error al crear la Actividad", "Se produjo un error: " + e.getLocalizedMessage());
 		}
@@ -106,6 +108,34 @@ public class ActividadesController  implements Initializable{
 			public void handle(CellEditEvent<Actividad, String> arg0) {
 				Actividad actividad = arg0.getRowValue();
 				actividad.setNombre(arg0.getNewValue());
+				
+				if(!conexion.actualizaActividad(actividad))
+					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
+			}
+		});
+		
+		//Para editar Lugar
+		tcALugar.setCellFactory(TextFieldTableCell.<Actividad>forTableColumn());
+		tcALugar.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Actividad,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<Actividad, String> arg0) {
+				Actividad actividad = arg0.getRowValue();
+				actividad.setLugar(arg0.getNewValue());
+				
+				if(!conexion.actualizaActividad(actividad))
+					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
+			}
+		});
+		
+		//Para editar Categoria
+		tcACategoria.setCellFactory(TextFieldTableCell.<Actividad>forTableColumn());
+		tcACategoria.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Actividad,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<Actividad, String> arg0) {
+				Actividad actividad = arg0.getRowValue();
+				actividad.setCategoria(arg0.getNewValue());
 				
 				if(!conexion.actualizaActividad(actividad))
 					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
@@ -148,5 +178,12 @@ public class ActividadesController  implements Initializable{
 		}else{
 			Dialog.showError("Error al eliminar", "Se produjo un error al eliminar la actividad.");
 		}
+	}
+	
+	private void limpiarCampos() {
+		tfANombre.clear();
+		tfALugar.clear();
+		tfACategoria.clear();		
+		
 	}
 }

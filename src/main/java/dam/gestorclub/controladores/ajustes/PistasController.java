@@ -92,6 +92,7 @@ public class PistasController implements Initializable{
 			conexion.insertarPista(nombre, precioSocios, precioNoSocios);
 			
 			actualizarTabla();
+			limpiarCampos();
 		} catch (SQLException e) {
 			Dialog.showError("Error al crear la pista", "Se produjo un error: " + e.getLocalizedMessage());
 		}
@@ -164,5 +165,11 @@ public class PistasController implements Initializable{
 		}else{
 			Dialog.showError("Error al eliminar", "Se produjo un error al eliminar la pista.");
 		}
+	}
+	
+	private void limpiarCampos() {
+		tfPNombre.clear();
+		tfPPrecioNoSocios.clear();
+		tfPPrecioSocios.clear();
 	}
 }
