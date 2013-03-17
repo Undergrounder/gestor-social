@@ -19,6 +19,7 @@ import java.util.Set;
 
 import dam.gestorclub.componentes.Configuracion.KEYS;
 import dam.gestorclub.entidades.Actividad;
+import dam.gestorclub.entidades.Personalexterno;
 import dam.gestorclub.entidades.Entrada;
 import dam.gestorclub.entidades.Pista;
 import dam.gestorclub.entidades.Reserva;
@@ -125,7 +126,7 @@ public class ConexionJDBC {
 		  
 	}
 	/**
-	 * Actualiza los datos de una lista.
+	 * Actualiza los datos de una lista de pistas.
 	 * Los datos de idpista deben ser de una existente.
 	 * @param pista
 	 * @return
@@ -258,5 +259,74 @@ public class ConexionJDBC {
 		
 		
 		return stmt.execute();
+	}
+
+	
+	public List<Personalexterno> getListaPersonalexterno() {
+		LinkedList<Personalexterno> lista = new LinkedList<>();
+		
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Personalexterno");
+			while(rs.next()){
+				Personalexterno personalexterno = new Personalexterno();
+				personalexterno.setIdpersonalexterno(rs.getShort("idpersonalexterno"));
+				personalexterno.setNombre(rs.getString("nombre"));
+				personalexterno.setApellidos(rs.getString("apellidos"));
+				personalexterno.setEmpleo(rs.getString("empleo"));
+				personalexterno.setEmpresa(rs.getString("empresa"));
+				lista.add(personalexterno);
+			}
+		} catch (SQLException e) {
+			System.err.println("Error al obtener la lista de Personal externo: " + e.getLocalizedMessage());
+			return null;
+		}		
+		
+		return lista;
+	}
+
+	public boolean insertarPersonalexterno(String nombre, String apellidos,
+			String empleo, String empresa) throws SQLException{
+		
+			PreparedStatement stmt = conn.prepareStatement("INSERT INTO Personalexterno VALUES (PersonalExterno_Seq.nextVal,?,?,?,?)");
+			stmt.setString(1, nombre);
+			stmt.setString(2, apellidos);
+			stmt.setString(3, empleo);
+			stmt.setString(4, empresa);		
+			
+			return stmt.execute();
+		
+	}
+
+	public boolean actualizaPersonalexterno(Personalexterno personalexterno) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement("UPDATE Personalexterno SET nombre = ?, apellidos = ?, empleo = ?, empresa = ? where idpersonalexterno = ?");
+			stmt.setString(1, personalexterno.getNombre());
+			stmt.setString(2, personalexterno.getApellidos());
+			stmt.setString(3, personalexterno.getEmpleo());
+			stmt.setString(4, personalexterno.getEmpresa());
+			stmt.setShort(5, personalexterno.getIdpersonalexterno());
+			
+			return 1== stmt.executeUpdate();
+		} catch (SQLException e) {
+			System.err.println("No se pudo modificar Personal externo. " + e.getLocalizedMessage());
+			return false;
+		}
+	}
+
+	public boolean eliminarPersonalexterno(short id) {
+		Statement st;
+		try {
+			st = conn.createStatement();
+			String sql = "DELETE FROM Personalexterno WHERE idpersonalexterno = '"+id+"'";
+			int delete = st.executeUpdate(sql);
+			if(delete==1)
+				return true;
+			else
+				return false;
+		} catch (SQLException e) {
+			System.err.println("SE produjo un error al eliminar el Personal externo " + id + ": " + e.getLocalizedMessage());
+			return false;
+		}	
 	}
 }
