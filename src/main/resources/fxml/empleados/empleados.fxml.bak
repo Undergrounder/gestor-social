@@ -17,16 +17,17 @@
     </ToolBar>
     <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
       <children>
-        <AnchorPane prefHeight="332.0" prefWidth="554.0" HBox.hgrow="ALWAYS">
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
           <children>
-            <Label id="tfEDatostarjeta" layoutX="26.0" layoutY="96.0" text="Tarjeta:" />
-            <TextField id="eTFID" fx:id="tfEDatostarjeta" layoutX="81.0" layoutY="93.0" prefWidth="149.0" />
-            <Label layoutX="20.0" layoutY="40.0" text="Nombre:" />
+            <Label layoutX="52.0" layoutY="14.0" text="ID:" />
+            <TextField fx:id="eTFID" layoutX="81.0" layoutY="11.0" prefWidth="149.0" />
+            <Label layoutX="14.0" layoutY="40.0" text="Nombre:" />
             <TextField fx:id="eTFNombre" layoutX="81.0" layoutY="37.0" prefWidth="231.0" />
-            <Label layoutX="13.0" layoutY="67.0" text="Apellidos:" />
+            <Label layoutX="7.0" layoutY="67.0" text="Apellidos:" />
             <TextField fx:id="eTFApellidos" layoutX="81.0" layoutY="64.0" prefWidth="231.0" />
-            <Label layoutX="43.0" layoutY="14.0" text="DNI:" />
-            <TextField fx:id="eTFDni" layoutX="81.0" layoutY="11.0" prefWidth="231.0" />
+            <Label layoutX="43.0" layoutY="96.0" text="DNI:" />
+            <TextField fx:id="eTFDni" layoutX="81.0" layoutY="93.0" prefWidth="231.0" />
+            <Button layoutX="316.0" layoutY="10.0" mnemonicParsing="false" onAction="#onImagenClicked" prefHeight="150.0" prefWidth="231.0" text="Imagen" />
             <Label layoutX="17.0" layoutY="123.0" text="Empleo:" />
             <ComboBox layoutX="81.0" layoutY="120.0" prefWidth="231.0">
               <items>
@@ -39,7 +40,7 @@
             </ComboBox>
           </children>
         </AnchorPane>
-        <TableView prefHeight="332.0" prefWidth="309.0">
+        <TableView prefHeight="200.0" prefWidth="200.0">
           <columns>
             <TableColumn prefWidth="93.0" text="Nombre" fx:id="eTCNombre" />
             <TableColumn prefWidth="115.0" text="Apellidos" fx:id="eTCApellidos" />

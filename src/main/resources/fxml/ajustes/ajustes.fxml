@@ -25,6 +25,11 @@
             <fx:include fx:id="actividades" source="actividades.fxml" />
           </content>
         </Tab>
+        <Tab text="Cuotas">
+          <content>
+            <fx:include fx:id="cuotas" source="cuotas.fxml" />
+          </content>
+        </Tab>
       </tabs>
     </TabPane>
     <ToolBar>

@@ -20,9 +20,9 @@
         <fx:include fx:id="datosCliente" source="datoscliente.fxml" />
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
           <tabs>
-            <Tab text="Cuotas">
+            <Tab text="Facturas">
               <content>
-                <fx:include fx:id="cuotas" source="cuotas.fxml" />
+                <fx:include fx:id="tablaFacturas" source="tablafacturas.fxml" />
               </content>
             </Tab>
             <Tab text="Actividades">
@@ -32,12 +32,12 @@
             </Tab>
             <Tab text="Entradas">
               <content>
-                <fx:include fx:id="entradas" source="entradas.fxml" />
+                <fx:include fx:id="tablaEntradas" source="tablaentradas.fxml" />
               </content>
             </Tab>
             <Tab text="Derramas">
               <content>
-                <fx:include fx:id="derramas" source="derramas.fxml" />
+                <fx:include fx:id="tablaDerramas" source="tabladerramas.fxml" />
               </content>
             </Tab>
           </tabs>

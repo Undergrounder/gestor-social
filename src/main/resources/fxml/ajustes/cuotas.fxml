@@ -6,19 +6,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox padding="$x1" prefHeight="288.0" prefWidth="771.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.ajustes.ActividadesController">
+<VBox padding="$x1" prefHeight="288.0" prefWidth="771.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.ajustes.CuotasController">
   <children>
     <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
       <children>
-        <TableView fx:id="tvActividades" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+        <TableView fx:id="tvCuotas" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
           <columns>
-            <TableColumn prefWidth="50.0" text="ID" fx:id="tcAId" />
-            <TableColumn prefWidth="200.0" text="Nombre" fx:id="tcANombre" />
-            <TableColumn prefWidth="200.0" text="Lugar" fx:id="tcALugar" />
-            <TableColumn prefWidth="200.0" text="Categoria" fx:id="tcACategoria" />
+            <TableColumn prefWidth="50.0" text="ID" fx:id="tcCId" />
+            <TableColumn prefWidth="200.0" text="Nombre" fx:id="tcCNombre" />
+            <TableColumn prefWidth="200.0" text="IVA" fx:id="tcCIva" />
+            <TableColumn prefWidth="200.0" text="Precio" fx:id="tcCPrecio" />
           </columns>
         </TableView>
-        <Button id="bAEliminar" fx:id="bAEliminar" mnemonicParsing="false" onAction="#onEliminarClicked" text="Eliminar">
+        <Button id="bCEliminar" fx:id="bCEliminar" mnemonicParsing="false" onAction="#onEliminarClicked" text="Eliminar">
           <HBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
           </HBox.margin>
@@ -27,13 +27,13 @@
     </HBox>
     <FlowPane>
       <children>
-        <TextField fx:id="tfANombre" prefWidth="250.0" promptText="Nombre">
+        <TextField fx:id="tfCNombre" prefWidth="250.0" promptText="Nombre">
           <FlowPane.margin>
             <Insets left="103.0" />
           </FlowPane.margin>
         </TextField>
-        <TextField id="tfALugar" fx:id="tfALugar" prefWidth="120.0" promptText="Lugar" />
-        <TextField id="tfACategoria" fx:id="tfACategoria" prefWidth="124.0" promptText="Categoria" />
+        <TextField id="tfCIva" fx:id="tfCIva" prefWidth="120.0" promptText="IVA" />
+        <TextField id="tfCPrecio" fx:id="tfCPrecio" prefWidth="124.0" promptText="Precio" />
         <Button mnemonicParsing="false" onAction="#onAddClicked" text="Añadir">
           <FlowPane.margin>
             <Insets left="10.0" />
