@@ -79,7 +79,7 @@ public class ExternosController  implements Initializable{
 			Dialog.showError("Datos invalidos", "El empleo no puede estar vacia.");
 			return;
 		}
-		String empresa = tcEEmpresa.getText().trim();
+		String empresa = tfEEmpresa.getText().trim();
 		if(empresa.isEmpty()){
 			Dialog.showError("Datos invalidos", "La empresa no puede estar vacia.");
 			return;
@@ -90,6 +90,8 @@ public class ExternosController  implements Initializable{
 			conexion.insertarPersonalexterno(nombre, apellidos, empleo, empresa);
 			
 			actualizarTabla();
+			limpiarCampos();
+			
 		} catch (SQLException e) {
 			Dialog.showError("Error al crear el personal externo", "Se produjo un error: " + e.getLocalizedMessage());
 		}
@@ -116,6 +118,48 @@ public class ExternosController  implements Initializable{
 			public void handle(CellEditEvent<Personalexterno, String> arg0) {
 				Personalexterno personalexterno = arg0.getRowValue();
 				personalexterno.setNombre(arg0.getNewValue());
+				
+				if(!conexion.actualizaPersonalexterno(personalexterno))
+					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
+			}
+		});
+		
+		//Para editar Apellidos		
+		tcEApellidos.setCellFactory(TextFieldTableCell.<Personalexterno>forTableColumn());
+		tcEApellidos.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Personalexterno,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<Personalexterno, String> arg0) {
+				Personalexterno personalexterno = arg0.getRowValue();
+				personalexterno.setApellidos(arg0.getNewValue());
+				
+				if(!conexion.actualizaPersonalexterno(personalexterno))
+					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
+			}
+		});
+		
+		//Para editar Empleo
+		tcEEmpleo.setCellFactory(TextFieldTableCell.<Personalexterno>forTableColumn());
+		tcEEmpleo.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Personalexterno,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<Personalexterno, String> arg0) {
+				Personalexterno personalexterno = arg0.getRowValue();
+				personalexterno.setEmpleo(arg0.getNewValue());
+				
+				if(!conexion.actualizaPersonalexterno(personalexterno))
+					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
+			}
+		});
+		
+		//Para editar Empresa
+		tcEEmpresa.setCellFactory(TextFieldTableCell.<Personalexterno>forTableColumn());
+		tcEEmpresa.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Personalexterno,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<Personalexterno, String> arg0) {
+				Personalexterno personalexterno = arg0.getRowValue();
+				personalexterno.setEmpresa(arg0.getNewValue());
 				
 				if(!conexion.actualizaPersonalexterno(personalexterno))
 					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
@@ -168,5 +212,13 @@ public class ExternosController  implements Initializable{
 	 */
 	@FXML protected void onVolverClicked(ActionEvent event){
 		StageSwitcher.cambiaPantalla(PANTALLA.PRINCIPAL);
+	}
+	
+	private void limpiarCampos() {
+		tfENombre.clear();
+		tfEApellidos.clear();
+		tfEEmpleo.clear();
+		tfEEmpresa.clear();
+		
 	}
 }
