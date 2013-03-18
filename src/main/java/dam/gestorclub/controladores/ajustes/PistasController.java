@@ -3,12 +3,20 @@
  */
 package dam.gestorclub.controladores.ajustes;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import name.antonsmirnov.javafx.dialog.Dialog;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
 import dam.gestorclub.componentes.ConexionJDBC;
 import dam.gestorclub.entidades.Pista;
 import javafx.beans.value.ChangeListener;
@@ -165,6 +173,33 @@ public class PistasController implements Initializable{
 		}else{
 			Dialog.showError("Error al eliminar", "Se produjo un error al eliminar la pista.");
 		}
+	}
+	
+	@FXML protected void onGenerarClicked(ActionEvent event){
+		
+		 try {
+	            JasperReport informe = (JasperReport)JRLoader.loadObject(
+	                    new File("ReportePistas.jasper"));
+	            
+	            JasperPrint impreso = JasperFillManager.fillReport(
+	                    informe, null, conexion.getConnection());
+	            
+	            JRExporter exportador = new JRPdfExporter();
+	            
+	            exportador.setParameter(
+	                    JRExporterParameter.JASPER_PRINT, impreso);
+	            exportador.setParameter(
+	                    JRExporterParameter.OUTPUT_FILE, new File("InformePistas.pdf"));
+	            exportador.exportReport();
+	            
+	            Dialog.showInfo("Creando Informe: ", "Informe de Pistas creado correctamente");
+	            
+	        } catch (Exception e) {
+	        	Dialog.showError("Error al crear reporte: ", "Se produjo un error al crear el informe Pistas.");
+	        	e.printStackTrace();
+	            
+	        }
+		 
 	}
 	
 	private void limpiarCampos() {

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportePersonalExterno" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="54c0aa72-da45-4292-b471-c680db0849ad">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="CabeceraColumnas" forecolor="#3B85D4" fontName="Arial" fontSize="16" isBold="true"/>
+	<style name="Campos" forecolor="#9F3030" fontSize="13" isItalic="true"/>
+	<style name="Titulo" forecolor="#348637" fontSize="38" isBold="true" isItalic="true"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT
      PERSONALEXTERNO."IDPERSONALEXTERNO" AS PERSONALEXTERNO_IDPERSONALEXTE,
@@ -31,76 +34,119 @@ FROM
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement uuid="00a44cad-9bb0-4c21-8a91-9936c3da5ada" x="0" y="0" width="555" height="79"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="5b3c10b7-9d11-406e-a895-cad9439ae215" style="Titulo" x="0" y="0" width="555" height="79"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Personal Externo al Club]]></text>
+			</staticText>
+		</band>
 	</title>
 	<columnHeader>
-		<band height="34" splitType="Stretch">
+		<band height="42" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="ee3dbbef-488a-43ca-9c60-d68e802eb0f2" x="0" y="10" width="555" height="20"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</rectangle>
 			<staticText>
-				<reportElement uuid="cfa2b3b5-e7e7-49d6-9441-74b5b73cb438" x="0" y="0" width="111" height="20"/>
+				<reportElement uuid="cfa2b3b5-e7e7-49d6-9441-74b5b73cb438" style="CabeceraColumnas" x="10" y="10" width="59" height="20"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="63c7a0d0-6233-4cc5-a25e-8c8bed85a486" x="111" y="0" width="111" height="20"/>
+				<reportElement uuid="63c7a0d0-6233-4cc5-a25e-8c8bed85a486" style="CabeceraColumnas" x="69" y="10" width="115" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="94f12d4c-dc89-4af6-a9b8-20f7a819b32b" x="222" y="0" width="111" height="20"/>
+				<reportElement uuid="94f12d4c-dc89-4af6-a9b8-20f7a819b32b" style="CabeceraColumnas" x="184" y="10" width="133" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Apellidos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="8caf6b31-f767-4320-ac4b-3418845eb2fd" x="333" y="0" width="111" height="20"/>
+				<reportElement uuid="8caf6b31-f767-4320-ac4b-3418845eb2fd" style="CabeceraColumnas" x="317" y="10" width="111" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Empleo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b8e3e385-fb27-417a-8c7e-fdb2da85f9c7" x="444" y="0" width="111" height="20"/>
+				<reportElement uuid="b8e3e385-fb27-417a-8c7e-fdb2da85f9c7" style="CabeceraColumnas" x="428" y="10" width="117" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Empresa]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="61" splitType="Stretch">
+		<band height="41" splitType="Stretch">
 			<textField>
-				<reportElement uuid="46d5f96e-3802-42c3-88ac-af30d1f139db" x="0" y="0" width="111" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement uuid="46d5f96e-3802-42c3-88ac-af30d1f139db" style="Campos" x="10" y="10" width="59" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{PERSONALEXTERNO_IDPERSONALEXTE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="ca52c897-bfb7-4a81-8fde-23e60cd9d62b" x="111" y="0" width="111" height="20"/>
+				<reportElement uuid="ca52c897-bfb7-4a81-8fde-23e60cd9d62b" style="Campos" x="69" y="10" width="115" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{PERSONALEXTERNO_NOMBRE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="edd9012c-4abc-470f-8680-e7445f717556" x="222" y="0" width="111" height="20"/>
+				<reportElement uuid="edd9012c-4abc-470f-8680-e7445f717556" style="Campos" x="184" y="10" width="133" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{PERSONALEXTERNO_APELLIDOS}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="b8e0446e-1e19-4e61-891e-a6ae67b7c3e8" x="333" y="0" width="111" height="20"/>
+				<reportElement uuid="b8e0446e-1e19-4e61-891e-a6ae67b7c3e8" style="Campos" x="317" y="10" width="111" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{PERSONALEXTERNO_EMPLEO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="1a718ecd-d7e7-447f-bce3-33155a1fddd4" x="444" y="0" width="111" height="20"/>
+				<reportElement uuid="1a718ecd-d7e7-447f-bce3-33155a1fddd4" style="Campos" x="428" y="10" width="117" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{PERSONALEXTERNO_EMPRESA}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement uuid="1320c737-ece3-4c95-bd69-95be6f71425c" x="313" y="0" width="1" height="41" forecolor="#3B85D4" backcolor="#3B85D4"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="1320c737-ece3-4c95-bd69-95be6f71425c" x="65" y="0" width="1" height="41" forecolor="#3B85D4" backcolor="#3B85D4"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="1320c737-ece3-4c95-bd69-95be6f71425c" x="424" y="0" width="1" height="41" forecolor="#3B85D4" backcolor="#3B85D4"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="1320c737-ece3-4c95-bd69-95be6f71425c" x="180" y="0" width="1" height="41" forecolor="#3B85D4" backcolor="#3B85D4"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
 		</band>
 	</detail>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement uuid="c6427957-5943-45ad-9ff1-bccd3d4220f9" x="432" y="21" width="80" height="20"/>
-				<textElement textAlignment="Right"/>
+				<reportElement uuid="c6427957-5943-45ad-9ff1-bccd3d4220f9" x="435" y="34" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="6f8bac51-ade1-4600-bc95-f63ddaee1ca0" x="512" y="21" width="40" height="20"/>
-				<textElement/>
+				<reportElement uuid="6f8bac51-ade1-4600-bc95-f63ddaee1ca0" x="515" y="34" width="40" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
