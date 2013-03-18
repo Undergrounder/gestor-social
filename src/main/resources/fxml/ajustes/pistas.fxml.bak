@@ -6,27 +6,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="288.0" prefWidth="770.999977929685" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.ajustes.PistasController">
+<VBox padding="$x1" prefHeight="288.0" prefWidth="771.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.ajustes.PistasController">
   <children>
     <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
       <children>
         <TableView fx:id="tvPistas" editable="true" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
           <columns>
-            <TableColumn editable="false" prefWidth="103.0" text="ID" fx:id="tcPId" />
-            <TableColumn prefWidth="250.0" text="Nombre" fx:id="tcPNombre" />
-            <TableColumn prefWidth="120.0" text="Precio socios" fx:id="tcPPrecioSocios" />
-            <TableColumn prefWidth="124.0" text="Precio no socios" fx:id="tcPPrecioNoSocios" />
+            <TableColumn fx:id="tcPId" editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="ID" />
+            <TableColumn fx:id="tcPNombre" prefWidth="250.0" text="Nombre" />
+            <TableColumn fx:id="tcPPrecioSocios" prefWidth="120.0" text="Precio socios" />
+            <TableColumn fx:id="tcPPrecioNoSocios" maxWidth="5000.0" minWidth="10.0" prefWidth="124.0" text="Precio no socios" />
           </columns>
         </TableView>
-        <FlowPane minWidth="68.0" orientation="VERTICAL" prefHeight="246.0" prefWidth="70.0">
-          <children>
-            <Button fx:id="bPEliminar" mnemonicParsing="false" onAction="#onEliminarClicked" text="Eliminar" translateX="5.0" translateY="40.0" />
-            <Button mnemonicParsing="false" onAction="#onGenerarClicked" prefHeight="38.0" prefWidth="63.0" text="Generar Informe" translateX="5.0" translateY="80.0" wrapText="true" />
-          </children>
-        </FlowPane>
+        <Button mnemonicParsing="false" fx:id="bPEliminar" onAction="#onEliminarClicked" text="Eliminar">
+          <HBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          </HBox.margin>
+        </Button>
       </children>
     </HBox>
-    <FlowPane>
+    <FlowPane prefHeight="-1.0" prefWidth="-1.0">
       <children>
         <TextField fx:id="tfPNombre" prefWidth="250.0" promptText="Nombre">
           <FlowPane.margin>
@@ -46,7 +45,4 @@
       </VBox.margin>
     </FlowPane>
   </children>
-  <padding>
-    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
-  </padding>
 </VBox>
