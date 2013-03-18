@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2013 16:35:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="dam.gestorclub.entidades.Pista" table="PISTA">
+  <id name="idpista" type="short">
+   <column name="IDPISTA" precision="4" scale="0"/>
+   <generator class="sequence">
+     <param name="sequence">PISTA_SEQ</param>
+   </generator>
+  </id>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="25" name="NOMBRE"/>
+  </property>
+  <property generated="never" lazy="false" name="precionosocios" type="big_decimal">
+   <column name="PRECIONOSOCIOS" precision="22" scale="0"/>
+  </property>
+  <property generated="never" lazy="false" name="preciosocios" type="big_decimal">
+   <column name="PRECIOSOCIOS" precision="22" scale="0"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true" name="reservas"
+   sort="unsorted" table="RESERVA">
+   <key>
+    <column name="PISTA_ID" not-null="true" precision="4" scale="0"/>
+   </key>
+   <one-to-many class="dam.gestorclub.entidades.Reserva"/>
+  </set>
+ </class>
+</hibernate-mapping>

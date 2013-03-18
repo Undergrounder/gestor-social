@@ -1,5 +1,10 @@
 package dam.gestorclub.entidades;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 // Generated 16-mar-2013 16:35:04 by Hibernate Tools 3.4.0.CR1
 
 /**
@@ -7,62 +12,92 @@ package dam.gestorclub.entidades;
  */
 public class Personalexterno implements java.io.Serializable {
 
-	private short idpersonalexterno;
-	private String nombre;
-	private String apellidos;
-	private String empleo;
-	private String empresa;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private ObjectProperty<Short> idpersonalexterno = new SimpleObjectProperty<>();
+	private StringProperty nombre = new SimpleStringProperty();
+	private StringProperty apellidos = new SimpleStringProperty();
+	private StringProperty empleo = new SimpleStringProperty();
+	private StringProperty empresa = new SimpleStringProperty();
 
 	public Personalexterno() {
 	}
 
-	public Personalexterno(short idpersonalexterno, String nombre,
+	public Personalexterno(Short idpersonalexterno, String nombre,
 			String apellidos, String empleo, String empresa) {
-		this.idpersonalexterno = idpersonalexterno;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.empleo = empleo;
-		this.empresa = empresa;
+		this.idpersonalexterno.set(idpersonalexterno);
+		this.nombre.set(nombre);
+		this.apellidos.set(apellidos);
+		this.empleo.set(empleo);
+		this.empresa.set(empresa);
 	}
 
-	public short getIdpersonalexterno() {
-		return this.idpersonalexterno;
+	public Short getIdpersonalexterno() {
+		return this.idpersonalexterno.get();
 	}
 
-	public void setIdpersonalexterno(short idpersonalexterno) {
-		this.idpersonalexterno = idpersonalexterno;
+	public void setIdpersonalexterno(Short idpersonalexterno) {
+		this.idpersonalexterno.set(idpersonalexterno);
+	}
+	
+	public ObjectProperty<Short> idpersonalexternoProperty(){
+		return idpersonalexterno;
 	}
 
 	public String getNombre() {
-		return this.nombre;
+		return this.nombre.get();
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.nombre.set(nombre);
 	}
 
+	public StringProperty nombreProperty(){
+		return nombre;
+	}
+	
 	public String getApellidos() {
-		return this.apellidos;
+		return this.apellidos.get();
 	}
 
 	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
+		this.apellidos.set(apellidos);
+	}
+	
+	public StringProperty apellidosProperty(){
+		return apellidos;
 	}
 
 	public String getEmpleo() {
-		return this.empleo;
+		return this.empleo.get();
 	}
 
 	public void setEmpleo(String empleo) {
-		this.empleo = empleo;
+		this.empleo.set(empleo);
+	}
+	
+	public StringProperty empleoProperty(){
+		return empleo;
 	}
 
 	public String getEmpresa() {
-		return this.empresa;
+		return this.empresa.get();
 	}
 
 	public void setEmpresa(String empresa) {
-		this.empresa = empresa;
+		this.empresa.set(empresa);
+	}
+	
+	public StringProperty empresaProperty(){
+		return empresa;
+	}
+	
+	@Override
+	public String toString() {
+		return apellidos.get() + " ," + nombre.get();
 	}
 
 }

@@ -6,11 +6,8 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.sf.jasperreports.crosstabs.fill.JRPercentageCalculatorFactory.BigDecimalPercentageCalculator;
 
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -36,11 +33,11 @@ public class Pista implements java.io.Serializable {
 	public Pista() {
 	}
 
-	public Pista(short idpista) {
+	public Pista(Short idpista) {
 		this.idpista.set(idpista);
 	}
 
-	public Pista(short idpista, String nombre, BigDecimal precionosocios,
+	public Pista(Short idpista, String nombre, BigDecimal precionosocios,
 			BigDecimal preciosocios, Set<Reserva> reservas) {
 		this.idpista.set(idpista);
 		this.nombre.set(nombre);
@@ -49,7 +46,7 @@ public class Pista implements java.io.Serializable {
 		this.reservas = reservas;
 	}
 
-	public short getIdpista() {
+	public Short getIdpista() {
 		return this.idpista.get();
 	}
 
@@ -103,6 +100,11 @@ public class Pista implements java.io.Serializable {
 
 	public void setReservas(Set<Reserva> reservas) {
 		this.reservas = reservas;
+	}
+	
+	@Override
+	public String toString() {
+		return nombre.get();
 	}
 
 }

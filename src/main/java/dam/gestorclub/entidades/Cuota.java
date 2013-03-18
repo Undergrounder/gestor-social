@@ -1,60 +1,83 @@
 package dam.gestorclub.entidades;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 
 public class Cuota {
 	
-	private short idCuota;
-	private String nombre;
-	private short iva;
-	private short precio;
+	private ObjectProperty<Short> idCuota = new SimpleObjectProperty<>();
+	private StringProperty nombre = new SimpleStringProperty();
+	private ObjectProperty<Short> iva = new SimpleObjectProperty<>();
+	private ObjectProperty<Short> precio = new SimpleObjectProperty<>();
 	
 	
 	public Cuota(){
 		
 	}
 	
-	public Cuota(short idCuota, String nombre, short iva, short precio) {
+	public Cuota(Short idCuota, String nombre, Short iva, Short precio) {
 		super();
-		this.idCuota = idCuota;
-		this.nombre = nombre;
-		this.iva = iva;
-		this.precio = precio;
+		this.idCuota.set(idCuota);
+		this.nombre.set(nombre);
+		this.iva.set(iva);
+		this.precio.set(precio);
 	}
 	
 	
-	public short getIdCuota() {
+	public Short getIdCuota() {
+		return idCuota.get();
+	}
+
+	public void setIdCuota(Short idCuota) {
+		this.idCuota.set(idCuota);
+	}
+
+	public ObjectProperty<Short> idCuotaProperty(){
 		return idCuota;
 	}
-
-	public void setIdCuota(short idCuota) {
-		this.idCuota = idCuota;
-	}
-
+	
 	public String getNombre() {
-		return nombre;
+		return nombre.get();
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.nombre.set(nombre);
+	}
+	
+	public StringProperty nombreProperty(){
+		return nombre;
 	}
 
 	public short getIva() {
-		return iva;
+		return iva.get();
 	}
 
 	public void setIva(short iva) {
-		this.iva = iva;
+		this.iva.set(iva);
+	}
+	
+	public ObjectProperty<Short> ivaProperty(){
+		return iva;
 	}
 
 	public short getPrecio() {
-		return precio;
+		return precio.get();
 	}
 
 	public void setPrecio(short precio) {
-		this.precio = precio;
+		this.precio.set(precio);
 	}
 
+	public ObjectProperty<Short> precioProperty(){
+		return precio;
+	}
 	
-	
+	@Override
+	public String toString() {
+		return nombre.get();
+	}
 
 }

@@ -167,6 +167,8 @@ public class PistasController implements Initializable{
 		}
 	}
 	
+	
+	
 	private void limpiarCampos() {
 		tfPNombre.clear();
 		tfPPrecioNoSocios.clear();
