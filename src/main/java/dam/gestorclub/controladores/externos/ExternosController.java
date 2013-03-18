@@ -3,16 +3,11 @@
  */
 package dam.gestorclub.controladores.externos;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import name.antonsmirnov.javafx.dialog.Dialog;
-import dam.gestorclub.componentes.ConexionJDBC;
-import dam.gestorclub.componentes.StageSwitcher;
-import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
-import dam.gestorclub.entidades.Actividad;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,11 +18,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import name.antonsmirnov.javafx.dialog.Dialog;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
+import dam.gestorclub.componentes.ConexionJDBC;
+import dam.gestorclub.componentes.StageSwitcher;
+import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
+import dam.gestorclub.entidades.Personalexterno;
 
 /**
  * @author under
@@ -38,18 +45,20 @@ public class ExternosController  implements Initializable{
 	private ConexionJDBC conexion;
 	
 	@FXML private Button bEEliminar;
-	/*
+	
 	//Tabla
-	@FXML private TableView<Actividad> tvActividades;
-	@FXML private TableColumn<Actividad, Short> tcAId;
-	@FXML private TableColumn<Actividad, String> tcANombre;
-	@FXML private TableColumn<Actividad, String> tcALugar;
-	@FXML private TableColumn<Actividad, String> tcACategoria;
+	@FXML private TableView<Personalexterno> tvExternos;
+	@FXML private TableColumn<Personalexterno, Short> tcEId;
+	@FXML private TableColumn<Personalexterno, String> tcENombre;
+	@FXML private TableColumn<Personalexterno, String> tcEApellidos;
+	@FXML private TableColumn<Personalexterno, String> tcEEmpleo;
+	@FXML private TableColumn<Personalexterno, String> tcEEmpresa;
 	
 	
-	@FXML TextField tfANombre;
-	@FXML TextField tfALugar;
-	@FXML TextField tfACategoria;
+	@FXML TextField tfENombre;
+	@FXML TextField tfEApellidos;
+	@FXML TextField tfEEmpleo;
+	@FXML TextField tfEEmpresa;
 	
 	/**
 	 * Boton de añadir pulsado
@@ -58,64 +67,114 @@ public class ExternosController  implements Initializable{
 	 */
 	@FXML protected void onAddClicked(ActionEvent event){
 		
-	/*	//Validación
+		//Validación
 	
-		String nombre = tfANombre.getText().trim();
+		String nombre = tfENombre.getText().trim();
 		if(nombre.isEmpty()){
 			Dialog.showError("Datos invalidos", "El nombre no puede estar vacio.");
 			return;
 		}
 		
-		String lugar = tfALugar.getText().trim();
-		if(lugar.isEmpty()){
-			Dialog.showError("Datos invalidos", "El lugar no puede estar vacio.");
+		String apellidos = tfEApellidos.getText().trim();
+		if(apellidos.isEmpty()){
+			Dialog.showError("Datos invalidos", "El apellido no puede estar vacio.");
 			return;
 		}
 		
-		String categoria = tfACategoria.getText().trim();
-		if(categoria.isEmpty()){
-			Dialog.showError("Datos invalidos", "La categoria no puede estar vacia.");
+		String empleo = tfEEmpleo.getText().trim();
+		if(empleo.isEmpty()){
+			Dialog.showError("Datos invalidos", "El empleo no puede estar vacia.");
+			return;
+		}
+		String empresa = tfEEmpresa.getText().trim();
+		if(empresa.isEmpty()){
+			Dialog.showError("Datos invalidos", "La empresa no puede estar vacia.");
 			return;
 		}
 		
 		
 		try {
-			conexion.insertarActividad(nombre, lugar, categoria);
+			conexion.insertarPersonalexterno(nombre, apellidos, empleo, empresa);
 			
 			actualizarTabla();
+			limpiarCampos();
+			
 		} catch (SQLException e) {
-			Dialog.showError("Error al crear la Actividad", "Se produjo un error: " + e.getLocalizedMessage());
-		}*/
+			Dialog.showError("Error al crear el personal externo", "Se produjo un error: " + e.getLocalizedMessage());
+		}
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		/*conexion  = ConexionJDBC.getConexionJDBC();
+		conexion  = ConexionJDBC.getConexionJDBC();
 		
 		bEEliminar.setDisable(true);
 		
 		//Para mostrar
-		tcAId.setCellValueFactory(new PropertyValueFactory<Actividad, Short>("idactividad"));
-		tcANombre.setCellValueFactory(new PropertyValueFactory<Actividad, String>("nombre"));
-		tcALugar.setCellValueFactory(new PropertyValueFactory<Actividad, String>("lugar"));
-		tcACategoria.setCellValueFactory(new PropertyValueFactory<Actividad, String>("categoria"));
+		tcEId.setCellValueFactory(new PropertyValueFactory<Personalexterno, Short>("idpersonalexterno"));
+		tcENombre.setCellValueFactory(new PropertyValueFactory<Personalexterno, String>("nombre"));
+		tcEApellidos.setCellValueFactory(new PropertyValueFactory<Personalexterno, String>("apellidos"));
+		tcEEmpleo.setCellValueFactory(new PropertyValueFactory<Personalexterno, String>("empleo"));
+		tcEEmpresa.setCellValueFactory(new PropertyValueFactory<Personalexterno, String>("empresa"));
 		
 		//Para editar nombre
-		tcANombre.setCellFactory(TextFieldTableCell.<Actividad>forTableColumn());
-		tcANombre.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Actividad,String>>() {
+		tcENombre.setCellFactory(TextFieldTableCell.<Personalexterno>forTableColumn());
+		tcENombre.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Personalexterno,String>>() {
 			
 			@Override
-			public void handle(CellEditEvent<Actividad, String> arg0) {
-				Actividad actividad = arg0.getRowValue();
-				actividad.setNombre(arg0.getNewValue());
+			public void handle(CellEditEvent<Personalexterno, String> arg0) {
+				Personalexterno personalexterno = arg0.getRowValue();
+				personalexterno.setNombre(arg0.getNewValue());
 				
-				if(!conexion.actualizaActividad(actividad))
+				if(!conexion.actualizaPersonalexterno(personalexterno))
+					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
+			}
+		});
+		
+		//Para editar Apellidos		
+		tcEApellidos.setCellFactory(TextFieldTableCell.<Personalexterno>forTableColumn());
+		tcEApellidos.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Personalexterno,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<Personalexterno, String> arg0) {
+				Personalexterno personalexterno = arg0.getRowValue();
+				personalexterno.setApellidos(arg0.getNewValue());
+				
+				if(!conexion.actualizaPersonalexterno(personalexterno))
+					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
+			}
+		});
+		
+		//Para editar Empleo
+		tcEEmpleo.setCellFactory(TextFieldTableCell.<Personalexterno>forTableColumn());
+		tcEEmpleo.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Personalexterno,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<Personalexterno, String> arg0) {
+				Personalexterno personalexterno = arg0.getRowValue();
+				personalexterno.setEmpleo(arg0.getNewValue());
+				
+				if(!conexion.actualizaPersonalexterno(personalexterno))
+					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
+			}
+		});
+		
+		//Para editar Empresa
+		tcEEmpresa.setCellFactory(TextFieldTableCell.<Personalexterno>forTableColumn());
+		tcEEmpresa.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Personalexterno,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<Personalexterno, String> arg0) {
+				Personalexterno personalexterno = arg0.getRowValue();
+				personalexterno.setEmpresa(arg0.getNewValue());
+				
+				if(!conexion.actualizaPersonalexterno(personalexterno))
 					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
 			}
 		});
 			
 		//Saber si algo esta seleccionado
-		tvActividades.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+		tvExternos.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0,
@@ -125,16 +184,16 @@ public class ExternosController  implements Initializable{
 		});
 		
 		//Cargamos los datos iniciales.
-		actualizarTabla();*/
+		actualizarTabla();
 	}
 	
 	private void actualizarTabla(){
-		/*List<Actividad> lista = conexion.getListaActividades();
+		List<Personalexterno> lista = conexion.getListaPersonalexterno();
 		
 		if(lista == null)
 			Dialog.showError("Error al leer los datos", "No se pudieron cargar los datos");
 		else
-			tvActividades.setItems(FXCollections.observableList(lista));*/
+			tvExternos.setItems(FXCollections.observableList(lista));
 	}
 	
 	/**
@@ -143,13 +202,13 @@ public class ExternosController  implements Initializable{
 	 * @param event
 	 */
 	@FXML protected void onEliminarClicked(ActionEvent event){
-		/*Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
-		if(conexion.eliminarActividad(actividad.getIdactividad())){
-			Dialog.showInfo("Actividad eliminada", "Actividad eliminada correctamente");
+		Personalexterno personalexterno = tvExternos.getSelectionModel().getSelectedItem();
+		if(conexion.eliminarPersonalexterno(personalexterno.getIdpersonalexterno())){
+			Dialog.showInfo("Personal externo eliminado", "Personal externo eliminado correctamente");
 			actualizarTabla();
 		}else{
 			Dialog.showError("Error al eliminar", "Se produjo un error al eliminar la actividad.");
-		}*/
+		}
 	}
 	
 	
@@ -160,5 +219,40 @@ public class ExternosController  implements Initializable{
 	 */
 	@FXML protected void onVolverClicked(ActionEvent event){
 		StageSwitcher.cambiaPantalla(PANTALLA.PRINCIPAL);
+	}
+	
+	@FXML protected void onGenerarClicked(ActionEvent event){
+		
+		 try {
+	            JasperReport informe = (JasperReport)JRLoader.loadObject(
+	                    new File("ReportePersonalExterno.jasper"));
+	            
+	            JasperPrint impreso = JasperFillManager.fillReport(
+	                    informe, null, conexion.getConnection());
+	            
+	            JRExporter exportador = new JRPdfExporter();
+	            
+	            exportador.setParameter(
+	                    JRExporterParameter.JASPER_PRINT, impreso);
+	            exportador.setParameter(
+	                    JRExporterParameter.OUTPUT_FILE, new File("InformePersonalExterno.pdf"));
+	            exportador.exportReport();
+	            
+	            Dialog.showInfo("Creando Informe: ", "Informe de Personal externo creado correctamente");
+	            
+	        } catch (Exception e) {
+	        	Dialog.showError("Error al crear reporte: ", "Se produjo un error al crear el informe Personal Externo.");
+	        	e.printStackTrace();
+	            
+	        }
+		 
+	}
+	
+	private void limpiarCampos() {
+		tfENombre.clear();
+		tfEApellidos.clear();
+		tfEEmpleo.clear();
+		tfEEmpresa.clear();
+		
 	}
 }

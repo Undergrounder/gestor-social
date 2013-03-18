@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportePistas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e2a4396a-7a62-42dc-9217-a3b260ec3893">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="CabeceraColumnas" forecolor="#3B85D4" fontName="Arial" fontSize="16" isBold="true"/>
+	<style name="Campos" forecolor="#9F3030" fontSize="13" isItalic="true"/>
+	<style name="Titulo" forecolor="#348637" fontSize="38" isBold="true" isItalic="true"/>
+	<style name="Campo Socios" style="Campos" mode="Transparent" isBold="true"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     PISTA."IDPISTA" AS PISTA_IDPISTA,
+     PISTA."NOMBRE" AS PISTA_NOMBRE,
+     PISTA."PRECIONOSOCIOS" AS PISTA_PRECIONOSOCIOS,
+     PISTA."PRECIOSOCIOS" AS PISTA_PRECIOSOCIOS
+FROM
+     "TEST"."PISTA" PISTA]]>
+	</queryString>
+	<field name="PISTA_IDPISTA" class="java.math.BigDecimal"/>
+	<field name="PISTA_NOMBRE" class="java.lang.String"/>
+	<field name="PISTA_PRECIONOSOCIOS" class="java.math.BigDecimal"/>
+	<field name="PISTA_PRECIOSOCIOS" class="java.math.BigDecimal"/>
+	<group name="PISTA_IDPISTA">
+		<groupExpression><![CDATA[$F{PISTA_IDPISTA}]]></groupExpression>
+	</group>
+	<group name="PISTA_NOMBRE">
+		<groupExpression><![CDATA[$F{PISTA_NOMBRE}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement uuid="00a44cad-9bb0-4c21-8a91-9936c3da5ada" x="0" y="0" width="555" height="79"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="5b3c10b7-9d11-406e-a895-cad9439ae215" style="Titulo" x="0" y="0" width="555" height="79"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Pistas del Club]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="ee3dbbef-488a-43ca-9c60-d68e802eb0f2" x="0" y="10" width="555" height="20" forecolor="#EB1313"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="8cf55ad0-69a0-4a50-bbb8-94f20175352c" style="CabeceraColumnas" x="12" y="10" width="126" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="19cad47d-804d-46d0-b018-e5749d5ec324" style="CabeceraColumnas" x="138" y="10" width="138" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18b71720-6665-4a40-99f2-1dd1b7527493" style="CabeceraColumnas" x="276" y="10" width="138" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Precio No Socios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="84b09f8a-54f2-45d6-abc9-43dcbf0e941b" style="CabeceraColumnas" x="414" y="10" width="129" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Precio Socios]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d8a600ac-b4db-435d-8894-9ed8a86655e2" style="Campos" x="12" y="15" width="126" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PISTA_IDPISTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4f54a945-eb49-4844-9143-39cf5f5d58bb" style="Campos" x="138" y="15" width="138" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PISTA_NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1b5f417a-e129-4688-a41a-5a89ade25152" style="Campos" x="276" y="15" width="138" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PISTA_PRECIONOSOCIOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="62a47951-e873-4cc7-aab5-b3e52caf1220" style="Campo Socios" x="414" y="15" width="129" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PISTA_PRECIOSOCIOS}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="92a80cc5-f790-4806-ae8d-1faed04f5e22" x="12" y="8" width="531" height="1" forecolor="#3B85D4"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="92a80cc5-f790-4806-ae8d-1faed04f5e22" x="12" y="40" width="531" height="1" forecolor="#3B85D4"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="92a80cc5-f790-4806-ae8d-1faed04f5e22" x="135" y="8" width="1" height="33" forecolor="#3B85D4"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="92a80cc5-f790-4806-ae8d-1faed04f5e22" x="272" y="8" width="1" height="33" forecolor="#3B85D4"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="92a80cc5-f790-4806-ae8d-1faed04f5e22" x="410" y="7" width="1" height="33" forecolor="#3B85D4"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="38" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c6427957-5943-45ad-9ff1-bccd3d4220f9" x="435" y="16" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="6f8bac51-ade1-4600-bc95-f63ddaee1ca0" x="515" y="16" width="40" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

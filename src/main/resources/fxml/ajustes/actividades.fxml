@@ -10,7 +10,7 @@
   <children>
     <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
       <children>
-        <TableView fx:id="tvActividades" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+        <TableView fx:id="tvActividades" editable="true" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
           <columns>
             <TableColumn prefWidth="50.0" text="ID" fx:id="tcAId" />
             <TableColumn prefWidth="200.0" text="Nombre" fx:id="tcANombre" />

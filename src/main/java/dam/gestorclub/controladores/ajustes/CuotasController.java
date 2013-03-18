@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import name.antonsmirnov.javafx.dialog.Dialog;
-import dam.gestorclub.componentes.ConexionJDBC;
-import dam.gestorclub.entidades.Actividad;
+import dam.gestorclub.componentes.ConexionOR;
+import dam.gestorclub.entidades.Cuota;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -33,21 +33,21 @@ import javafx.scene.control.cell.TextFieldTableCell;
  */
 public class CuotasController  implements Initializable{
 
-	private ConexionJDBC conexion;
+	private ConexionOR conexion;
 	
 	@FXML private Button bCEliminar;
 	
 	//Tabla
-	@FXML private TableView<Actividad> tvCuotas;
-	@FXML private TableColumn<Actividad, Short> tcAId;
-	@FXML private TableColumn<Actividad, String> tcANombre;
-	@FXML private TableColumn<Actividad, String> tcALugar;
-	@FXML private TableColumn<Actividad, String> tcACategoria;
+	@FXML private TableView<Cuota> tvCuotas;
+	@FXML private TableColumn<Cuota, Short> tcCId;
+	@FXML private TableColumn<Cuota, String> tcCNombre;
+	@FXML private TableColumn<Cuota, Short> tcCIva;
+	@FXML private TableColumn<Cuota, Short> tcCPrecio;
 	
 	
-	@FXML TextField tfANombre;
-	@FXML TextField tfALugar;
-	@FXML TextField tfACategoria;
+	@FXML TextField tfCNombre;
+	@FXML TextField tfCIva;
+	@FXML TextField tfCPrecio;
 	
 	/**
 	 * Boton de añadir pulsado
@@ -58,56 +58,70 @@ public class CuotasController  implements Initializable{
 		
 		//Validación
 	
-		String nombre = tfANombre.getText().trim();
+		String nombre = tfCNombre.getText().trim();
 		if(nombre.isEmpty()){
 			Dialog.showError("Datos invalidos", "El nombre no puede estar vacio.");
 			return;
 		}
 		
-		String lugar = tfALugar.getText().trim();
-		if(lugar.isEmpty()){
-			Dialog.showError("Datos invalidos", "El lugar no puede estar vacio.");
+		Short iva = null;
+		try{
+			iva = Short.parseShort(tfCIva.getText());
+		}catch(NumberFormatException e){
+			Dialog.showError("Datos invalidos", "El iva para la cuota es invalido.");
+			return;
+		}
+		if(iva < 0){
+			Dialog.showError("Datos invalidos", "El iva para la cuota no puede ser negativo.");
 			return;
 		}
 		
-		String categoria = tfACategoria.getText().trim();
-		if(categoria.isEmpty()){
-			Dialog.showError("Datos invalidos", "La categoria no puede estar vacia.");
+		Short precio = null;
+		try{
+			precio = Short.parseShort(tfCPrecio.getText());
+		}catch(NumberFormatException e){
+			Dialog.showError("Datos invalidos", "El precio para la cuota es invalido.");
+			return;
+		}
+		
+		if(precio < 0){
+			Dialog.showError("Datos invalidos", "El precio para la cuota no puede ser negativo.");
 			return;
 		}
 		
 		
 		try {
-			conexion.insertarActividad(nombre, lugar, categoria);
+			conexion.insertarCuota(nombre, iva, precio);
 			
 			actualizarTabla();
+			limpiarCampos();
 		} catch (SQLException e) {
-			Dialog.showError("Error al crear la Actividad", "Se produjo un error: " + e.getLocalizedMessage());
+			Dialog.showError("Error al crear la Cuota", "Se produjo un error: " + e.getLocalizedMessage());
 		}
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		conexion  = ConexionJDBC.getConexionJDBC();
-		/*
+		conexion  = ConexionOR.getConexionOR();
+		
 		bCEliminar.setDisable(true);
 		
 		//Para mostrar
-		tcAId.setCellValueFactory(new PropertyValueFactory<Actividad, Short>("idactividad"));
-		tcANombre.setCellValueFactory(new PropertyValueFactory<Actividad, String>("nombre"));
-		tcALugar.setCellValueFactory(new PropertyValueFactory<Actividad, String>("lugar"));
-		tcACategoria.setCellValueFactory(new PropertyValueFactory<Actividad, String>("categoria"));
+		tcCId.setCellValueFactory(new PropertyValueFactory<Cuota, Short>("idCuota"));
+		tcCNombre.setCellValueFactory(new PropertyValueFactory<Cuota, String>("nombre"));
+		tcCIva.setCellValueFactory(new PropertyValueFactory<Cuota, Short>("iva"));
+		tcCPrecio.setCellValueFactory(new PropertyValueFactory<Cuota, Short>("precio"));
 		
 		//Para editar nombre
-		tcANombre.setCellFactory(TextFieldTableCell.<Actividad>forTableColumn());
-		tcANombre.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Actividad,String>>() {
+		tcCNombre.setCellFactory(TextFieldTableCell.<Cuota>forTableColumn());
+		tcCNombre.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Cuota,String>>() {
 			
 			@Override
-			public void handle(CellEditEvent<Actividad, String> arg0) {
-				Actividad actividad = arg0.getRowValue();
-				actividad.setNombre(arg0.getNewValue());
+			public void handle(CellEditEvent<Cuota, String> arg0) {
+				Cuota cuota = arg0.getRowValue();
+				cuota.setNombre(arg0.getNewValue());
 				
-				if(!conexion.actualizaActividad(actividad))
+				if(!conexion.actualizaCuota(cuota))
 					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
 			}
 		});
@@ -123,16 +137,16 @@ public class CuotasController  implements Initializable{
 		});
 		
 		//Cargamos los datos iniciales.
-		actualizarTabla();*/
+		actualizarTabla();
 	}
 	
 	private void actualizarTabla(){
-		/*List<Actividad> lista = conexion.getListaActividades();
+		List<Cuota> lista = conexion.getListaCuotas();
 		
 		if(lista == null)
 			Dialog.showError("Error al leer los datos", "No se pudieron cargar los datos");
 		else
-			tvCuotas.setItems(FXCollections.observableList(lista));*/
+			tvCuotas.setItems(FXCollections.observableList(lista));
 	}
 	
 	/**
@@ -141,12 +155,19 @@ public class CuotasController  implements Initializable{
 	 * @param event
 	 */
 	@FXML protected void onEliminarClicked(ActionEvent event){
-		/*Actividad actividad = tvCuotas.getSelectionModel().getSelectedItem();
-		if(conexion.eliminarActividad(actividad.getIdactividad())){
+		Cuota cuota = tvCuotas.getSelectionModel().getSelectedItem();
+		if(conexion.eliminarCuota(cuota.getIdCuota())){
 			Dialog.showInfo("Actividad eliminada", "Actividad eliminada correctamente");
 			actualizarTabla();
 		}else{
 			Dialog.showError("Error al eliminar", "Se produjo un error al eliminar la actividad.");
-		}*/
+		}
+	}
+	
+	
+	private void limpiarCampos() {
+		tfCNombre.clear();
+		tfCIva.clear();
+		tfCPrecio.clear();
 	}
 }
