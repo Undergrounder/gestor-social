@@ -23,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import dam.gestorclub.componentes.ConexionHibernate;
@@ -116,18 +117,43 @@ public class EmpleadosController implements Initializable{
 			}
 		});
 		
-		//Para editar apellidos
-		tcEApellidos.setCellFactory(TextFieldTableCell.<Empleado>forTableColumn());
-		tcEApellidos.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Empleado,String>>() {
+		//Para editar dni
+		tcEDNI.setCellFactory(TextFieldTableCell.<Empleado>forTableColumn());
+		tcEDNI.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Empleado,String>>() {
 					
 			@Override
 			public void handle(CellEditEvent<Empleado, String> arg0) {
 				Empleado empleado = arg0.getRowValue();
-				empleado.setApellidos((arg0.getNewValue()));
+				String dni = arg0.getNewValue().trim();
+				
+				
+				if(dni.length() > 9){
+					Dialog.showError("Datos invalidos", "El DNI no puede tener mas de 9 caracteres.");
+					return;
+				}
+				
+				
+				empleado.setDni((dni));
 						
 				if(!conexion.actualizarEmpleado(empleado))
 					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
 						
+			}
+		});
+		
+		//Para editar dni
+		tcEEmpleo.setCellFactory(ComboBoxTableCell.<Empleado, Empleo>forTableColumn(cbEEmpleo.getItems()));
+		tcEEmpleo.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Empleado,Empleo>>() {
+
+			@Override
+			public void handle(CellEditEvent<Empleado, Empleo> arg0) {
+				
+				Empleado empleado = arg0.getRowValue();
+				empleado.setEmpleo(arg0.getNewValue());
+				
+				if(!conexion.actualizarEmpleado(empleado))
+					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
+					
 			}
 		});
 		
@@ -225,9 +251,11 @@ public class EmpleadosController implements Initializable{
 			return;
 		}
 		
-		BigDecimal tarjeta = new BigDecimal(tfETarjeta.getText().trim());
-		if(tarjeta.equals(BigDecimal.ZERO)){
-			Dialog.showError("Datos invalidos", "El empleado ha de tener una tarjeta de acceso asociada.");
+		BigDecimal tarjeta = null;
+		try{
+			tarjeta = new BigDecimal(tfETarjeta.getText().trim());
+		}catch(NumberFormatException e){
+			Dialog.showError("Datos invalidos", "El empleado ha de tener una tarjeta de acceso asociada. Introduzca el numero de esta.");
 			return;
 		}
 		

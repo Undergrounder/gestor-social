@@ -3,8 +3,6 @@
  */
 package dam.gestorclub.componentes;
 
-import java.io.Reader;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -12,17 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import dam.gestorclub.componentes.Configuracion.KEYS;
 import dam.gestorclub.entidades.Actividad;
 import dam.gestorclub.entidades.Personalexterno;
-import dam.gestorclub.entidades.Entrada;
 import dam.gestorclub.entidades.Pista;
-import dam.gestorclub.entidades.Reserva;
 import dam.gestorclub.entidades.Socio;
 
 
@@ -260,8 +254,13 @@ public class ConexionJDBC {
 		stmt.setFloat(10, codigobarras);
 		stmt.setShort(11, descuento);
 		
+		if(stmt.execute()){
 		
-		return stmt.execute();
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			System.out.println(rs.getString(0));
+		}
+		return true;
 	}
 
 	
@@ -329,6 +328,22 @@ public class ConexionJDBC {
 				return false;
 		} catch (SQLException e) {
 			System.err.println("SE produjo un error al eliminar el Personal externo " + id + ": " + e.getLocalizedMessage());
+			return false;
+		}	
+	}
+	
+	public boolean eliminarSocio(Short idsocio) {
+		Statement st;
+		try {
+			st = conn.createStatement();
+			String sql = "DELETE FROM Socio WHERE idSocio = '"+idsocio+"'";
+			int delete = st.executeUpdate(sql);
+			if(delete==1)
+				return true;
+			else
+				return false;
+		} catch (SQLException e) {
+			System.err.println("SE produjo un error al eliminar el socio " + idsocio + ": " + e.getLocalizedMessage());
 			return false;
 		}	
 	}
