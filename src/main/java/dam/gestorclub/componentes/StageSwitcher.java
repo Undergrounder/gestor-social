@@ -99,7 +99,7 @@ public class StageSwitcher {
 			}
 			FXMLLoader loader = new FXMLLoader(StageSwitcher.class.getResource("/fxml/" + fxmlPath + ".fxml"));
 			Parent root = (Parent)loader.load();
-			sStage.setScene(new Scene(root, 760, 600));
+			sStage.setScene(new Scene(root, 860, 600));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -5,7 +5,6 @@ package dam.gestorclub.controladores.empleados;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -21,9 +20,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import dam.gestorclub.componentes.ConexionHibernate;
@@ -31,7 +30,6 @@ import dam.gestorclub.componentes.StageSwitcher;
 import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
 import dam.gestorclub.entidades.Empleado;
 import dam.gestorclub.entidades.Empleo;
-import dam.gestorclub.entidades.Pista;
 
 /**
  * @author under
@@ -40,15 +38,15 @@ import dam.gestorclub.entidades.Pista;
 public class EmpleadosController implements Initializable{
 
 	
-	@FXML TableView<Empleado> tvEEmpleados;
-	@FXML TableColumn<Empleado, Short> tcEId;
-	@FXML TableColumn<Empleado, String> tcENombre;
-	@FXML TableColumn<Empleado, String> tcEApellidos;
-	@FXML TableColumn<Empleado, String> tcEDNI;
-	@FXML TableColumn<Empleado, Empleo> tcEEmpleo;
-	@FXML TableColumn<Empleado, String> tcETarjeta;
+	@FXML private TableView<Empleado> tvEEmpleados;
+	@FXML private TableColumn<Empleado, Short> tcEId;
+	@FXML private TableColumn<Empleado, String> tcENombre;
+	@FXML private TableColumn<Empleado, String> tcEApellidos;
+	@FXML private TableColumn<Empleado, String> tcEDNI;
+	@FXML private TableColumn<Empleado, Empleo> tcEEmpleo;
+	@FXML private TableColumn<Empleado, String> tcETarjeta;
 	
-	@FXML Button bEEliminar;
+	@FXML private Button bEEliminar;
 	
 	@FXML private TextField tfENombre;
 	@FXML private TextField tfEApellidos;
@@ -84,29 +82,55 @@ public class EmpleadosController implements Initializable{
 		tcENombre.setCellValueFactory(new PropertyValueFactory<Empleado, String>("nombre"));
 		tcEApellidos.setCellValueFactory(new PropertyValueFactory<Empleado, String>("apellidos"));
 		tcEDNI.setCellValueFactory(new PropertyValueFactory<Empleado, String>("dni"));
-		//tcEEmpleo.setCellValueFactory(new PropertyValueFactory<Empleado, Empleo>("empleo"));
-		tcETarjeta.setCellValueFactory(new PropertyValueFactory<Empleado, String>("tarjeta"));
+		tcEEmpleo.setCellValueFactory(new PropertyValueFactory<Empleado, Empleo>("empleo"));
+		tcETarjeta.setCellValueFactory(new PropertyValueFactory<Empleado, String>("datostarjeta"));
 			
-		/*
+		
 		//Para editar nombre
-		tcPNombre.setCellFactory(TextFieldTableCell.<Pista>forTableColumn());
-		tcPNombre.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Pista,String>>() {
-					
+		tcENombre.setCellFactory(TextFieldTableCell.<Empleado>forTableColumn());
+		tcENombre.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Empleado,String>>() {
+			
 			@Override
-			public void handle(CellEditEvent<Pista, String> arg0) {
-				Pista pista = arg0.getRowValue();
-				pista.setNombre(arg0.getNewValue());
-						
-				if(!conexion.actualizaPista(pista))
+			public void handle(CellEditEvent<Empleado, String> arg0) {
+				Empleado empleado = arg0.getRowValue();
+				empleado.setNombre(arg0.getNewValue());
+				
+				if(!conexion.actualizarEmpleado(empleado))
 					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
+				
 			}
 		});
+		
+		//Para editar apellidos
+		tcEApellidos.setCellFactory(TextFieldTableCell.<Empleado>forTableColumn());
+		tcEApellidos.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Empleado,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<Empleado, String> arg0) {
+				Empleado empleado = arg0.getRowValue();
+				empleado.setApellidos((arg0.getNewValue()));
 				
-		//TODO Para editar precio socios
-		//tcPPrecioSocios.setCellFactory(TextFieldTableCell.<Pista>forTableColumn());
+				if(!conexion.actualizarEmpleado(empleado))
+					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
 				
-		//TODO Para editar precio no socios
-		*/		
+			}
+		});
+		
+		//Para editar apellidos
+		tcEApellidos.setCellFactory(TextFieldTableCell.<Empleado>forTableColumn());
+		tcEApellidos.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Empleado,String>>() {
+					
+			@Override
+			public void handle(CellEditEvent<Empleado, String> arg0) {
+				Empleado empleado = arg0.getRowValue();
+				empleado.setApellidos((arg0.getNewValue()));
+						
+				if(!conexion.actualizarEmpleado(empleado))
+					Dialog.showError("No se actualizo", "No se pudo actualizar el registro.");
+						
+			}
+		});
+		
 		//Saber si algo esta seleccionado
 		tvEEmpleados.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 
@@ -123,7 +147,7 @@ public class EmpleadosController implements Initializable{
 			
 	private void actualizarTabla(){
 		List<Empleado> lista = conexion.getListaEmpleados();
-		System.out.println(lista);
+		
 				
 		if(lista == null)
 			Dialog.showError("Error al leer los datos", "No se pudieron cargar los datos");
@@ -212,5 +236,6 @@ public class EmpleadosController implements Initializable{
 		actualizarTabla();
 		limpiarCampos();
 	}
+	
 	
 }
