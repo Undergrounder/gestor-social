@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -60,14 +61,18 @@ public class ConexionHibernate {
 	 * Devuelve la lista de empleados
 	 * @return lista de empleados
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Empleado> getListaEmpleados(){
 		Session session = sessionFactory.openSession();
 		
 		List<Empleado> lista = null;
+		session.beginTransaction();
+		Query q = session.createQuery("from Empleado e join fetch e.empleo");
+		q.setProperties(new Empleado());
+		lista = (List<Empleado>)(q.list());
 		
-		Query q = session.createQuery("from Empleado as empleado inner join empleado.empleo");
-		lista = q.list();
 		
+		session.getTransaction().commit();
 		session.close();
 		
 		return lista;
@@ -81,10 +86,20 @@ public class ConexionHibernate {
 	 */
 	public boolean eliminarEmpleado(Empleado empleado){
 		Session session = sessionFactory.openSession();
+		Transaction trans = session.beginTransaction();
 		session.delete(empleado);
 		
-		session.close();
-		return true; //TODO comprobarlo de verdad....
+		try{
+			trans.commit();
+			return true;
+		}catch(HibernateException e){
+			System.err.println("Eror al eliminar empleado: " + e.getLocalizedMessage());
+			return false;
+		}finally{
+			session.close();
+		}
+		
+		
 	}
 
 
@@ -93,22 +108,24 @@ public class ConexionHibernate {
 	 * Devuelve la lista de empleos
 	 * @return lista de empleos
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Empleo> getListaEmpleos(){
 		Session session = sessionFactory.openSession();
-		
+        session.beginTransaction();
+
 		List<Empleo> lista = null;
 		
 		Query q = session.createQuery("from Empleo");
 		lista = q.list();
 		
-		System.out.println("Num: " + lista.size());
 		
+		session.getTransaction().commit();
 		session.close();
 		
 		return lista;
 	}
 	
-	public void insertarEmpleado(String nombre, String apellidos, String dni,
+	public boolean insertarEmpleado(String nombre, String apellidos, String dni,
 			Empleo empleo, BigDecimal tarjeta) {
 		Session session = sessionFactory.openSession();
 		
@@ -120,13 +137,95 @@ public class ConexionHibernate {
 		empleado.setDni(dni);
 		empleado.setEmpleo(empleo);
 		empleado.setDatostarjeta(tarjeta);
+		session.save(empleado);
+		
+		try{
+			txn.commit();
+			return true;
+		}catch(HibernateException e){
+			System.err.println("Eror al insertar empleado: " + e.getLocalizedMessage());
+			return false;
+		}finally{
+			session.close();
+		}
 		
 		
+	}
+	
+	public boolean actualizarEmpleado(Empleado empleado){
+		Session session = sessionFactory.openSession();
 		
-		System.out.println("ID: " + session.save(empleado));
-		txn.commit();
+		Transaction txn = session.beginTransaction();
+		session.update(empleado);
 		
-		session.close();
+		try{
+			txn.commit();
+			return true;
+		}catch(HibernateException e){
+			System.err.println("Error al actualizar el empleado: " + e.getLocalizedMessage());
+			return false;
+		}finally{
+			session.close();
+		}
+		
+	}
+
+
+	public boolean insertarEmpleo(String nombre, String horario, BigDecimal sueldo) {
+		Session session = sessionFactory.openSession();
+		
+		Transaction txn = session.beginTransaction();
+		
+		Empleo empleo = new Empleo();
+		empleo.setNombre(nombre);
+		empleo.setHorario(horario);
+		empleo.setSueldo(sueldo);
+		session.save(empleo);
+		
+		try{
+			txn.commit();
+			return true;
+		}catch(HibernateException e){
+			System.err.println("Eror al insertar empleo: " + e.getLocalizedMessage());
+			return false;
+		}finally{
+			session.close();
+		}
+	}
+
+
+	public boolean eliminarEmpleo(Empleo empleo) {
+		Session session = sessionFactory.openSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(empleo);
+		
+		try{
+			trans.commit();
+			return true;
+		}catch(HibernateException e){
+			System.err.println("Eror al eliminar empleo: " + e.getLocalizedMessage());
+			return false;
+		}finally{
+			session.close();
+		}
+	}
+
+
+	public boolean actualizarEmpleo(Empleo empleo) {
+		Session session = sessionFactory.openSession();
+		
+		Transaction txn = session.beginTransaction();
+		session.update(empleo);
+		
+		try{
+			txn.commit();
+			return true;
+		}catch(HibernateException e){
+			System.err.println("Error al actualizar el empleo: " + e.getLocalizedMessage());
+			return false;
+		}finally{
+			session.close();
+		}
 	}
 	
 }

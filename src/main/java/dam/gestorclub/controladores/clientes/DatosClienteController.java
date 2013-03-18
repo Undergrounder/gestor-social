@@ -66,30 +66,30 @@ public class DatosClienteController implements Initializable, ChangeListener<Obj
 	}
 	
 
-	public Short guardarCliente() {
+	public Socio guardarCliente() {
 		
 		String dni = tfDCDni.getText().trim();
 		if(dni.isEmpty()){
 			Dialog.showError("Datos invalidos", "El Dni no puede estar vacio.");
-			return -1;
+			return null;
 		}
 		
 		String nombre = tfDCNombre.getText().trim();
 		if(nombre.isEmpty()){
 			Dialog.showError("Datos invalidos", "El nombre no puede estar vacio.");
-			return -1;
+			return null;
 		}
 		
 		String apellidos = tfDCApellidos.getText().trim();
 		if(apellidos.isEmpty()){
 			Dialog.showError("Datos invalidos", "Los apellidos no puede estar vacio.");
-			return -1;
+			return null;
 		}
 		
 		String correo = tfDCCorreo.getText().trim();
 		if(correo.isEmpty()){
 			Dialog.showError("Datos invalidos", "El correo no puede estar vacio.");
-			return -1;
+			return null;
 		}
 		
 		
@@ -104,13 +104,13 @@ public class DatosClienteController implements Initializable, ChangeListener<Obj
 		String telefono = tfDCTelefono.getText().trim();
 		if(telefono.isEmpty()){
 			Dialog.showError("Datos invalidos", "El telefono no puede estar vacio.");
-			return -1;
+			return null;
 		}
 		
 		String direccion = tfDCDireccion.getText().trim();
 		if(direccion.isEmpty()){
 			Dialog.showError("Datos invalidos", "La direccion no puede estar vacia.");
-			return -1;
+			return null;
 		}
 		
 		Date fechanac = calNacimiento.getValue().getTime();
@@ -125,23 +125,14 @@ public class DatosClienteController implements Initializable, ChangeListener<Obj
 			//TODO devuelve id
 			tablaClientesController.actualizarTabla();
 		} catch (SQLException e) {
-			Dialog.showError("Error al crear la Actividad", "Se produjo un error: " + e.getLocalizedMessage());
+			Dialog.showError("Error.", "Se produjo un error: " + e.getLocalizedMessage());
 		}
-		return -1; //TEMPORAL;
+		return new Socio(); //TEMPORAL;
 		
 	}
 
 
-	public void BorrarCliente() {
-		// TODO Auto-generated method stub
-		
-	}
 
-
-	public void FiltrarCliente() {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 	@Override

@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
+import dam.gestorclub.componentes.ConexionJDBC;
 import dam.gestorclub.componentes.StageSwitcher;
 import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
 import dam.gestorclub.controladores.clientes.TablaClientesController.SocioSelectedListener;
@@ -24,6 +25,9 @@ import dam.gestorclub.entidades.Socio;
 public class ClientesController implements Initializable, SocioSelectedListener{
 
 	private MODO modo;
+	private Socio ultimo = null; 
+	
+	private ConexionJDBC conexion;
 	
 	public static enum MODO{
 		NUEVO,
@@ -59,12 +63,10 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 	 * @param event
 	 */
 	@FXML protected void onGuardarClicked(ActionEvent event){
-		short id = datosClienteController.guardarCliente();
+		Socio socio = datosClienteController.guardarCliente();
 		
-		if(id == -1){
-			Dialog.showError("Error al guardar.", "No se pudo guardar el cliente");
-		}else{
-			
+		if(socio != null){
+			tablaClientesController.addSocio(socio);
 		}
 	}
 	
@@ -74,8 +76,16 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 	 * @param event
 	 */
 	@FXML protected void onEliminarClicked(ActionEvent event){
-		//TODO eliminar cliente
-		datosClienteController.BorrarCliente();
+		if(ultimo != null){
+			if(conexion.eliminarSocio(ultimo.getIdsocio())){
+				Dialog.showInfo("Usuario borrado correctamente", "Se ha borrado al socio.");
+				tablaClientesController.actualizarTabla();
+			}else{
+				Dialog.showError("No se pudo borrar", "No se pudo borrar");
+			}
+			
+		
+		}
 	}
 	
 	/**
@@ -85,7 +95,7 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 	 */
 	@FXML protected void onFiltrarClicked(ActionEvent event){
 		//TODO filtrar cliente
-		datosClienteController.FiltrarCliente();
+		//datosClienteController.FiltrarCliente();
 	}
 	
 	/**
@@ -99,8 +109,12 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		conexion = ConexionJDBC.getConexionJDBC();
+		
 		tablaClientesController.setOnSocioSelected(this);
 		modo = MODO.NUEVO;
+		
+		
 	}
 
 	private void cambiaModo(MODO nuevo, Socio socio) {

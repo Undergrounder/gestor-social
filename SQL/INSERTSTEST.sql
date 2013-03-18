@@ -92,6 +92,7 @@ INSERT INTO empleado VALUES (Empleado_Seq.nextval, 1, '262689594', 'Hector', 'Pi
 INSERT INTO empleado VALUES (Empleado_Seq.nextval, 5, '325499562', 'Laura', 'Fernandez', 0008976554);
 
 
+COMMIT;
 /*
 --INSERTS LINEA PAGO IS LIKE LOL
 rem HAY UN ERROR QUE NO SE CUAL ES.
