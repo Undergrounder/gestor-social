@@ -3,16 +3,11 @@
  */
 package dam.gestorclub.controladores.externos;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import name.antonsmirnov.javafx.dialog.Dialog;
-import dam.gestorclub.componentes.ConexionJDBC;
-import dam.gestorclub.componentes.StageSwitcher;
-import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
-import dam.gestorclub.entidades.Personalexterno;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,11 +18,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import name.antonsmirnov.javafx.dialog.Dialog;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
+import dam.gestorclub.componentes.ConexionJDBC;
+import dam.gestorclub.componentes.StageSwitcher;
+import dam.gestorclub.componentes.StageSwitcher.PANTALLA;
+import dam.gestorclub.entidades.Personalexterno;
 
 /**
  * @author under
@@ -212,6 +219,33 @@ public class ExternosController  implements Initializable{
 	 */
 	@FXML protected void onVolverClicked(ActionEvent event){
 		StageSwitcher.cambiaPantalla(PANTALLA.PRINCIPAL);
+	}
+	
+	@FXML protected void onGenerarClicked(ActionEvent event){
+		
+		 try {
+	            JasperReport informe = (JasperReport)JRLoader.loadObject(
+	                    new File("ReportePersonalExterno.jasper"));
+	            
+	            JasperPrint impreso = JasperFillManager.fillReport(
+	                    informe, null, conexion.getConnection());
+	            
+	            JRExporter exportador = new JRPdfExporter();
+	            
+	            exportador.setParameter(
+	                    JRExporterParameter.JASPER_PRINT, impreso);
+	            exportador.setParameter(
+	                    JRExporterParameter.OUTPUT_FILE, new File("InformePersonalExterno.pdf"));
+	            exportador.exportReport();
+	            
+	            Dialog.showInfo("Creando Informe: ", "Informe de Personal externo creado correctamente");
+	            
+	        } catch (Exception e) {
+	        	Dialog.showError("Error al crear reporte: ", "Se produjo un error al crear el informe Personal Externo.");
+	        	e.printStackTrace();
+	            
+	        }
+		 
 	}
 	
 	private void limpiarCampos() {
