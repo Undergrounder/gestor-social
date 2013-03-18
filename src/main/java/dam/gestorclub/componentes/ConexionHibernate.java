@@ -169,5 +169,63 @@ public class ConexionHibernate {
 		}
 		
 	}
+
+
+	public boolean insertarEmpleo(String nombre, String horario, BigDecimal sueldo) {
+		Session session = sessionFactory.openSession();
+		
+		Transaction txn = session.beginTransaction();
+		
+		Empleo empleo = new Empleo();
+		empleo.setNombre(nombre);
+		empleo.setHorario(horario);
+		empleo.setSueldo(sueldo);
+		session.save(empleo);
+		
+		try{
+			txn.commit();
+			return true;
+		}catch(HibernateException e){
+			System.err.println("Eror al insertar empleo: " + e.getLocalizedMessage());
+			return false;
+		}finally{
+			session.close();
+		}
+	}
+
+
+	public boolean eliminarEmpleo(Empleo empleo) {
+		Session session = sessionFactory.openSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(empleo);
+		
+		try{
+			trans.commit();
+			return true;
+		}catch(HibernateException e){
+			System.err.println("Eror al eliminar empleo: " + e.getLocalizedMessage());
+			return false;
+		}finally{
+			session.close();
+		}
+	}
+
+
+	public boolean actualizarEmpleo(Empleo empleo) {
+		Session session = sessionFactory.openSession();
+		
+		Transaction txn = session.beginTransaction();
+		session.update(empleo);
+		
+		try{
+			txn.commit();
+			return true;
+		}catch(HibernateException e){
+			System.err.println("Error al actualizar el empleo: " + e.getLocalizedMessage());
+			return false;
+		}finally{
+			session.close();
+		}
+	}
 	
 }
