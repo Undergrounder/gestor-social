@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2013 16:35:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="dam.gestorclub.entidades.Entrada" table="ENTRADA">
+  <id name="identrada" type="short">
+   <column name="IDENTRADA" precision="4" scale="0"/>
+   <generator class="sequence">
+     <param name="sequence">ENTRADA_SEQ</param>
+   </generator>
+  </id>
+  <many-to-one class="dam.gestorclub.entidades.Socio" fetch="select" name="socio">
+   <column name="SOCIO_ID" not-null="true" precision="4" scale="0"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="fecha" type="date">
+   <column length="7" name="FECHA"/>
+  </property>
+ </class>
+</hibernate-mapping>

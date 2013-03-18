@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-mar-2013 16:35:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="dam.gestorclub.entidades.Socio" table="SOCIO">
+  <id name="idsocio" type="short">
+   <column name="IDSOCIO" precision="4" scale="0"/>
+   <generator class="sequence">
+     <param name="sequence">SOCIO_SEQ</param>
+   </generator>
+  </id>
+  <property generated="never" lazy="false" name="dni" type="string">
+   <column length="9" name="DNI" not-null="true" unique="true"/>
+  </property>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="25" name="NOMBRE" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="apellidos" type="string">
+   <column length="50" name="APELLIDOS" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="correo" type="string">
+   <column length="100" name="CORREO" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="esvaron" type="char">
+   <column length="1" name="ESVARON" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="telefono" type="string">
+   <column length="9" name="TELEFONO" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="direccion" type="string">
+   <column name="DIRECCION" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="fechanac" type="date">
+   <column length="7" name="FECHANAC"/>
+  </property>
+  <property generated="never" lazy="false" name="cuentabancaria" type="big_decimal">
+   <column name="CUENTABANCARIA" precision="20" scale="0"/>
+  </property>
+  <property generated="never" lazy="false" name="codigobarras" type="big_decimal">
+   <column name="CODIGOBARRAS" precision="22" scale="0"/>
+  </property>
+  <property generated="never" lazy="false" name="descuento" type="java.lang.Short">
+   <column name="DESCUENTO" precision="3" scale="0"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true" name="reservas"
+   sort="unsorted" table="RESERVA">
+   <key>
+    <column name="SOCIO_ID" precision="4" scale="0"/>
+   </key>
+   <one-to-many class="dam.gestorclub.entidades.Reserva"/>
+  </set>
+  <set fetch="select" lazy="true" name="actividads" sort="unsorted" table="ACTIVIDADSOCIO">
+   <key>
+    <column name="SOCIO_ID" not-null="true" precision="4" scale="0"/>
+   </key>
+   <many-to-many entity-name="dam.gestorclub.entidades.Actividad" unique="false">
+    <column name="ACTIVIDAD_ID" not-null="true" precision="4" scale="0"/>
+   </many-to-many>
+  </set>
+  <set fetch="select" inverse="true" lazy="true" name="entradas"
+   sort="unsorted" table="ENTRADA">
+   <key>
+    <column name="SOCIO_ID" not-null="true" precision="4" scale="0"/>
+   </key>
+   <one-to-many class="dam.gestorclub.entidades.Entrada"/>
+  </set>
+ </class>
+</hibernate-mapping>

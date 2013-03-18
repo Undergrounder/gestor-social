@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -15,18 +17,23 @@ import javafx.beans.property.StringProperty;
  */
 public class Socio implements java.io.Serializable {
 
-	private ObjectProperty<Short> idsocio;
-	private StringProperty dni;
-	private StringProperty nombre;
-	private StringProperty apellidos;
-	private StringProperty correo;
-	private ObjectProperty<Character> esvaron;
-	private StringProperty telefono;
-	private StringProperty direccion;
-	private ObjectProperty<Date> fechanac;
-	private ObjectProperty<BigDecimal> cuentabancaria;
-	private ObjectProperty<BigDecimal> codigobarras;
-	private ObjectProperty<Short> descuento;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private ObjectProperty<Short> idsocio = new SimpleObjectProperty<>();
+	private StringProperty dni = new SimpleStringProperty();
+	private StringProperty nombre = new SimpleStringProperty();;
+	private StringProperty apellidos = new SimpleStringProperty();;
+	private StringProperty correo = new SimpleStringProperty();;
+	private ObjectProperty<Character> esvaron = new SimpleObjectProperty<>();
+	private StringProperty telefono = new SimpleStringProperty();;
+	private StringProperty direccion = new SimpleStringProperty();;
+	private ObjectProperty<Date> fechanac = new SimpleObjectProperty<>();
+	private ObjectProperty<BigDecimal> cuentabancaria = new SimpleObjectProperty<>();
+	private ObjectProperty<BigDecimal> codigobarras = new SimpleObjectProperty<>();
+	private ObjectProperty<Short> descuento = new SimpleObjectProperty<>();
 	private Set<Reserva> reservas = new HashSet<Reserva>(0);
 	private Set<Actividad> actividads = new HashSet<Actividad>(0);
 	private Set<Entrada> entradas = new HashSet<Entrada>(0);
@@ -68,7 +75,7 @@ public class Socio implements java.io.Serializable {
 		this.entradas = entradas;
 	}
 
-	public short getIdsocio() {
+	public Short getIdsocio() {
 		return this.idsocio.get();
 	}
 

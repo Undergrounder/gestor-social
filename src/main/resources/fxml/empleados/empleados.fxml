@@ -8,48 +8,48 @@
 
 <VBox prefHeight="394.0" prefWidth="878.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dam.gestorclub.controladores.empleados.EmpleadosController">
   <children>
-    <ToolBar>
-      <items>
-        <Button mnemonicParsing="false" onAction="#onNuevoClicked" text="Nuevo" />
-        <Button mnemonicParsing="false" onAction="#onGuardarClicked" text="Guardar" />
-        <ToggleButton mnemonicParsing="false" onAction="#onFiltrarClicked" text="Filtar" />
-      </items>
-    </ToolBar>
-    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+    <HBox prefHeight="100.0" prefWidth="200.0" VBox.margin="$x1" VBox.vgrow="ALWAYS">
       <children>
-        <AnchorPane prefHeight="332.0" prefWidth="554.0" HBox.hgrow="ALWAYS">
-          <children>
-            <Label id="tfEDatostarjeta" layoutX="26.0" layoutY="96.0" text="Tarjeta:" />
-            <TextField id="eTFID" fx:id="tfEDatostarjeta" layoutX="81.0" layoutY="93.0" prefWidth="149.0" />
-            <Label layoutX="20.0" layoutY="40.0" text="Nombre:" />
-            <TextField fx:id="eTFNombre" layoutX="81.0" layoutY="37.0" prefWidth="231.0" />
-            <Label layoutX="13.0" layoutY="67.0" text="Apellidos:" />
-            <TextField fx:id="eTFApellidos" layoutX="81.0" layoutY="64.0" prefWidth="231.0" />
-            <Label layoutX="43.0" layoutY="14.0" text="DNI:" />
-            <TextField fx:id="eTFDni" layoutX="81.0" layoutY="11.0" prefWidth="231.0" />
-            <Label layoutX="17.0" layoutY="123.0" text="Empleo:" />
-            <ComboBox layoutX="81.0" layoutY="120.0" prefWidth="231.0">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
-              </items>
-            </ComboBox>
-          </children>
-        </AnchorPane>
-        <TableView prefHeight="332.0" prefWidth="309.0">
+        <TableView fx:id="tvEEmpleados" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
           <columns>
-            <TableColumn prefWidth="93.0" text="Nombre" fx:id="eTCNombre" />
-            <TableColumn prefWidth="115.0" text="Apellidos" fx:id="eTCApellidos" />
+            <TableColumn prefWidth="75.0" text="ID" fx:id="tcEId" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="115.0" text="Nombre" fx:id="tcENombre" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="129.0" text="Apellidos" fx:id="tcEApellidos" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="137.0" text="DNI" fx:id="tcEDNI" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="130.0" text="Empleo" fx:id="tcEEmpleo" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="187.0" text="Tarjeta" fx:id="tcETarjeta" />
           </columns>
         </TableView>
+        <VBox prefHeight="200.0" prefWidth="100.0">
+          <children>
+            <Button fx:id="bEEliminar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEliminarClicked" text="Eliminar" />
+          </children>
+          <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          </padding>
+        </VBox>
       </children>
     </HBox>
+    <FlowPane prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <TextField fx:id="tfENombre" prefWidth="115.0" promptText="Nombre" text="">
+          <FlowPane.margin>
+            <Insets left="75.0" />
+          </FlowPane.margin>
+        </TextField>
+        <TextField fx:id="tfEApellidos" prefWidth="129.0" promptText="Apellidos" text="" />
+        <TextField fx:id="tfEDNI" prefWidth="137.0" promptText="DNI" text="" />
+        <ChoiceBox id="" fx:id="cbEEmpleo" prefWidth="130.0" />
+        <TextField fx:id="tfETarjeta" prefWidth="187.0" promptText="Tarjeta" text="" />
+        <Button mnemonicParsing="false" onAction="#onAddClicked" text="Añadir" />
+      </children>
+      <VBox.margin>
+        <Insets bottom="5.0" top="5.0" />
+      </VBox.margin>
+    </FlowPane>
     <ToolBar>
       <items>
-        <Button mnemonicParsing="false" onAction="#onVolverClicked" text="Volver" />
+        <Button mnemonicParsing="false" text="Volver" />
       </items>
     </ToolBar>
   </children>
