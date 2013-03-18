@@ -54,6 +54,9 @@ public class ConexionJDBC {
 		
 		
 	}
+	public Connection getConnection(){
+		return conn;
+	}
 	
 	/**
 	 * Deuvelve una instancia de conexion JDBC

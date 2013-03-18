@@ -49,6 +49,7 @@
     <ToolBar>
       <items>
         <Button mnemonicParsing="false" onAction="#onVolverClicked" text="Volver" />
+        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onGenerarClicked" text="Generar Reporte" translateX="570.0" />
       </items>
     </ToolBar>
   </children>
