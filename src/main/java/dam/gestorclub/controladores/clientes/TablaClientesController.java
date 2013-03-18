@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import dam.gestorclub.componentes.ConexionJDBC;
-import dam.gestorclub.entidades.Actividad;
 import dam.gestorclub.entidades.Socio;
 
 import name.antonsmirnov.javafx.dialog.Dialog;
@@ -19,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * @author under
@@ -26,6 +26,7 @@ import javafx.scene.control.TableView;
  */
 public class TablaClientesController implements Initializable{
 	
+	private Socio filtro;
 	private SocioSelectedListener listener;
 	
 	public static interface SocioSelectedListener{
@@ -41,7 +42,7 @@ public class TablaClientesController implements Initializable{
 
 	
 	public void actualizarTabla(){
-		List<Socio> lista = conexion.getListaSocios();
+		List<Socio> lista = conexion.getListaSocios(filtro);
 		
 		
 		if(lista == null)
@@ -54,6 +55,12 @@ public class TablaClientesController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		conexion = ConexionJDBC.getConexionJDBC();
+		
+		filtro = null;
+		
+		tcTCCodigo.setCellValueFactory(new PropertyValueFactory<Socio, Short>("idsocio"));
+		tcTCNombre.setCellValueFactory(new PropertyValueFactory<Socio, String>("nombre"));
+		tcTCApellidos.setCellValueFactory(new PropertyValueFactory<Socio, String>("apellidos"));;
 		
 		tvTC.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 
@@ -86,7 +93,11 @@ public class TablaClientesController implements Initializable{
 	
 	public void addSocio(Socio socio){
 		tvTC.getItems().add(socio);
-		tvTC.getSelectionModel().select(socio);
+	}
+	
+	public void setFiltro(Socio socio){
+		filtro = socio;
+		actualizarTabla();
 	}
 	
 }

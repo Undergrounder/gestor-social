@@ -9,14 +9,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import com.sun.media.sound.DirectAudioDeviceProvider;
-
 import name.antonsmirnov.javafx.dialog.Dialog;
 import dam.gestorclub.componentes.ConexionJDBC;
 import dam.gestorclub.entidades.Socio;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -30,10 +29,11 @@ import jfxtras.labs.scene.control.CalendarTextField;
  */
 public class DatosClienteController implements Initializable, ChangeListener<Object>{
 	
-	private boolean estaTodoGuardaro;
+	private Socio socio;
+	
+	private BooleanProperty estaTodoGuardado = new SimpleBooleanProperty();
 	
 	private ConexionJDBC conexion;
-	private TablaClientesController tablaClientesController;
 	
 	@FXML private TextField tfDCDni;
 	@FXML private TextField tfDCNombre;
@@ -48,86 +48,86 @@ public class DatosClienteController implements Initializable, ChangeListener<Obj
 	@FXML private ChoiceBox<String> cbDCSexo;
 	
 	
-	
-	
-	public void LimpiarCliente() {
-		tfDCDni.clear();
-		tfDCNombre.clear();
-		tfDCApellidos.clear();
-		tfDCDireccion.clear();
-		tfDCCorreo.clear();
-		tfDCTelefono.clear();
-		calNacimiento.setValue(null);
-		tfDCCuentaBancaria.clear();
-		tfDCCodigoBarras.clear();
-		cbDCSexo.setValue("Varon"); // NO FUNCIONA DAFQ
-		
-		estaTodoGuardaro = true;
-	}
-	
 
-	public Socio guardarCliente() {
-		
-		String dni = tfDCDni.getText().trim();
-		if(dni.isEmpty()){
-			Dialog.showError("Datos invalidos", "El Dni no puede estar vacio.");
-			return null;
-		}
-		
-		String nombre = tfDCNombre.getText().trim();
-		if(nombre.isEmpty()){
-			Dialog.showError("Datos invalidos", "El nombre no puede estar vacio.");
-			return null;
-		}
-		
-		String apellidos = tfDCApellidos.getText().trim();
-		if(apellidos.isEmpty()){
-			Dialog.showError("Datos invalidos", "Los apellidos no puede estar vacio.");
-			return null;
-		}
-		
-		String correo = tfDCCorreo.getText().trim();
-		if(correo.isEmpty()){
-			Dialog.showError("Datos invalidos", "El correo no puede estar vacio.");
-			return null;
-		}
+	public boolean guardarCliente() {
 		
 		
-		Character esVaron = null;
-		if(cbDCSexo.getValue().equals("Masculino")){
-			esVaron = 'S';
-		}else{
-			esVaron = 'N';
-		}
+			String dni = tfDCDni.getText().trim();
+			if(dni.length() > 9){
+				Dialog.showError("Datos invalidos", "El Dni es demasiado largo.");
+				return false;
+			}
+		
+			String nombre = tfDCNombre.getText().trim();
+			if(nombre.isEmpty()){
+				Dialog.showError("Datos invalidos", "El nombre no puede estar vacio.");
+				return false;
+			}
+		
+			String apellidos = tfDCApellidos.getText().trim();
+			if(apellidos.isEmpty()){
+				Dialog.showError("Datos invalidos", "Los apellidos no puede estar vacio.");
+				return false;
+			}
+		
+			String correo = tfDCCorreo.getText().trim();
+			if(correo.isEmpty()){
+				Dialog.showError("Datos invalidos", "El correo no puede estar vacio.");
+				return false;
+			}
 		
 		
-		String telefono = tfDCTelefono.getText().trim();
-		if(telefono.isEmpty()){
-			Dialog.showError("Datos invalidos", "El telefono no puede estar vacio.");
-			return null;
-		}
+			Character esVaron = null;
+			if(cbDCSexo.getValue().equals("Masculino")){
+				esVaron = 'S';
+			}else{
+				esVaron = 'N';
+			}
 		
-		String direccion = tfDCDireccion.getText().trim();
-		if(direccion.isEmpty()){
-			Dialog.showError("Datos invalidos", "La direccion no puede estar vacia.");
-			return null;
-		}
 		
-		Date fechanac = calNacimiento.getValue().getTime();
+			String telefono = tfDCTelefono.getText().trim();
+			if(telefono.isEmpty()){
+				Dialog.showError("Datos invalidos", "El telefono no puede estar vacio.");
+				return false;
+			}
 		
-		Float cuentabancaria = Float.parseFloat(tfDCCuentaBancaria.getText());
-		Float codigobarras = Float.parseFloat(tfDCCodigoBarras.getText());
+			String direccion = tfDCDireccion.getText().trim();
+			if(direccion.isEmpty()){
+				Dialog.showError("Datos invalidos", "La direccion no puede estar vacia.");
+				return false;
+			}
 		
-		Short descuento = 0;
+			Date fechanac = calNacimiento.getValue().getTime();
 		
-		try {
-			conexion.insertarSocio(dni, nombre, apellidos, correo, esVaron, telefono, direccion, (java.sql.Date) fechanac, cuentabancaria, codigobarras, descuento);
-			//TODO devuelve id
-			tablaClientesController.actualizarTabla();
-		} catch (SQLException e) {
-			Dialog.showError("Error.", "Se produjo un error: " + e.getLocalizedMessage());
-		}
-		return new Socio(); //TEMPORAL;
+			Float cuentabancaria = Float.parseFloat(tfDCCuentaBancaria.getText());
+			Float codigobarras = Float.parseFloat(tfDCCodigoBarras.getText());
+		
+			Short descuento = 0;
+		
+			
+		
+			if(socio == null){
+				//Insertar socio
+				try {
+					conexion.insertarSocio(dni, nombre, apellidos, correo, esVaron, telefono, direccion, new java.sql.Date(fechanac.getTime()), cuentabancaria, codigobarras, descuento);
+					estaTodoGuardado.set(true);
+					return true;
+				} catch (SQLException e) {
+					Dialog.showError("Error.", "Se produjo un error: " + e.getLocalizedMessage());
+					return false;
+				}
+			}else{
+				try {
+					conexion.actualizarSocio(socio.getIdsocio(), dni, nombre, apellidos, correo, esVaron, telefono, direccion, new java.sql.Date(fechanac.getTime()), cuentabancaria, codigobarras, descuento);
+					estaTodoGuardado.set(true);
+					return true;
+				} catch (SQLException e) {
+					Dialog.showError("Error.", "Se produjo un error: " + e.getLocalizedMessage());
+					return false;
+				}
+			}
+			
+		
 		
 	}
 
@@ -137,7 +137,11 @@ public class DatosClienteController implements Initializable, ChangeListener<Obj
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		estaTodoGuardaro = true;
+		conexion = ConexionJDBC.getConexionJDBC();
+		
+		socio = null;
+		
+		estaTodoGuardado.set(true);
 		
 		//Controlar si se ha cambiado algo
 		tfDCDni.textProperty().addListener(this);
@@ -153,14 +157,18 @@ public class DatosClienteController implements Initializable, ChangeListener<Obj
 	}
 	
 	public boolean getEstaTodoGuardado(){
-		return estaTodoGuardaro;
+		return estaTodoGuardado.get();
+	}
+	
+	public BooleanProperty estaTodoGuardadoProperty(){
+		return estaTodoGuardado;
 	}
 
 
 	@Override
 	public void changed(ObservableValue<? extends Object> arg0, Object arg1,
 			Object arg2) {
-		estaTodoGuardaro = false;
+		estaTodoGuardado.set(false);
 		
 	}
 	
@@ -169,23 +177,36 @@ public class DatosClienteController implements Initializable, ChangeListener<Obj
 	 * @param socio
 	 */
 	public void setSocio(Socio socio){
-		tfDCDni.setText(socio.getDni());
-		tfDCNombre.setText(socio.getNombre());
-		tfDCApellidos.setText(socio.getApellidos());
-		tfDCDireccion.setText(socio.getDireccion());
-		tfDCCorreo.setText(socio.getCorreo());
-		tfDCTelefono.setText(socio.getTelefono());
-		calNacimiento.setValue(dateToCalendar(socio.getFechanac()));
-		tfDCCuentaBancaria.setText(String.valueOf(socio.getCuentabancaria()));
-		tfDCCodigoBarras.setText(String.valueOf(socio.getCodigobarras()));
+		this.socio = socio;
 		
-		if(socio.getEsvaron() == 'S')
+		if(socio == null){
+			tfDCDni.clear();
+			tfDCNombre.clear();
+			tfDCApellidos.clear();
+			tfDCDireccion.clear();
+			tfDCCorreo.clear();
+			tfDCTelefono.clear();
+			calNacimiento.setValue(null);
+			tfDCCuentaBancaria.clear();
+			tfDCCodigoBarras.clear();
 			cbDCSexo.setValue("Masculino");
-		else
-			cbDCSexo.setValue("Femenino");
+		}else{
+			tfDCDni.setText(socio.getDni());
+			tfDCNombre.setText(socio.getNombre());
+			tfDCApellidos.setText(socio.getApellidos());
+			tfDCDireccion.setText(socio.getDireccion());
+			tfDCCorreo.setText(socio.getCorreo());
+			tfDCTelefono.setText(socio.getTelefono());
+			calNacimiento.setValue(dateToCalendar(socio.getFechanac()));
+			tfDCCuentaBancaria.setText(String.valueOf(socio.getCuentabancaria()));
+			tfDCCodigoBarras.setText(String.valueOf(socio.getCodigobarras()));
+			if(socio.getEsvaron() == 'S')
+				cbDCSexo.setValue("Masculino");
+			else
+				cbDCSexo.setValue("Femenino");
+		}
 		
-		
-		estaTodoGuardaro = true;
+		estaTodoGuardado.set(false);
 	}
 	
 	public static Calendar dateToCalendar(Date date){ 

@@ -35,11 +35,6 @@
                 <fx:include fx:id="tablaEntradas" source="tablaentradas.fxml" />
               </content>
             </Tab>
-            <Tab text="Derramas">
-              <content>
-                <fx:include fx:id="tablaDerramas" source="tabladerramas.fxml" />
-              </content>
-            </Tab>
           </tabs>
           <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -55,7 +50,7 @@
     <ToolBar>
       <items>
         <Button onAction="#onNuevoClicked" mnemonicParsing="false" text="Nuevo" />
-        <Button onAction="#onGuardarClicked" mnemonicParsing="false" text="Guardar" />
+        <Button fx:id="bCGuardar" onAction="#onGuardarClicked" mnemonicParsing="false" text="Guardar" />
         <Button onAction="#onEliminarClicked" mnemonicParsing="false" text="Eliminar" />
         <ToggleButton fx:id="bFiltrar" onAction="#onFiltrarClicked" mnemonicParsing="false" text="Filtrar" />
       </items>

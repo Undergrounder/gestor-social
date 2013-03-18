@@ -168,6 +168,36 @@ public class ConexionJDBC {
 		}
 	}
 
+	public boolean insertarActividadSocio(Actividad actividad, Socio socio)throws SQLException{
+		PreparedStatement stmt = conn.prepareStatement("INSERT INTO ActividadSocio VALUES (?,?)");
+		stmt.setShort(1, actividad.getIdactividad());
+		stmt.setShort(2, socio.getIdsocio());	
+		
+		return stmt.execute();
+	}
+	
+	public List<Actividad> getListaActividades(Socio socio) {
+		LinkedList<Actividad> lista = new LinkedList<>();
+		
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT a.IDACTIVIDAD, a.nombre, a.lugar, a.categoria FROM ActividadSocio as2 INNER JOIN Actividad a ON as2.actividad_id=a.IDACTIVIDAD WHERE as2.SOCIO_ID = " + socio.getIdsocio());
+			while(rs.next()){
+				Actividad actividad = new Actividad();
+				actividad.setIdactividad(rs.getShort("idactividad"));
+				actividad.setNombre(rs.getString("nombre"));
+				actividad.setLugar(rs.getString("lugar"));
+				actividad.setCategoria(rs.getString("categoria"));
+				lista.add(actividad);
+			}
+		} catch (SQLException e) {
+			System.err.println("Error al obtener la lista de actividades: " + e.getLocalizedMessage());
+			return null;
+		}		
+		
+		return lista;
+	}
+	
 	public List<Actividad> getListaActividades() {
 		LinkedList<Actividad> lista = new LinkedList<>();
 		
@@ -206,7 +236,7 @@ public class ConexionJDBC {
 		}		
 	}
 
-	public List<Socio> getListaSocios() {
+	public List<Socio> getListaSocios(Socio filtro) {
 		LinkedList<Socio> lista = new LinkedList<>();
 		
 		try {
@@ -238,30 +268,7 @@ public class ConexionJDBC {
 		return lista;
 	}
 
-	public boolean insertarSocio(String dni, String nombre, String apellidos,
-			String correo, Character esvaron, String telefono, String direccion,
-			Date fechanac, Float cuentabancaria, Float codigobarras, Short descuento) throws SQLException{
-		PreparedStatement stmt = conn.prepareStatement("INSERT INTO Socio VALUES (Pista_Seq.nextVal,?,?,?,?,?,?,?,?,?,?,?)");
-		stmt.setString(1, dni);
-		stmt.setString(2, nombre);
-		stmt.setString(3, apellidos);
-		stmt.setString(4, correo);
-		stmt.setString(5, String.valueOf(esvaron));
-		stmt.setString(6, telefono);
-		stmt.setString(7, direccion);
-		stmt.setDate(8, fechanac);
-		stmt.setFloat(9, cuentabancaria);
-		stmt.setFloat(10, codigobarras);
-		stmt.setShort(11, descuento);
-		
-		if(stmt.execute()){
-		
-			ResultSet rs = stmt.getGeneratedKeys();
-			rs.next();
-			System.out.println(rs.getString(0));
-		}
-		return true;
-	}
+	
 
 	
 	public List<Personalexterno> getListaPersonalexterno() {
@@ -343,8 +350,55 @@ public class ConexionJDBC {
 			else
 				return false;
 		} catch (SQLException e) {
-			System.err.println("SE produjo un error al eliminar el socio " + idsocio + ": " + e.getLocalizedMessage());
+			System.err.println("Se produjo un error al eliminar el socio " + idsocio + ": " + e.getLocalizedMessage());
 			return false;
 		}	
+	}
+	
+	public boolean actualizarSocio(Short id, String dni, String nombre, String apellidos,
+			String correo, Character esvaron, String telefono, String direccion,
+			Date fechanac, Float cuentabancaria, Float codigobarras, Short descuento) throws SQLException{
+		PreparedStatement stmt = conn.prepareStatement("UPDATE Socio SET dni = ?, nombre = ?, apellidos = ?, correo = ?, esVaron = ?, telefono = ?, direccion = ?, fechanac = ?, cuentabancaria = ?, codigobarras = ?, descuento = ? where idsocio = ?");
+		stmt.setString(1, dni);
+		stmt.setString(2, nombre);
+		stmt.setString(3, apellidos);
+		stmt.setString(4, correo);
+		stmt.setString(5, String.valueOf(esvaron));
+		stmt.setString(6, telefono);
+		stmt.setString(7, direccion);
+		stmt.setDate(8, fechanac);
+		stmt.setFloat(9, cuentabancaria);
+		stmt.setFloat(10, codigobarras);
+		stmt.setShort(11, descuento);
+		stmt.setShort(12, id);
+		
+
+		return stmt.execute();
+	}
+	
+	
+	public boolean insertarSocio(String dni, String nombre, String apellidos,
+			String correo, Character esvaron, String telefono, String direccion,
+			Date fechanac, Float cuentabancaria, Float codigobarras, Short descuento) throws SQLException{
+		PreparedStatement stmt = conn.prepareStatement("INSERT INTO Socio VALUES (Pista_Seq.nextVal,?,?,?,?,?,?,?,?,?,?,?)");
+		stmt.setString(1, dni);
+		stmt.setString(2, nombre);
+		stmt.setString(3, apellidos);
+		stmt.setString(4, correo);
+		stmt.setString(5, String.valueOf(esvaron));
+		stmt.setString(6, telefono);
+		stmt.setString(7, direccion);
+		stmt.setDate(8, fechanac);
+		stmt.setFloat(9, cuentabancaria);
+		stmt.setFloat(10, codigobarras);
+		stmt.setShort(11, descuento);
+		
+		stmt.execute();
+		
+		ResultSet rs = stmt.getGeneratedKeys();
+		rs.next();
+		System.out.println("ID:" + rs.getString(0));
+		
+		return true;
 	}
 }

@@ -4,6 +4,7 @@
 package dam.gestorclub.componentes;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import dam.gestorclub.componentes.Configuracion.KEYS;
 import dam.gestorclub.entidades.Cuota;
+import dam.gestorclub.entidades.Factura;
 
 
 
@@ -66,7 +68,8 @@ public class ConexionOR {
 		
 		return stmt.execute();
 	}
-
+	
+	
 	public List<Cuota> getListaCuotas()  {
 		LinkedList<Cuota> lista = new LinkedList<>();
 		
@@ -115,6 +118,63 @@ public class ConexionOR {
 				return false;
 		} catch (SQLException e) {
 			System.err.println("SE produjo un error al eliminar la cuota " + id + ": " + e.getLocalizedMessage());
+			return false;
+		}	
+	}
+	
+	public boolean insertarFactura(Short socioId, Date creada, Short meses, Date fechaPagado){
+		PreparedStatement stmt;
+		try {
+			stmt = conn.prepareStatement("INSERT INTO Factura VALUES (Factura_Seq.nextVal,?,?,?,?, Lineas_Pago())");
+			stmt.setShort(1, socioId);
+			stmt.setDate(2, creada);
+			stmt.setShort(3, meses);
+			stmt.setDate(4, fechaPagado);
+			stmt.execute();
+			return true;
+		} catch (SQLException e) {
+			System.err.println("Error insertando factura: " + e.getLocalizedMessage());
+			return false;
+		}
+		
+	}
+	
+	public List<Factura> getListaFactura(Short idSocio)  {
+		LinkedList<Factura> lista = new LinkedList<>();
+		
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT f.creada, f.nummeses, f.idfactura, f.fechapagado, f.total_factura() as total FROM Factura f WHERE f.socio_id = " + idSocio);
+			while(rs.next()){
+				Factura factura = new Factura();
+				factura.setFecha(rs.getDate("creada"));
+				factura.setMeses(rs.getShort("nummeses"));
+				factura.setIdFactura(rs.getShort("idfactura"));
+				factura.setFechaPagado(rs.getDate("fechapagado"));
+				factura.setTotal(rs.getBigDecimal("total"));
+				
+				lista.add(factura);
+			}
+		} catch (SQLException e) {
+			System.err.println("Error leyendo la lista de facturas: " + e.getLocalizedMessage());
+			return null;
+		}		
+		
+		return lista;
+	}
+	
+	public boolean eliminarFactura(short id) {
+		Statement st;
+		try {
+			st = conn.createStatement();
+			String sql = "DELETE FROM Factura WHERE idFactura = '"+id+"'";
+			int delete = st.executeUpdate(sql);
+			if(delete==1)
+				return true;
+			else
+				return false;
+		} catch (SQLException e) {
+			System.err.println("Se produjo un error al eliminar la factura " + id + ": " + e.getLocalizedMessage());
 			return false;
 		}	
 	}

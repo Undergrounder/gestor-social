@@ -8,9 +8,12 @@ import java.util.ResourceBundle;
 
 import name.antonsmirnov.javafx.dialog.Dialog;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import dam.gestorclub.componentes.ConexionJDBC;
 import dam.gestorclub.componentes.StageSwitcher;
@@ -23,19 +26,11 @@ import dam.gestorclub.entidades.Socio;
  *
  */
 public class ClientesController implements Initializable, SocioSelectedListener{
-
-	private MODO modo;
-	private Socio ultimo = null; 
 	
 	private ConexionJDBC conexion;
 	
-	public static enum MODO{
-		NUEVO,
-		VER,
-		BUSCAR
-	};
 	
-	
+	@FXML private Button bCGuardar;
 	@FXML private ToggleButton bFiltrar;
 	
 	
@@ -43,10 +38,10 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 	@FXML private DatosClienteController datosClienteController;
 	
 	//Pestañas
-	@FXML private DerramasController derramasController;
 	@FXML private TablaActividadesController tablaActividadesController;
 	@FXML private TablaClientesController tablaClientesController;
 	@FXML private TablaFacturasController tablaFacturasController;
+	private Socio socio;
 	
 	/**
 	 * Boton de nuevo pulsado
@@ -54,7 +49,7 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 	 * @param event
 	 */
 	@FXML protected void onNuevoClicked(ActionEvent event){
-		cambiaModo(MODO.NUEVO, null);
+		onSocioSelected(null);
 	}
 	
 	/**
@@ -63,10 +58,8 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 	 * @param event
 	 */
 	@FXML protected void onGuardarClicked(ActionEvent event){
-		Socio socio = datosClienteController.guardarCliente();
-		
-		if(socio != null){
-			tablaClientesController.addSocio(socio);
+		if(datosClienteController.guardarCliente()){
+			tablaClientesController.actualizarTabla();
 		}
 	}
 	
@@ -76,10 +69,11 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 	 * @param event
 	 */
 	@FXML protected void onEliminarClicked(ActionEvent event){
-		if(ultimo != null){
-			if(conexion.eliminarSocio(ultimo.getIdsocio())){
+		if(socio != null){
+			if(conexion.eliminarSocio(socio.getIdsocio())){
 				Dialog.showInfo("Usuario borrado correctamente", "Se ha borrado al socio.");
 				tablaClientesController.actualizarTabla();
+				//TODO se vacia?
 			}else{
 				Dialog.showError("No se pudo borrar", "No se pudo borrar");
 			}
@@ -94,8 +88,13 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 	 * @param event
 	 */
 	@FXML protected void onFiltrarClicked(ActionEvent event){
-		//TODO filtrar cliente
-		//datosClienteController.FiltrarCliente();
+		
+		if(bFiltrar.isSelected()){
+			//TODO filtar
+		}else{
+			tablaClientesController.setFiltro(null);
+		}
+		
 	}
 	
 	/**
@@ -112,69 +111,29 @@ public class ClientesController implements Initializable, SocioSelectedListener{
 		conexion = ConexionJDBC.getConexionJDBC();
 		
 		tablaClientesController.setOnSocioSelected(this);
-		modo = MODO.NUEVO;
+		onSocioSelected(null);
 		
-		
-	}
+		datosClienteController.estaTodoGuardadoProperty().addListener(new ChangeListener<Boolean>() {
 
-	private void cambiaModo(MODO nuevo, Socio socio) {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0,
+					Boolean arg1, Boolean arg2) {
+				System.out.println("Cambio!!");
+				bCGuardar.setDisable(datosClienteController.getEstaTodoGuardado());
+					
+				
+			}
+		});
 		
-		if(modo == MODO.NUEVO){
-			if(!confirmacionContinuar())
-				return;
-			
-			if(nuevo == MODO.NUEVO){
-				datosClienteController.LimpiarCliente();
-			}else if(nuevo == MODO.VER){
-				datosClienteController.setSocio(socio);
-				derramasController.setSocio(socio);
-				tablaActividadesController.setSocio(socio);
-				tablaFacturasController.setSocio(socio);
-			}else if(nuevo == MODO.BUSCAR){
-				//TODO!!!
-			}
-			
-		}else if(modo == MODO.VER){
-			if(nuevo == MODO.NUEVO){
-				datosClienteController.LimpiarCliente();
-				derramasController.setSocio(null);
-				tablaActividadesController.setSocio(null);
-				tablaFacturasController.setSocio(null);
-			}else if(nuevo == MODO.VER){
-				datosClienteController.setSocio(socio);
-				derramasController.setSocio(socio);
-				tablaActividadesController.setSocio(socio);
-				tablaFacturasController.setSocio(socio);
-			}else if(nuevo == MODO.BUSCAR){
-				//TODO!!!
-			}
-		}else{ //MODO buscar
-			if(nuevo == MODO.NUEVO){
-				datosClienteController.LimpiarCliente();
-				derramasController.setSocio(null);
-				tablaActividadesController.setSocio(null);
-				tablaFacturasController.setSocio(null);
-			}else if(nuevo == MODO.VER){
-				datosClienteController.setSocio(socio);
-				derramasController.setSocio(socio);
-				tablaActividadesController.setSocio(socio);
-				tablaFacturasController.setSocio(socio);
-			}else if(nuevo == MODO.BUSCAR){
-				//TODO!!!
-			}
-		}
-		modo = nuevo;
 	}
 
 	@Override
 	public void onSocioSelected(Socio socio) {
-		cambiaModo(MODO.VER, socio);
+		this.socio = socio;
+		
+		datosClienteController.setSocio(socio);
+		tablaActividadesController.setSocio(socio);
+		tablaFacturasController.setSocio(socio);
 	}
 	
-	private boolean confirmacionContinuar(){
-		if(!datosClienteController.getEstaTodoGuardado()){
-					//TODO preguntar si se desean descartar los cambios
-		}
-		return true; 
-	}
 }
